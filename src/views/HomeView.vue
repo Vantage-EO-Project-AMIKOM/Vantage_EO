@@ -1,18 +1,94 @@
 <script setup>
+import CountPerson from '@/components/CountPerson.vue';
+import HomLeatestPost from '@/components/HomLeatestPost.vue';
 </script>
 
 <template>
-  <section>
-    <div class=" w-full h-130 border bg-[url(https://museum.biologi.ugm.ac.id/wp-content/uploads/sites/694/2023/08/WhatsApp-Image-2023-08-28-at-15.13.30-e1693282057283-759x510.jpeg)]
-      bg-no-repeat bg-cover bg-center flex justify-center items-center">
+  <!-- HERO BG -->
+  <section class="w-full h-130 bg-monyet flex justify-center items-center">
 
-      <div class=" w-full max-w-6xl mx-auto border">
-        <h1 class=" w-1/2 font-semibold capitalize text-6xl text-white mb-8">let's create your event with vantage</h1>
+    <div class=" w-full max-w-6xl mx-auto">
+      <h1 class=" w-1/2 capitalize text-5xl font-bold text-white mb-5">let's create your event with vantage</h1>
+      <RouterLink to="/">
+        <button class="px-7 py-4 bg-gray-200 rounded-full transition-all hover:translate-x-2 cursor-pointer">Check this
+          out!</button>
+      </RouterLink>
+    </div>
+
+  </section>
+
+  <!-- CONTENT I -->
+  <section class=" w-full h-auto">
+
+    <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">
+
+      <div class=" grid grid-cols-2 grid-rows-2 gap-6 pr-10">
+        <div class="w-4/5 h-4/5 bg-monyet rounded-2xl justify-self-end self-end"></div>
+        <div class="w-full h-80 bg-monyet rounded-2xl"></div>
+        <div class="w-full h-80 bg-monyet rounded-2xl"></div>
+        <div class="w-4/5 h-4/5 bg-monyet rounded-2xl justify-self-start self-start">
+        </div>
+      </div>
+
+      <div class=" flex flex-col self-center">
+        <h2 class=" w-3/5 text-4xl capitalize text-black font-semibold mb-8">Welcome the Greatest Digital Conference
+        </h2>
+
+        <p class=" text-lg font-normal mb-15">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna
+          aliqua. Ut enim ad minim veniam
+          quis nostrud exercitation ulla mco sed do eiusmod tempor incid idunt ut labore et dolore magna.</p>
+
+        <div class=" grid grid-cols-3 grid-rows-2 gap-8 mb-15">
+          <div class=" flex items-center transition-all hover:text-[#c58a00]">
+            <i class="fa fa-users text-3xl mr-4" aria-hidden="true"></i>
+            <p>Up to 2500 Guest</p>
+          </div>
+          <div class=" col-span-2 flex items-center transition-all hover:text-[#c58a00]">
+            <i class="fa fa-ticket text-3xl mr-4" aria-hidden="true"></i>
+            <p>Free Entry Ticket</p>
+          </div>
+          <div class=" flex items-center transition-all hover:text-[#c58a00]">
+            <i class="fa fa-play-circle text-3xl mr-4" aria-hidden="true"></i>
+            <p>950 SQFT Space</p>
+          </div>
+          <div class=" col-span-2 flex items-center transition-all hover:text-[#c58a00]">
+            <i class="fa fa-comment text-3xl mr-4" aria-hidden="true"></i>
+            <p>Up to 2500 Guests</p>
+          </div>
+        </div>
+
         <RouterLink to="/">
-          <button class="px-7 py-4 bg-gray-200 rounded-full transition-all hover:translate-x-2">Check this out!</button>
+          <button
+            class="px-7 py-4 border-2 border-gray-300 rounded-full transition-all hover:translate-x-2 cursor-pointer">View
+            Our
+            Schdule</button>
         </RouterLink>
+
       </div>
 
     </div>
+
+  </section>
+
+  <section class=" w-full h-auto">
+
+    <div class=" w-full max-w-3/5 mx-auto my-20">
+      <h2 class=" text-4xl capitalize text-black font-semibold mb-8 text-center">Our Service</h2>
+      <p class=" text-lg font-normal text-black text-center">Di Vantage Event Organizer, kami senantiasa menghadirkan
+        rangkaian layanan terintegrasi yang dirancang untuk
+        menjadikan acara Anda spektakuler. Sebagai Event Organizer (EO) di Indonesia, kami menghadirkan kreativitas,
+        ketepatan, dan inovasi dalam setiap aspek perencanaan dan pelaksanaan acara, baik itu Corporate Gathering, FGD,
+        Summit, Expo, Sport Event, MICE, hingga CSR Activity.</p>
+    </div>
+
+  </section>
+
+  <section class=" w-full h-auto">
+    <CountPerson />
+  </section>
+
+  <section class=" w-full h-auto">
+    <HomLeatestPost />
   </section>
 </template>
