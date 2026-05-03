@@ -5,12 +5,16 @@ import HomLeatestPost from '@/components/HomLeatestPost.vue';
 
 <template>
   <!-- HERO BG -->
-  <section class="w-full h-130 bg-monyet flex justify-center items-center">
+  <section class="w-full h-130 flex justify-center items-center relative overflow-hidden">
 
-    <div class=" w-full max-w-6xl mx-auto">
-      <h1 class=" w-1/2 capitalize text-5xl font-bold text-white mb-5">let's create your event with vantage</h1>
+    <img src="./../components/img/bg/hero-bg.jpg" alt="" class="w-full object-cover absolute top-0 left-0 opacity-55">
+
+    <div class="w-full max-w-6xl mx-auto z-10">
+      <h1 class="w-1/2 capitalize text-5xl font-bold text-black mb-5">let's create your event with vantage</h1>
       <RouterLink to="/">
-        <button class="px-7 py-4 bg-gray-200 rounded-full transition-all hover:translate-x-2 cursor-pointer">Check this
+        <button
+          class="px-7 py-4 bg-[#788663] rounded-full border border-black transition-all hover:translate-x-2 cursor-pointer">Check
+          this
           out!</button>
       </RouterLink>
     </div>
@@ -23,10 +27,17 @@ import HomLeatestPost from '@/components/HomLeatestPost.vue';
     <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">
 
       <div class=" grid grid-cols-2 grid-rows-2 gap-6 pr-10">
-        <div class="w-4/5 h-4/5 bg-monyet rounded-2xl justify-self-end self-end"></div>
-        <div class="w-full h-80 bg-monyet rounded-2xl"></div>
-        <div class="w-full h-80 bg-monyet rounded-2xl"></div>
-        <div class="w-4/5 h-4/5 bg-monyet rounded-2xl justify-self-start self-start">
+        <div class="w-8/10 h-9/10 rounded-2xl justify-self-end self-end overflow-hidden">
+          <img src="./../components/img/bg/c1.jpeg" alt="" class=" w-full h-full object-cover object-center" draggable="false">
+        </div>
+        <div class="w-full h-80 rounded-2xl overflow-hidden">
+          <img src="./../components/img/bg/c2.jpeg" alt="" class=" w-full h-full object-cover object-center" draggable="false">
+        </div>
+        <div class="w-9/10 h-80 rounded-2xl justify-self-end overflow-hidden">
+          <img src="./../components/img/bg/c3.jpeg" alt="" class=" w-full h-full object-cover object-center" draggable="false">
+        </div>
+        <div class="w-9/10 h-9/10 rounded-2xl justify-self-start self-start overflow-hidden">
+          <img src="./../components/img/bg/c4.jpeg" alt="" class=" w-full h-full object-cover object-center" draggable="false">
         </div>
       </div>
 
@@ -60,7 +71,7 @@ import HomLeatestPost from '@/components/HomLeatestPost.vue';
 
         <RouterLink to="/">
           <button
-            class="px-7 py-4 border-2 border-gray-300 rounded-full transition-all hover:translate-x-2 cursor-pointer">View
+            class="px-7 py-4 border-2 border-black rounded-full transition-all hover:translate-x-2 cursor-pointer">View
             Our
             Schdule</button>
         </RouterLink>
@@ -71,6 +82,7 @@ import HomLeatestPost from '@/components/HomLeatestPost.vue';
 
   </section>
 
+  <!-- OUR SERVICE -->
   <section class=" w-full h-auto">
 
     <div class=" w-full max-w-3/5 mx-auto my-20">

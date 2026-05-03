@@ -6,7 +6,7 @@ const isOpen = ref(false)
 
 <template>
     <nav
-        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] lg:w-[90%] h-18 px-5 lg:px-10 bg-[#FFF5DD] shadow-xl rounded-full flex justify-between items-center z-50">
+        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] lg:w-[90%] h-18 px-5 lg:px-10 bg-[#E7C899] shadow-xl rounded-full flex justify-between items-center z-50">
 
         <RouterLink to="#" class=" flex justify-center items-center">
             <img src="./img/onlyLogo.png" alt="Logo" class="h-8 lg:h-10 w-auto mr-2" draggable="false">
@@ -14,12 +14,12 @@ const isOpen = ref(false)
         </RouterLink>
 
         <div class="hidden lg:flex items-center space-x-6">
-            <RouterLink to="/" class="transition-all hover:text-blue-800">Home</RouterLink>
-            <RouterLink to="about" class="transition-all hover:text-blue-800">About</RouterLink>
-            <RouterLink to="#" class="transition-all hover:text-blue-800">Events</RouterLink>
-            <RouterLink to="#" class="transition-all hover:text-blue-800">Speakers</RouterLink>
-            <RouterLink to="#" class="transition-all hover:text-blue-800">Blog</RouterLink>
-            <RouterLink to="#" class="transition-all hover:text-blue-800">Contact Us</RouterLink>
+            <RouterLink to="/" class="transition-all hover:text-[#788663]">Home</RouterLink>
+            <RouterLink to="about" class="transition-all hover:text-[#788663]">About</RouterLink>
+            <RouterLink to="#" class="transition-all hover:text-[#788663]">Events</RouterLink>
+            <RouterLink to="#" class="transition-all hover:text-[#788663]">Speakers</RouterLink>
+            <RouterLink to="#" class="transition-all hover:text-[#788663]">Blog</RouterLink>
+            <RouterLink to="#" class="transition-all hover:text-[#788663]">Contact Us</RouterLink>
         </div>
 
         <div class="hidden lg:flex justify-center items-center space-x-4">
@@ -30,8 +30,9 @@ const isOpen = ref(false)
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
             </div>
-            <button
-                class="bg-[#788663] text-white px-5 py-2 rounded-full transition-all hover:bg-[#788700]">Register</button>
+            <button class="bg-[#788663] text-black px-5 py-2 rounded-full transition-all hover:bg-[#788700]">Register
+                <i class="fa fa-long-arrow-right font-extralight -rotate-45" aria-hidden="true"></i>
+            </button>
         </div>
 
         <button @click="isOpen = !isOpen" class="lg:hidden text-2xl text-[#788663] focus:outline-none">
