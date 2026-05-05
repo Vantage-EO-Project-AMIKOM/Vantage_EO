@@ -86,7 +86,7 @@ import CountPerson from '@/components/CountPerson.vue';
 
                 <RouterLink to="/">
                     <button
-                        class="px-7 py-4 border-2 border-black rounded-full transition-all hover:translate-x-2 cursor-pointer">Button</button>
+                        class="px-7 py-4 border-2 border-black rounded-full transition-all hover:translate-x-2 cursor-pointer">Get Ticket</button>
                 </RouterLink>
 
             </div>
@@ -204,7 +204,7 @@ import CountPerson from '@/components/CountPerson.vue';
                 <div class=" w-3/10 h-100 bg-[#E7C899] rounded-4xl flex flex-col items-start justify-center p-20">
 
                     <div class=" w-full flex flex-col mb-10">
-                        
+
                         <div class=" w-full h-auto flex mb-8">
                             <i class="fa fa-calendar text-4xl mr-3" aria-hidden="true"></i>
 
@@ -214,7 +214,7 @@ import CountPerson from '@/components/CountPerson.vue';
                             </div>
                         </div>
 
-                        
+
                         <div class=" w-full h-auto flex">
                             <i class="fa fa-location-arrow text-4xl mr-3" aria-hidden="true"></i>
 
