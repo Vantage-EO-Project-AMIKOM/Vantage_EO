@@ -6,12 +6,12 @@ import CountPerson from '@/components/CountPerson.vue';
     <!-- ABOUT BG -->
     <section class="w-full h-130 flex justify-center items-center relative overflow-hidden">
 
-        <img src="./../components/img/bg/hero-bg.jpg" alt=""
+        <img src="./../components/img/bg/hero-bg.jpg" alt="" draggable="false"
             class="w-full object-cover absolute top-0 left-0 opacity-55">
 
-        <div class="w-full max-w-6xl mx-auto z-10">
-            <h1 class="w-1/2 capitalize text-5xl font-bold text-black mb-5">about us</h1>
-            <p class=" text-lg font-normal text-black uppercase">vantage > about us</p>
+        <div class="w-full max-w-6xl mx-auto z-10 text-white text-shadow-lg/30 shadow-black">
+            <h1 class="w-1/2 capitalize text-5xl font-bold mb-5">about us</h1>
+            <p class=" text-lg font-normal uppercase">vantage > about us</p>
         </div>
 
     </section>

@@ -19,7 +19,7 @@ const isOpen = ref(false)
             <RouterLink to="#" class="transition-all hover:text-[#788663]">Events</RouterLink>
             <RouterLink to="#" class="transition-all hover:text-[#788663]">Speakers</RouterLink>
             <RouterLink to="#" class="transition-all hover:text-[#788663]">Blog</RouterLink>
-            <RouterLink to="#" class="transition-all hover:text-[#788663]">Contact Us</RouterLink>
+            <RouterLink to="contact" class="transition-all hover:text-[#788663]">Contact Us</RouterLink>
         </div>
 
         <div class="hidden lg:flex justify-center items-center space-x-4">
@@ -42,12 +42,12 @@ const isOpen = ref(false)
 
     <div v-if="isOpen"
         class="fixed top-28 left-1/2 -translate-x-1/2 w-[95%] bg-[#FFF5DD] shadow-2xl rounded-2xl p-6 flex flex-col space-y-4 z-40 lg:hidden">
-        <RouterLink to="#" class=" text-lg hover:text-blue-800">Home</RouterLink>
-        <RouterLink to="#" class=" text-lg hover:text-blue-800">Pages</RouterLink>
+        <RouterLink to="/" class=" text-lg hover:text-blue-800">Home</RouterLink>
+        <RouterLink to="about" class=" text-lg hover:text-blue-800">Pages</RouterLink>
         <RouterLink to="#" class=" text-lg hover:text-blue-800">Events</RouterLink>
         <RouterLink to="#" class=" text-lg hover:text-blue-800">Speakers</RouterLink>
         <RouterLink to="#" class=" text-lg hover:text-blue-800">Blog</RouterLink>
-        <RouterLink to="#" class=" text-lg hover:text-blue-800">Contact Us</RouterLink>
+        <RouterLink to="contact" class=" text-lg hover:text-blue-800">Contact Us</RouterLink>
 
         <div class="flex w-full mt-4">
             <input type="text" placeholder="Search..."
