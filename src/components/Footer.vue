@@ -74,7 +74,7 @@
                         </RouterLink>
                         <RouterLink to="#" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">
                             Speakers</RouterLink>
-                        <RouterLink to="#" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">Blog
+                        <RouterLink to="ourHistory" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">Our Story
                         </RouterLink>
                         <RouterLink to="contact" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">Contact
                             Us</RouterLink>

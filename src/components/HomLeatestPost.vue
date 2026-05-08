@@ -10,7 +10,7 @@
         <div class=" w-full grid grid-cols-4 grid-rows-2 gap-8">
             <div class=" h-80 flex flex-col items-start rounded-2xl shadow-md shadow-[#788663] transition-all
         hover:scale-101 hover:-translate-y-1 hover:shadow-lg">
-                <img class=" w-full h-3/5 object-cover object-center rounded-t-2xl" src="./img/bg/ulp.jpeg" alt="content" draggable="false">
+                <img class=" w-full h-3/5 object-cover object-center rounded-t-xl" src="./img/bg/ulp.jpeg" alt="content" draggable="false">
                 <div class=" w-full h-auto p-5">
                     <div class=" w-full flex mb-2">
                         <div class=" w-fit bg-gray-300 px-3 mr-3 rounded-full">
