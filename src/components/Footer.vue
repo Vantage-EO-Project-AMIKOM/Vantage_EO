@@ -8,7 +8,7 @@
                 <div class=" flex w-1/2 h-15 items-center">
                     <input type="email" class=" w-2/3 h-full bg-white rounded-l-full py-5 px-8 text-lg outline-none"
                         placeholder="Your email address">
-                    <button class=" w-1/3 h-full bg-[#788663] rounded-r-full text-lg capitalize">subscribe</button>
+                    <button class=" w-1/3 h-full bg-[#788663] rounded-r-full text-lg capitalize hover:bg-[#788700] hover:text-white cursor-pointer">subscribe</button>
                 </div>
             </div>
 
