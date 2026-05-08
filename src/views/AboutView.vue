@@ -17,6 +17,7 @@ import CountPerson from '@/components/CountPerson.vue';
     </section>
 
     <!-- CONTENT I -->
+    <div class="z-20">
     <section class=" w-full h-auto">
 
         <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">
@@ -240,4 +241,5 @@ import CountPerson from '@/components/CountPerson.vue';
             </div>
         </div>
     </section>
+    </div>
 </template>

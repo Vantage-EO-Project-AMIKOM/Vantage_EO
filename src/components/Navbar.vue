@@ -1,5 +1,9 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, defineOptions } from 'vue'
+
+defineOptions({
+  name: 'AppNavbar'
+})
 
 const isOpen = ref(false)
 </script>
