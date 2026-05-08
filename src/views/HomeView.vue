@@ -5,13 +5,13 @@ import HomLeatestPost from '@/components/HomLeatestPost.vue';
 
 <template>
   <!-- HERO BG -->
-  <section class="w-full h-130 flex justify-center items-center relative overflow-hidden">
+  <section class="w-full h-130 flex items-center relative overflow-hidden">
 
     <img src="./../components/img/bg/hero-bg.jpg" alt="" class="w-full object-cover absolute top-0 left-0 opacity-55"
       draggable="false">
 
-    <div class="w-full max-w-6xl mx-auto z-10">
-      <h1 class="w-1/2 capitalize text-5xl font-bold text-white text-shadow-lg/20 text-shadow-black mb-5">let's create your event with vantage</h1>
+    <div class="w-full max-w-3/5 mx-auto z-10">
+      <h1 class="w-2/3 capitalize text-7xl font-bold text-white text-shadow-lg/20 text-shadow-black mb-5">let's create your event with vantage</h1>
       <RouterLink to="/">
         <button
           class="px-7 py-4 bg-[#788663] rounded-full text-white transition-all hover:translate-x-2 cursor-pointer">Check
