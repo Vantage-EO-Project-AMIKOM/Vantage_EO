@@ -6,14 +6,14 @@ const isOpen = ref(false)
 
 <template>
     <nav
-        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] lg:w-[90%] h-18 px-5 lg:px-10 bg-[#E7C899] shadow-xl rounded-full flex justify-between items-center z-50">
+        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] xl:w-[90%] h-18 px-5 xl:px-10 bg-[#E7C899] shadow-xl rounded-full flex justify-between items-center z-50">
 
         <RouterLink to="#" class=" flex justify-center items-center">
-            <img src="./img/onlyLogo.png" alt="Logo" class="h-8 lg:h-10 w-auto mr-2" draggable="false">
+            <img src="./img/onlyLogo.png" alt="Logo" class="h-8 xl:h-10 w-auto mr-2" draggable="false">
             <p class=" text-lg font-bold">Vantage</p>
         </RouterLink>
 
-        <div class="hidden lg:flex items-center space-x-6">
+        <div class="hidden xl:flex items-center space-x-6">
             <RouterLink to="/" class="transition-all hover:text-[#788663]">Home</RouterLink>
             <RouterLink to="about" class="transition-all hover:text-[#788663]">About</RouterLink>
             <RouterLink to="#" class="transition-all hover:text-[#788663]">Events</RouterLink>
@@ -22,7 +22,7 @@ const isOpen = ref(false)
             <RouterLink to="contact" class="transition-all hover:text-[#788663]">Contact Us</RouterLink>
         </div>
 
-        <div class="hidden lg:flex justify-center items-center space-x-4">
+        <div class="hidden xl:flex justify-center items-center space-x-4">
             <div class="flex">
                 <input type="text" placeholder="Type text here"
                     class="w-40 xl:w-full bg-white pl-5 pr-2 py-2 rounded-l-full outline-none">
@@ -35,13 +35,13 @@ const isOpen = ref(false)
             </button>
         </div>
 
-        <button @click="isOpen = !isOpen" class="lg:hidden text-2xl text-[#788663] focus:outline-none">
+        <button @click="isOpen = !isOpen" class="xl:hidden text-2xl text-[#788663] focus:outline-none">
             <i :class="isOpen ? 'fa fa-times' : 'fa fa-bars'"></i>
         </button>
     </nav>
 
     <div v-if="isOpen"
-        class="fixed top-28 left-1/2 -translate-x-1/2 w-[95%] bg-[#FFF5DD] shadow-2xl rounded-2xl p-6 flex flex-col space-y-4 z-40 lg:hidden">
+        class="fixed top-28 left-1/2 -translate-x-1/2 w-[95%] bg-[#FFF5DD] shadow-2xl rounded-2xl p-6 flex flex-col space-y-4 z-40 xl:hidden">
         <RouterLink to="/" class=" text-lg hover:text-blue-800">Home</RouterLink>
         <RouterLink to="about" class=" text-lg hover:text-blue-800">Pages</RouterLink>
         <RouterLink to="#" class=" text-lg hover:text-blue-800">Events</RouterLink>
