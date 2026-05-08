@@ -46,7 +46,7 @@
                     <p class=" font-normal text-lg text-black">How you transform your business as technology, consumer,
                         habits industry dynamics change? Find out from those leading the charge.</p>
                     <p class=" w-10 h-20 text-4xl font-bold overflow-hidden absolute bottom-10 left-10">20
-                        10</p>
+                        12</p>
                 </div>
 
             </div>
@@ -59,7 +59,7 @@
                     <p class=" font-normal text-lg text-black">How you transform your business as technology, consumer,
                         habits industry dynamics change? Find out from those leading the charge.</p>
                     <p class=" w-10 h-20 text-4xl font-bold overflow-hidden absolute bottom-10 right-10">20
-                        10</p>
+                        14</p>
                 </div>
 
                 <div class=" w-full h-full rounded-4xl overflow-hidden">
@@ -82,7 +82,7 @@
                     <p class=" font-normal text-lg text-black">How you transform your business as technology, consumer,
                         habits industry dynamics change? Find out from those leading the charge.</p>
                     <p class=" w-10 h-20 text-4xl font-bold overflow-hidden absolute bottom-10 left-10">20
-                        10</p>
+                        16</p>
                 </div>
 
             </div>
