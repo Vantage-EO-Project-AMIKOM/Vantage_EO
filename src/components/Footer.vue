@@ -1,6 +1,6 @@
 <template>
-    <footer class=" w-full h-auto">
-        <div class=" w-full max-w-4/5 mx-auto mt-10 mb-20">
+    <footer class="fixed bottom-0 z-0 w-full h-auto">
+        <div class=" w-full max-w-4/5 mx-auto pb-20">
 
             <div class=" w-full h-35 bg-[#E7C899] rounded-full flex justify-between items-center p-15 mb-10">
                 <h2 class=" text-4xl font-bold">Subscribe to Our Newsletter</h2>
@@ -20,7 +20,7 @@
                         <p class=" text-xl font-bold">Vantage</p>
                     </RouterLink>
 
-                    <p class=" text-md text-justify">Vantage adalah platform web event organizer yang memudahkan
+                    <p class=" text-md text-justify text-white">Vantage adalah platform web event organizer yang memudahkan
                         pembuatan, pengelolaan, dan
                         pelaksanaan acara secara praktis dan terintegrasi dalam satu sistem.</p>
 
@@ -66,17 +66,17 @@
                 <div class=" flex justify-center">
                     <div class=" flex flex-col items-start">
                         <h3 class=" text-3xl font-bold text-black text-left capitalize mb-5">quick links</h3>
-                        <RouterLink to="/" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">Home
+                        <RouterLink to="/" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Home
                         </RouterLink>
-                        <RouterLink to="about" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">
+                        <RouterLink to="about" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">
                             About</RouterLink>
-                        <RouterLink to="#" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">Events
+                        <RouterLink to="#" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Events
                         </RouterLink>
-                        <RouterLink to="#" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">
+                        <RouterLink to="#" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">
                             Speakers</RouterLink>
-                        <RouterLink to="ourHistory" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">Our Story
+                        <RouterLink to="ourHistory" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Our Story
                         </RouterLink>
-                        <RouterLink to="contact" class=" my-2 transition-all hover:text-[#788663] hover:translate-x-1">Contact
+                        <RouterLink to="contact" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Contact
                             Us</RouterLink>
                     </div>
                 </div>
@@ -92,10 +92,10 @@
                             </div>
 
                             <div class=" col-span-2 flex flex-col justify-center pl-4">
-                                <h4 class=" text-2xl font-bold text-black text-left capitalize mb-2">perantara fest</h4>
+                                <h4 class=" text-2xl font-bold text-white text-left capitalize mb-2">perantara fest</h4>
                                 <div class=" flex items-center">
-                                    <i class="fa fa-calendar text-sm mr-2" aria-hidden="true"></i>
-                                    <p>06 Apr 2027</p>
+                                    <i class="fa fa-calendar text-sm text-white mr-2" aria-hidden="true"></i>
+                                    <p class="text-white">06 Apr 2027</p>
                                 </div>
                             </div>
                         </div>
@@ -107,10 +107,10 @@
                             </div>
 
                             <div class=" col-span-2 flex flex-col justify-center pl-4">
-                                <h4 class=" text-2xl font-bold text-black text-left capitalize mb-2">veteran cup</h4>
+                                <h4 class=" text-2xl font-bold text-white text-left capitalize mb-2">veteran cup</h4>
                                 <div class=" flex items-center">
-                                    <i class="fa fa-calendar text-sm mr-2" aria-hidden="true"></i>
-                                    <p>26 Apr 2027</p>
+                                    <i class="fa fa-calendar text-white text-sm mr-2" aria-hidden="true"></i>
+                                    <p class="text-white">26 Apr 2027</p>
                                 </div>
                             </div>
                         </div>
@@ -122,19 +122,19 @@
                 <div class=" flex justify-center">
                     <div class=" flex flex-col items-start">
                         <h3 class=" text-3xl font-bold text-black text-left capitalize mb-5">contact info</h3>
-                        <div class=" flex items-center text-lg font-normal text-gray-600 mb-2">
+                        <div class=" flex items-center text-lg font-normal text-white mb-2">
                             <i class="fa fa-thumb-tack mr-3" aria-hidden="true"></i>
                             <p class=" capitalize">address</p>
                         </div>
-                        <div class=" flex items-center text-lg font-normal text-gray-600 mb-2">
+                        <div class=" flex items-center text-lg font-normal text-white mb-2">
                             <i class="fa fa-phone mr-3" aria-hidden="true"></i>
                             <p class="capitalize">+62883847294</p>
                         </div>
-                        <div class=" flex items-center text-lg font-normal text-gray-600 mb-2">
+                        <div class=" flex items-center text-lg font-normal text-white mb-2">
                             <i class="fa fa-envelope mr-3" aria-hidden="true"></i>
                             <p class=" lowercase">vantage@gmail.com</p>
                         </div>
-                        <div class=" flex items-center text-lg font-normal text-gray-600 mb-2">
+                        <div class=" flex items-center text-lg font-normal text-white mb-2">
                             <i class="fa fa-globe mr-3" aria-hidden="true"></i>
                             <p class=" lowercase">vantage.com</p>
                         </div>
