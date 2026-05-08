@@ -14,7 +14,7 @@ import HomLeatestPost from '@/components/HomLeatestPost.vue';
       <h1 class="w-2/3 capitalize text-7xl font-bold text-white text-shadow-lg/20 text-shadow-black mb-5">let's create your event with vantage</h1>
       <RouterLink to="/">
         <button
-          class="px-7 py-4 bg-[#788663] rounded-full border border-black transition-all hover:translate-x-2 cursor-pointer">Check
+          class="px-7 py-4 bg-[#788663] rounded-full text-white transition-all hover:translate-x-2 cursor-pointer">Check
           this
           out!</button>
       </RouterLink>

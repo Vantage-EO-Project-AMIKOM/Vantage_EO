@@ -15,7 +15,7 @@ const isOpen = ref(false)
 
         <div class="hidden xl:flex items-center space-x-6">
             <RouterLink to="/" class="transition-all hover:text-[#788663]">Home</RouterLink>
-            <RouterLink to="about" class="transition-all hover:text-[#788663]">About</RouterLink>
+            <RouterLink to="about" class="transition-all hover:text-[#788663]">About Us</RouterLink>
             <RouterLink to="#" class="transition-all hover:text-[#788663]">Events</RouterLink>
             <RouterLink to="#" class="transition-all hover:text-[#788663]">Speakers</RouterLink>
             <RouterLink to="ourHistory" class="transition-all hover:text-[#788663]">Our Story</RouterLink>
