@@ -2,19 +2,19 @@
     <footer class="fixed bottom-0 z-0 w-full h-auto">
         <div class=" w-full max-w-4/5 mx-auto pb-20">
 
-            <div class=" w-full h-35 bg-[#E7C899] rounded-full flex justify-between items-center p-15 mb-10">
-                <h2 class=" text-4xl font-bold">Subscribe to Our Newsletter</h2>
+            <div class=" w-full h-auto bg-[#E7C899] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-15 mb-10">
+                <h2 class=" text-3xl xl:text-4xl text-center lg:text-left font-bold mb-3 lg:mb-0">Subscribe to Our Newsletter</h2>
 
-                <div class=" flex w-1/2 h-15 items-center">
+                <div class=" flex w-full md:w-6/7 xl:w-1/2 h-15 items-center">
                     <input type="email" class=" w-2/3 h-full bg-white rounded-l-full py-5 px-8 text-lg outline-none"
                         placeholder="Your email address">
                     <button class=" w-1/3 h-full bg-[#788663] rounded-r-full text-lg capitalize hover:bg-[#788700] hover:text-white cursor-pointer">subscribe</button>
                 </div>
             </div>
 
-            <div class=" min-h-50 grid grid-cols-4 gap-4">
+            <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-4">
 
-                <div class=" flex flex-col items-start relative">
+                <div class=" min-h-60 flex flex-col items-start relative">
                     <RouterLink to="#" class=" flex justify-center items-center mb-4">
                         <img src="./img/onlyLogo.png" alt="Logo" class="h-8 lg:h-10 w-auto mr-2" draggable="false">
                         <p class=" text-xl font-bold">Vantage</p>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-                <div class=" flex justify-center">
+                <div class=" flex justify-start md:justify-center">
                     <div class=" flex flex-col items-start">
                         <h3 class=" text-3xl font-bold text-black text-left capitalize mb-5">quick links</h3>
                         <RouterLink to="/" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Home
@@ -119,7 +119,7 @@
                     </div>
                 </div>
 
-                <div class=" flex justify-center">
+                <div class=" flex justify-start md:justify-center">
                     <div class=" flex flex-col items-start">
                         <h3 class=" text-3xl font-bold text-black text-left capitalize mb-5">contact info</h3>
                         <div class=" flex items-center text-lg font-normal text-white mb-2">
