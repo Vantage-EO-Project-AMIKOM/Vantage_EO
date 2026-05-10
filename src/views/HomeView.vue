@@ -13,7 +13,7 @@
   const contentOffset = ref(0);
 
   const handleScroll = () => {
-    parallaxOffset.value = window.scrollY * 0.4;
+    parallaxOffset.value = window.scrollY * 0.3;
 
     // Apply parallax to grid images with different speeds
     imageOffsets.value.c1 = window.scrollY * 0.3;
@@ -37,7 +37,7 @@
     <section class="w-full h-130 z-10 flex items-center relative overflow-hidden">
       <div class="absolute inset-0 bg-black/60">
       <img src="./../components/img/bg/hero-bg.jpg" alt="" class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover"
-        draggable="false" :style="{ transform: `translateY(${parallaxOffset}px)` }">
+        draggable="false">
       </div>
       <div class="w-full max-w-3/5 mx-auto z-10">
         <h1 class="w-2/3 capitalize text-7xl font-bold text-white mb-5">let's create your event with vantage</h1>

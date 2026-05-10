@@ -1,17 +1,18 @@
 <template>
     <!-- OUR STORY BG -->
-    <section class="w-full h-130 flex justify-center items-center relative overflow-hidden">
+    <section class="w-full h-130 z-10 flex justify-center items-center relative overflow-hidden">
 
         <img src="./../components/img/bg/hero-bg.jpg" alt="" draggable="false"
-            class="w-full object-cover absolute top-0 left-0 opacity-55">
+            class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover">
 
-        <div class="w-full max-w-3/4 mx-auto z-10 text-white text-shadow-lg/30 shadow-black">
+        <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black">
             <h1 class=" capitalize text-7xl font-bold mb-5">our story</h1>
             <p class=" text-lg font-normal uppercase">vantage > about us</p>
         </div>
 
     </section>
 
+  <div class="relative z-10 bg-[#FFF9EB] py-5 rounded-[3rem] -mt-10 mb-[650px] shadow-[0_0_80px_rgba(0,0,0,0.15)]">
     <section class=" w-full h-auto">
         <div class=" w-full max-w-4/5 mx-auto py-20">
 
@@ -89,4 +90,5 @@
 
         </div>
     </section>
+    </div>
 </template>

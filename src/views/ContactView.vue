@@ -1,11 +1,11 @@
 <template>
     <!-- ABOUT BG -->
-    <section class="w-full h-130 flex justify-center items-center relative overflow-hidden">
+    <section class="w-full h-130 z-10 flex justify-center items-center relative overflow-hidden">
 
         <img src="./../components/img/bg/hero-bg.jpg" alt="" draggable="false"
-            class="w-full object-cover absolute top-0 left-0 opacity-55">
+            class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover">
 
-        <div class="w-full max-w-3/4 mx-auto z-10 text-white text-shadow-lg/30 shadow-black">
+        <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black">
             <h1 class=" capitalize text-7xl font-bold mb-5">contact us</h1>
             <p class=" text-lg font-normal uppercase">vantage > contact us</p>
         </div>
@@ -13,11 +13,12 @@
     </section>
 
     <!-- CONTACT INFO -->
-    <section class=" w-full h-auto bg-[#E7C899]">
-        <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-4 gap-6">
+    <div class="relative z-10 bg-[#FFF9EB] py-5 rounded-[3rem] -mt-10 mb-[650px] shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+    <section class=" w-full h-auto bg-[#E7C899] rounded-[3rem] relative -top-5">
+        <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-4 gap-10 ]">
 
             <div class=" w-full h-full flex flex-col items-start">
-                <i class="fa fa-phone text-[4rem] mb-5" aria-hidden="true"></i>
+                <i class="fa fa-phone text-[4rem] mb-5 t" aria-hidden="true"></i>
                 <h4 class=" text-2xl font-bold capitalize mb-1">contact us 24/7</h4>
                 <p class=" text-lg font-normal">vantage@gmail.com <br> +6288828123</p>
             </div>
@@ -164,4 +165,5 @@
 
         </div>
     </section>
+    </div>
 </template>
