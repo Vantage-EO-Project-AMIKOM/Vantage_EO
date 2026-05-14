@@ -45,7 +45,7 @@
           your event with vantage</h1>
         <RouterLink to="/">
           <button
-            class="px-7 py-4 bg-[#788663] rounded-full text-white transition-all hover:translate-x-2 cursor-pointer">Check
+            class="px-7 py-4 bg-[#EE0034] rounded-full text-white transition-all hover:translate-x-2 cursor-pointer">Check
             this
             out!</button>
         </RouterLink>

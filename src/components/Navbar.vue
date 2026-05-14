@@ -10,7 +10,7 @@ const isOpen = ref(false)
 
 <template>
     <nav
-        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] xl:w-[90%] h-18 px-5 xl:px-10 bg-[#E7C899] shadow-xl rounded-full flex justify-between items-center z-50">
+        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] xl:w-[90%] h-18 px-5 xl:px-10 bg-[#EE0034] shadow-xl rounded-full flex justify-between items-center z-50 text-white">
 
         <RouterLink to="#" class=" flex justify-center items-center">
             <img src="./img/onlyLogo.png" alt="Logo" class="h-8 xl:h-10 w-auto mr-2" draggable="false">
@@ -26,7 +26,7 @@ const isOpen = ref(false)
             <RouterLink to="contact" class="transition-all hover:text-[#788663]">Contact Us</RouterLink>
         </div>
 
-        <div class="hidden xl:flex justify-center items-center space-x-4">
+        <div class="hidden xl:flex justify-center items-center space-x-4 text-black">
             <div class="flex">
                 <input type="text" placeholder="Type text here"
                     class="w-40 xl:w-full bg-white pl-5 pr-2 py-2 rounded-l-full outline-none">
@@ -34,7 +34,7 @@ const isOpen = ref(false)
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
             </div>
-            <button class="bg-[#788663] text-black px-5 py-2 rounded-full transition-all hover:bg-[#788700]">Register
+            <button class="bg-[#17202A] text-white px-5 py-2 rounded-full transition-all hover:bg-[#788700]">Register
                 <i class="fa fa-long-arrow-right font-extralight -rotate-45" aria-hidden="true"></i>
             </button>
         </div>
