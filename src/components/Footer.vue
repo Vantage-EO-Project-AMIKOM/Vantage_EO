@@ -2,13 +2,16 @@
     <footer class="fixed bottom-0 z-0 w-full h-auto">
         <div class=" w-full max-w-4/5 mx-auto pb-20">
 
-            <div class=" w-full h-auto bg-[#FF0000] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-15 mb-10">
-                <h2 class=" text-3xl xl:text-4xl text-center text-white lg:text-left font-bold mb-3 lg:mb-0">Subscribe to Our Newsletter</h2>
+            <div
+                class=" w-full h-auto bg-[#FF0000] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-15 mb-10">
+                <h2 class=" text-3xl xl:text-4xl text-center text-white lg:text-left font-bold mb-3 lg:mb-0">Subscribe
+                    to Our Newsletter</h2>
 
                 <div class=" flex w-full md:w-6/7 xl:w-1/2 h-15 items-center">
                     <input type="email" class=" w-2/3 h-full bg-white rounded-l-full py-5 px-8 text-lg outline-none"
                         placeholder="Your email address">
-                    <button class=" w-1/3 h-full bg-[#2B3B4C] rounded-r-full text-lg capitalize hover:bg-[#4c5053] text-white cursor-pointer">subscribe</button>
+                    <button
+                        class=" w-1/3 h-full bg-[#2B3B4C] rounded-r-full text-lg capitalize hover:bg-[#4c5053] text-white cursor-pointer">subscribe</button>
                 </div>
             </div>
 
@@ -20,7 +23,8 @@
                         <p class=" text-xl font-bold text-white">Vantage</p>
                     </RouterLink>
 
-                    <p class=" text-md text-justify text-white">Vantage adalah platform web event organizer yang memudahkan
+                    <p class=" text-md text-justify text-white">Vantage adalah platform web event organizer yang
+                        memudahkan
                         pembuatan, pengelolaan, dan
                         pelaksanaan acara secara praktis dan terintegrasi dalam satu sistem.</p>
 
@@ -53,7 +57,12 @@
                         </div>
                         <div
                             class=" w-13 h-13 bg-[#FF0000] text-white rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor" fill-rule="evenodd"><path d="M818 800 498.11 333.745l.546.437L787.084 0h-96.385L455.738 272 269.15 0H16.367l298.648 435.31-.036-.037L0 800h96.385l261.222-302.618L565.217 800zM230.96 72.727l448.827 654.546h-76.38L154.217 72.727z" transform="translate(103 112)"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor"
+                                fill-rule="evenodd" class=" w-8 h-8">
+                                <path
+                                    d="M818 800 498.11 333.745l.546.437L787.084 0h-96.385L455.738 272 269.15 0H16.367l298.648 435.31-.036-.037L0 800h96.385l261.222-302.618L565.217 800zM230.96 72.727l448.827 654.546h-76.38L154.217 72.727z"
+                                    transform="translate(103 112)" />
+                            </svg>
                         </div>
 
                     </div>
@@ -62,17 +71,23 @@
                 <div class=" flex justify-start md:justify-center">
                     <div class=" flex flex-col items-start">
                         <h3 class=" text-3xl font-bold text-white text-left capitalize mb-5">quick links</h3>
-                        <RouterLink to="/" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Home
+                        <RouterLink to="/"
+                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Home
                         </RouterLink>
-                        <RouterLink to="about" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">
+                        <RouterLink to="about"
+                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">
                             About</RouterLink>
-                        <RouterLink to="#" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Events
+                        <RouterLink to="#"
+                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Events
                         </RouterLink>
-                        <RouterLink to="#" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">
+                        <RouterLink to="#"
+                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">
                             Speakers</RouterLink>
-                        <RouterLink to="ourHistory" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Our Story
+                        <RouterLink to="ourHistory"
+                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Our Story
                         </RouterLink>
-                        <RouterLink to="contact" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Contact
+                        <RouterLink to="contact"
+                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Contact
                             Us</RouterLink>
                     </div>
                 </div>
@@ -146,6 +161,6 @@
 
 <script>
 export default {
-  name: 'AppFooter'
+    name: 'AppFooter'
 }
 </script>
