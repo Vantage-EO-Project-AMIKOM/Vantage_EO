@@ -54,7 +54,7 @@
     </section>
 
     <!-- CONTENT I -->
-    <div class="relative z-10 bg-[#FFF9EB] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+    <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
       <section class=" w-full h-auto">
 
         <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">
@@ -78,8 +78,8 @@
             </div>
           </div>
 
-          <div class=" flex flex-col self-center">
-            <h2 class=" w-3/5 text-4xl capitalize text-black font-semibold mb-8">Welcome the Greatest Digital Conference
+          <div class=" flex flex-col self-center text-white">
+            <h2 class=" w-3/5 text-4xl capitalize font-semibold mb-8">Welcome the Greatest Digital Conference
             </h2>
 
             <p class=" text-lg font-normal mb-15">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -88,19 +88,19 @@
               quis nostrud exercitation ulla mco sed do eiusmod tempor incid idunt ut labore et dolore magna.</p>
 
             <div class=" grid grid-cols-3 grid-rows-2 gap-8 mb-15">
-              <div class=" flex items-center transition-all hover:text-[#c58a00]">
+              <div class=" flex items-center transition-all hover:text-[#EE0034]">
                 <i class="fa fa-users text-3xl mr-4" aria-hidden="true"></i>
                 <p>Up to 2500 Guest</p>
               </div>
-              <div class=" col-span-2 flex items-center transition-all hover:text-[#c58a00]">
+              <div class=" col-span-2 flex items-center transition-all hover:text-[#EE0034]">
                 <i class="fa fa-ticket text-3xl mr-4" aria-hidden="true"></i>
                 <p>Free Entry Ticket</p>
               </div>
-              <div class=" flex items-center transition-all hover:text-[#c58a00]">
+              <div class=" flex items-center transition-all hover:text-[#EE0034]">
                 <i class="fa fa-play-circle text-3xl mr-4" aria-hidden="true"></i>
                 <p>950 SQFT Space</p>
               </div>
-              <div class=" col-span-2 flex items-center transition-all hover:text-[#c58a00]">
+              <div class=" col-span-2 flex items-center transition-all hover:text-[#EE0034]">
                 <i class="fa fa-comment text-3xl mr-4" aria-hidden="true"></i>
                 <p>Up to 2500 Guests</p>
               </div>
@@ -108,7 +108,7 @@
 
             <RouterLink to="/">
               <button
-                class="px-7 py-4 border-2 border-black rounded-full transition-all hover:translate-x-2 cursor-pointer">View
+                class="px-7 py-4 border-2 border-white bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer">View
                 Our
                 Schdule</button>
             </RouterLink>
@@ -122,9 +122,9 @@
       <!-- OUR SERVICE -->
       <section class=" w-full h-auto">
 
-        <div class=" w-full max-w-3/5 mx-auto my-20">
-          <h2 class=" text-4xl capitalize text-black font-semibold mb-8 text-center">Our Service</h2>
-          <p class=" text-lg font-normal text-black text-center">Di Vantage Event Organizer, kami senantiasa
+        <div class=" w-full max-w-3/5 mx-auto py-20 text-white">
+          <h2 class=" text-4xl capitalize font-semibold mb-8 text-center">Our Service</h2>
+          <p class=" text-lg font-normal text-center">Di Vantage Event Organizer, kami senantiasa
             menghadirkan
             rangkaian layanan terintegrasi yang dirancang untuk
             menjadikan acara Anda spektakuler. Sebagai Event Organizer (EO) di Indonesia, kami menghadirkan kreativitas,

@@ -1,5 +1,5 @@
 <template>
-    <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-4 gap-10 border-b-2">
+    <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-4 gap-10 border-b-2 border-white text-white">
         <div class="h-50 flex flex-col justify-center items-center">
             <p class=" text-7xl font-bold">15+</p>
             <p class=" text-md font-normal capitalize">investors</p>

@@ -2,13 +2,13 @@
     <footer class="fixed bottom-0 z-0 w-full h-auto">
         <div class=" w-full max-w-4/5 mx-auto pb-20">
 
-            <div class=" w-full h-auto bg-[#E7C899] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-15 mb-10">
-                <h2 class=" text-3xl xl:text-4xl text-center lg:text-left font-bold mb-3 lg:mb-0">Subscribe to Our Newsletter</h2>
+            <div class=" w-full h-auto bg-[#FF0000] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-15 mb-10">
+                <h2 class=" text-3xl xl:text-4xl text-center text-white lg:text-left font-bold mb-3 lg:mb-0">Subscribe to Our Newsletter</h2>
 
                 <div class=" flex w-full md:w-6/7 xl:w-1/2 h-15 items-center">
                     <input type="email" class=" w-2/3 h-full bg-white rounded-l-full py-5 px-8 text-lg outline-none"
                         placeholder="Your email address">
-                    <button class=" w-1/3 h-full bg-[#788663] rounded-r-full text-lg capitalize hover:bg-[#788700] hover:text-white cursor-pointer">subscribe</button>
+                    <button class=" w-1/3 h-full bg-[#2B3B4C] rounded-r-full text-lg capitalize hover:bg-[#4c5053] text-white cursor-pointer">subscribe</button>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                     <div class="flex absolute bottom-0 left-0">
 
                         <div
-                            class=" w-13 h-13 bg-black rounded-full mr-2 text-2xl flex justify-center items-center transition-all hover:bg-[#788663]">
+                            class=" w-13 h-13 bg-[#FF0000] rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
                             <svg width="800px" height="800px" viewBox="0 0 24 24" id="facebook" data-name="Flat Color"
                                 xmlns="http://www.w3.org/2000/svg" class=" w-8 h-8 fill-white">
                                 <path id="primary"
@@ -36,7 +36,7 @@
                             </svg>
                         </div>
                         <div
-                            class=" w-13 h-13 bg-black rounded-full mr-2 text-2xl flex justify-center items-center transition-all hover:bg-[#788663]">
+                            class=" w-13 h-13 bg-[#FF0000] rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
                             <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                 data-name="Layer 1" class=" w-8 h-8 fill-white">
                                 <path
@@ -44,7 +44,7 @@
                             </svg>
                         </div>
                         <div
-                            class=" w-13 h-13 bg-black text-white rounded-full mr-2 text-2xl flex justify-center items-center transition-all hover:bg-[#788663]">
+                            class=" w-13 h-13 bg-[#FF0000] text-white rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
                             <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                 data-name="Layer 1" class=" w-8 h-8 fill-white">
                                 <path
@@ -52,7 +52,7 @@
                             </svg>
                         </div>
                         <div
-                            class=" w-13 h-13 bg-black text-white rounded-full mr-2 text-2xl flex justify-center items-center transition-all hover:bg-[#788663]">
+                            class=" w-13 h-13 bg-[#FF0000] text-white rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
                             <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                 data-name="Layer 1" class=" w-8 h-8 fill-white">
                                 <path
@@ -65,7 +65,7 @@
 
                 <div class=" flex justify-start md:justify-center">
                     <div class=" flex flex-col items-start">
-                        <h3 class=" text-3xl font-bold text-black text-left capitalize mb-5">quick links</h3>
+                        <h3 class=" text-3xl font-bold text-white text-left capitalize mb-5">quick links</h3>
                         <RouterLink to="/" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Home
                         </RouterLink>
                         <RouterLink to="about" class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class=" flex flex-col items-start">
-                    <h3 class=" text-3xl font-bold text-black text-left capitalize mb-5">upcoming events</h3>
+                    <h3 class=" text-3xl font-bold text-white text-left capitalize mb-5">upcoming events</h3>
                     <div class=" w-full h-full grid grid-rows-2 gap-4">
 
                         <div class=" w-full h-full grid grid-cols-3 transition-all hover:scale-102 rounded-2xl">
@@ -121,7 +121,7 @@
 
                 <div class=" flex justify-start md:justify-center">
                     <div class=" flex flex-col items-start">
-                        <h3 class=" text-3xl font-bold text-black text-left capitalize mb-5">contact info</h3>
+                        <h3 class=" text-3xl font-bold text-white text-left capitalize mb-5">contact info</h3>
                         <div class=" flex items-center text-lg font-normal text-white mb-2">
                             <i class="fa fa-thumb-tack mr-3" aria-hidden="true"></i>
                             <p class=" capitalize">address</p>
