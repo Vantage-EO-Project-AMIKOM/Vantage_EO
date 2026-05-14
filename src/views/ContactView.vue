@@ -48,30 +48,30 @@ onUnmounted(() => {
     </section>
 
     <!-- CONTACT INFO -->
-    <div class="relative z-10 bg-[#FFF9EB] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
-        <section class=" w-full h-auto bg-[#E7C899] rounded-[3rem] relative -top-10">
+    <div class="relative z-10 bg-[#2B3B4C] rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+        <section class=" w-full h-auto bg-[#FF0000] rounded-t-[3rem] relative -top-5">
             <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-4 gap-6">
 
-                <div class=" w-full h-full flex flex-col items-start">
+                <div class=" w-full h-full flex flex-col items-start text-white">
                     <i class="fa fa-phone text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">contact us 24/7</h4>
                     <p class=" text-lg font-normal">vantage@gmail.com <br> +6288828123</p>
                 </div>
 
-                <div class=" w-full h-full flex flex-col items-start">
+                <div class=" w-full h-full flex flex-col items-start text-white">
                     <i class="fa fa-map text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">our address</h4>
                     <p class=" text-lg font-normal">830 Ringroad Street, Condongcatur,
                         Sleman, Daerah Istimewa Yogyakarta</p>
                 </div>
 
-                <div class=" w-full h-full flex flex-col items-start">
+                <div class=" w-full h-full flex flex-col items-start text-white">
                     <i class="fa fa-envelope text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">mail us</h4>
                     <p class=" text-lg font-normal">vantage@gmail.com</p>
                 </div>
 
-                <div class=" w-full h-full flex flex-col items-start">
+                <div class=" w-full h-full flex flex-col items-start text-white">
                     <i class="fa fa-calendar text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">working time</h4>
                     <p class=" text-lg font-normal">Monday - Friday 06.00 AM - 09.00 PM
@@ -87,7 +87,7 @@ onUnmounted(() => {
             <div class=" w-full max-w-4/5 mx-auto py-20 flex flex-col items-center">
 
                 <div class=" w-full text-center">
-                    <h2 class=" text-4xl font-bold mb-30">Have Be Any Question? <br> Feel free to contact with us.</h2>
+                    <h2 class=" text-5xl font-bold mb-30 text-white">Have Be Any Question? <br> Feel free to contact with us.</h2>
 
                     <div class=" w-full h-auto flex">
 
@@ -96,8 +96,8 @@ onUnmounted(() => {
                                 class=" w-full h-full object-cover object-top">
                         </div>
 
-                        <div class=" w-full ml-10 p-15 bg-[#E7C899] rounded-4xl flex flex-col">
-                            <p class=" text-lg font-normal text-black text-left mb-4">To find out the price and go to
+                        <div class=" w-full ml-10 p-15 bg-[#FF0000] rounded-4xl flex flex-col">
+                            <p class=" text-2xl font-normal text-white text-left mb-4">To find out the price and go to
                                 the
                                 selection tickets, fill out the forms fields</p>
 
@@ -118,7 +118,7 @@ onUnmounted(() => {
 
                                 <div class=" relative">
                                     <button
-                                        class="px-7 py-4 m-auto bg-[#788663] rounded-full border border-black transition-all hover:translate-x-2 cursor-pointer absolute top-0 left-0 capitalize">
+                                        class="px-7 py-4 m-auto bg-[#2B3B4C] rounded-full transition-all hover:translate-x-2 cursor-pointer absolute top-0 left-0 capitalize text-white font-bold">
                                         register now
                                         <i class="fa fa-long-arrow-right font-extralight -rotate-45"
                                             aria-hidden="true"></i>
@@ -150,13 +150,16 @@ onUnmounted(() => {
         </section>
 
         <!-- SPONSOR -->
-        <section class=" w-full h-auto">
-            <div class=" w-full max-w-4/5 mx-auto py-20 mb-20 flex flex-col">
+        <section class=" w-full h-auto border border-white/30 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden   inset-0 rounded-[3rem]
+           ring-1 ring-white/30">
+            <div class=" w-full max-w-4/5 mx-auto py-20 mb-20 flex flex-col ">
 
                 <div class=" w-full flex justify-between items-center mb-10">
-                    <div class=" w-full border border-black"></div>
-                    <p class=" w-100 text-lg font-normal text-black text-center capitalize">our sponsors</p>
-                    <div class=" w-full border border-black"></div>
+                    <div class=" w-full border border-white"></div>
+                    <p class=" w-100 text-lg font-normal text-white text-center capitalize">our sponsors</p>
+                    <div class=" w-full border border-white"></div>
                 </div>
 
                 <div class=" w-full grid grid-cols-8 gap-12">

@@ -48,7 +48,7 @@ const parallaxOffset = ref(0);
     </section>
 
     <!-- CONTENT I -->
-    <div class="relative z-10 bg-[#FFF9EB] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+    <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
         <section class=" w-full h-auto">
 
             <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">
@@ -69,11 +69,11 @@ const parallaxOffset = ref(0);
                 </div>
 
                 <div class=" flex flex-col self-center">
-                    <h2 class=" w-3/5 text-4xl capitalize text-black font-semibold mb-8">Why you should Join
+                    <h2 class=" w-3/5 text-4xl capitalize text-white font-semibold mb-8">Why you should Join
                         Our Event
                     </h2>
 
-                    <p class=" text-lg font-normal mb-15">We have dedicated tracks for every industry Whether you want to
+                    <p class=" text-lg font-normal mb-15 text-white">We have dedicated tracks for every industry Whether you want to
                         hire tech’s top talent meet with the policymakers influencing your industry or exchange notes to
                         have dedicated track How you transform your business as technology, consumer habits industry
                         dynamic.</p>
@@ -81,18 +81,18 @@ const parallaxOffset = ref(0);
                     <div class=" grid grid-rows-3 gap-8">
 
                         <div class=" flex justify-start items-center">
-                            <i class="fa fa-check text-xl mr-10" aria-hidden="true"></i>
-                            <p class="">How to improve your busines for Helping us</p>
+                            <i class="fa fa-check text-xl mr-10 text-white" aria-hidden="true"></i>
+                            <p class="text-white">How to improve your busines for Helping us</p>
                         </div>
 
                         <div class=" flex justify-start items-center">
-                            <i class="fa fa-check text-xl mr-10" aria-hidden="true"></i>
-                            <p class="">making this the first true generator on the Internet</p>
+                            <i class="fa fa-check text-xl mr-10 text-white" aria-hidden="true"></i>
+                            <p class="text-white">making this the first true generator on the Internet</p>
                         </div>
 
                         <div class=" flex justify-start items-center">
-                            <i class="fa fa-check text-xl mr-10" aria-hidden="true"></i>
-                            <p class="">Creative this the first true generator on the designe</p>
+                            <i class="fa fa-check text-xl mr-10 text-white" aria-hidden="true"></i>
+                            <p class="text-white">Creative this the first true generator on the designe</p>
                         </div>
 
                     </div>
@@ -109,44 +109,56 @@ const parallaxOffset = ref(0);
             <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">
 
                 <div class=" flex flex-col self-center pr-20">
-                    <h2 class=" w-3/5 text-4xl capitalize text-black font-semibold mb-8">We Bring The Best
+                    <h2 class=" w-3/5 text-4xl capitalize text-white font-semibold mb-8">We Bring The Best
                         Things for You
                     </h2>
 
-                    <p class=" text-lg font-normal mb-15">No conference has ever grown so large so fast. But we also pride
+                    <p class=" text-lg font-normal mb-15 text-white">No conference has ever grown so large so fast. But we also pride
                         ourselves in organising the “best technology conference on the planet”.</p>
 
                     <RouterLink to="/">
                         <button
-                            class="px-7 py-4 border-2 border-black rounded-full transition-all hover:translate-x-2 cursor-pointer">Get Ticket</button>
+                            class="px-7 py-4 border-2 border-white rounded-full transition-all hover:translate-x-2 cursor-pointer text-white border">Get Ticket</button>
                     </RouterLink>
 
                 </div>
 
-                <div class=" grid grid-cols-2 grid-rows-2 gap-8">
+                <div class=" grid grid-cols-2 grid-rows-2 gap-8 ">
 
-                    <div class=" w-full h-auto border bg-white rounded-3xl p-6 flex flex-col items-start">
+                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden p-10 inset-0 rounded-[40px]
+           ring-1 ring-white/40 text-white">
                         <i class="fa fa-microphone text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">advance speakers</h3>
                         <p>Hear 9 inspiring talks, meet the best product people in Europe, and party together after the
                             event!</p>
                     </div>
 
-                    <div class=" w-full h-auto border bg-white rounded-3xl p-6 flex flex-col items-start">
+                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden p-10 inset-0 rounded-[40px]
+           ring-1 ring-white/40 text-white">
                         <i class="fa fa-briefcase text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">daily worshops</h3>
                         <p>Hear 9 inspiring talks, meet the best product people in Europe, and party together after the
                             event!</p>
                     </div>
 
-                    <div class=" w-full h-auto border bg-white rounded-3xl p-6 flex flex-col items-start">
+                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden p-10 inset-0 rounded-[40px]
+           ring-1 ring-white/40 text-white">
                         <i class="fa fa-commenting text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">Q&A sessions</h3>
                         <p>Hear 9 inspiring talks, meet the best product people in Europe, and party together after the
                             event!</p>
                     </div>
 
-                    <div class=" w-full h-auto border bg-white rounded-3xl p-6 flex flex-col items-start">
+                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden p-10 inset-0 rounded-[40px]
+           ring-1 ring-white/40 text-white">
                         <i class="fa fa-television text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">live training</h3>
                         <p>Hear 9 inspiring talks, meet the best product people in Europe, and party together after the
@@ -160,18 +172,21 @@ const parallaxOffset = ref(0);
         </section>
 
         <!-- USER TESTIMONI -->
-        <section class=" w-full h-auto rounded-[5rem] bg-[#E7C899]">
+        <section class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden p-10 inset-0 rounded-[40px]
+           ring-1 ring-white/40 ">
             <div class=" w-full max-w-4/5 mx-auto py-15 grid grid-cols-3">
 
                 <div class=" flex flex-col items-center">
-                    <h2 class=" w-4/5 text-4xl capitalize text-black font-semibold mb-8">What our client's say about us</h2>
+                    <h2 class=" w-4/5 text-4xl capitalize text-white font-semibold mb-8">What our client's say about us</h2>
                     <img src="./../components/img/aboutBG/shc.png" alt="" draggable="false">
                 </div>
 
                 <div class=" col-span-2 flex items-center px-20">
                     <div class=" flex flex-col items-start text-left">
-                        <i class="fa fa-quote-left text-6xl mb-5" aria-hidden="true"></i>
-                        <p class=" text-2xl mb-7">I express my deep gratitude to the team for the impecc able and productive
+                        <i class="fa fa-quote-left text-6xl mb-5 text-white" aria-hidden="true"></i>
+                        <p class=" text-2xl mb-7 text-white">I express my deep gratitude to the team for the impecc able and productive
                             service to the
                             company activities based on the results of seven years of joint work I recommend the services of
                             this company to everyone!</p>
@@ -182,8 +197,8 @@ const parallaxOffset = ref(0);
                                         class=" w-full h-full object-cover object-center" draggable="false">
                                 </div>
                                 <div class=" flex flex-col items-start justify-center">
-                                    <h5 class=" text-xl font-bold text-black">username</h5>
-                                    <p class=" text-sm font-normal text-black">[Developer]</p>
+                                    <h5 class=" text-xl font-bold text-white">username</h5>
+                                    <p class=" text-sm font-normal text-white">[Developer]</p>
                                 </div>
                             </div>
 
@@ -197,20 +212,20 @@ const parallaxOffset = ref(0);
                         </div>
                         <div class=" w-full h-auto flex items-center">
                             <div class=" w-auto flex">
-                                <div class=" w-5 h-5 mr-2 border border-black bg-black rounded-full"></div>
-                                <div class=" w-5 h-5 mr-2 border border-black bg-none rounded-full"></div>
-                                <div class=" w-5 h-5 border border-black bg-none rounded-full"></div>
+                                <div class=" w-5 h-5 mr-2 border border-white bg-white rounded-full"></div>
+                                <div class=" w-5 h-5 mr-2 border border-white bg-none rounded-full"></div>
+                                <div class=" w-5 h-5 border border-white bg-none rounded-full"></div>
                             </div>
 
-                            <div class=" w-full mx-3 border border-black"></div>
+                            <div class=" w-full mx-3 border border-white"></div>
 
                             <div class=" w-auto flex items-center">
                                 <button
-                                    class=" w-10 h-10 bg-white transition-all hover:bg-gray-300 border border-black rounded-full font-bold mr-2">
+                                    class=" w-10 h-10 bg-white transition-all hover:bg-gray-300 border border-white rounded-full font-bold mr-2">
                                     <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
                                 </button>
                                 <button
-                                    class=" w-10 h-10 bg-white transition-all hover:bg-gray-300 border border-black rounded-full font-bold">
+                                    class=" w-10 h-10 bg-white transition-all hover:bg-gray-300 border border-white rounded-full font-bold">
                                     <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -230,14 +245,14 @@ const parallaxOffset = ref(0);
 
         <section class=" w-full h-auto">
             <div class=" w-full max-w-4/5 mx-auto py-15 flex flex-col">
-                <h2 class=" text-4xl font-bold text-black text-center mb-15">Get direction to the event hall</h2>
+                <h2 class=" text-4xl font-bold text-white text-center mb-15">Get direction to the event hall</h2>
                 <div class=" w-full flex justify-between">
 
-                    <div class=" w-3/10 h-100 bg-[#E7C899] rounded-4xl flex flex-col items-start justify-center p-20">
+                    <div class=" w-3/10 h-100 bg-[#FF0000] rounded-4xl flex flex-col items-start justify-center p-20 ">
 
                         <div class=" w-full flex flex-col mb-10">
 
-                            <div class=" w-full h-auto flex mb-8">
+                            <div class=" w-full h-auto flex mb-8 text-white">
                                 <i class="fa fa-calendar text-4xl mr-3" aria-hidden="true"></i>
 
                                 <div class=" flex flex-col justify-center items-start">
@@ -247,7 +262,7 @@ const parallaxOffset = ref(0);
                             </div>
 
 
-                            <div class=" w-full h-auto flex">
+                            <div class=" w-full h-auto flex text-white">
                                 <i class="fa fa-location-arrow text-4xl mr-3" aria-hidden="true"></i>
 
                                 <div class=" flex flex-col justify-center items-start">
@@ -259,7 +274,8 @@ const parallaxOffset = ref(0);
                         </div>
 
                         <button
-                            class="px-7 py-4 border border-black bg-white rounded-full transition-all hover:translate-x-2 cursor-pointer">Get Direction</button>
+                            class="px-7 py-4 bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">
+                            Get Direction</button>
                     </div>
 
                     <div class=" w-7/10 h-100 rounded-4xl overflow-hidden ml-10">

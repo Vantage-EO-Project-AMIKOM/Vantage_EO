@@ -47,16 +47,19 @@ onUnmounted(() => {
 
     </section>
 
-    <div class="relative z-10 bg-[#FFF9EB] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+    <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
         <section class=" w-full h-auto">
             <div class=" w-full max-w-4/5 mx-auto py-20">
 
                 <div class=" w-full h-100 grid grid-cols-2 gap-8 mb-25">
 
                     <div
-                        class=" w-4/5 h-5/6 rounded-4xl bg-white p-10 border border-black relative text-right justify-self-end">
-                        <h2 class=" text-4xl capitalize text-black font-medium mb-8">marketing matters!</h2>
-                        <p class=" font-normal text-lg text-black">How you transform your business as technology, consumer,
+                        class=" w-4/5 h-5/6 relative text-right justify-self-end rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden p-10 inset-0 rounded-[40px]
+           ring-1 ring-white/40 text-white">
+                        <h2 class=" text-4xl capitalize text-white font-medium mb-8">marketing matters!</h2>
+                        <p class=" font-normal text-lg text-white">How you transform your business as technology, consumer,
                             habits industry dynamics change? Find out from those leading the charge.</p>
                         <p class=" w-10 h-20 text-4xl font-bold overflow-hidden absolute bottom-10 right-10">20
                             10</p>
@@ -77,9 +80,12 @@ onUnmounted(() => {
                     </div>
 
                     <div
-                        class=" w-4/5 h-5/6 rounded-4xl bg-white p-10 border border-black relative text-left justify-self-start">
-                        <h2 class=" text-4xl capitalize text-black font-medium mb-8">reinventing experiences</h2>
-                        <p class=" font-normal text-lg text-black">How you transform your business as technology, consumer,
+                        class=" w-4/5 h-5/6 relative text-left justify-self-start rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden p-10 inset-0 rounded-[40px]
+           ring-1 ring-white/40 text-white">
+                        <h2 class=" text-4xl capitalize text-white font-medium mb-8">reinventing experiences</h2>
+                        <p class=" font-normal text-lg text-white">How you transform your business as technology, consumer,
                             habits industry dynamics change? Find out from those leading the charge.</p>
                         <p class=" w-10 h-20 text-4xl font-bold overflow-hidden absolute bottom-10 left-10">20
                             12</p>
@@ -90,9 +96,12 @@ onUnmounted(() => {
                 <div class=" w-full h-100 grid grid-cols-2 gap-8 mb-25">
 
                     <div
-                        class=" w-4/5 h-5/6 rounded-4xl bg-white p-10 border border-black relative text-right justify-self-end">
-                        <h2 class=" text-4xl capitalize text-black font-medium mb-8">cultures of creativity</h2>
-                        <p class=" font-normal text-lg text-black">How you transform your business as technology, consumer,
+                        class="w-4/5 h-5/6 relative text-right justify-self-end rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden p-10 inset-0 rounded-[40px]
+           ring-1 ring-white/40 text-white">
+                        <h2 class=" text-4xl capitalize text-white font-medium mb-8">cultures of creativity</h2>
+                        <p class=" font-normal text-lg text-white">How you transform your business as technology, consumer,
                             habits industry dynamics change? Find out from those leading the charge.</p>
                         <p class=" w-10 h-20 text-4xl font-bold overflow-hidden absolute bottom-10 right-10">20
                             14</p>
@@ -113,9 +122,12 @@ onUnmounted(() => {
                     </div>
 
                     <div
-                        class=" w-4/5 h-5/6 rounded-4xl bg-white p-10 border border-black relative text-left justify-self-start">
-                        <h2 class=" text-4xl capitalize text-black font-medium mb-8">Human Centered Design</h2>
-                        <p class=" font-normal text-lg text-black">How you transform your business as technology, consumer,
+                        class=" w-4/5 h-5/6 relative text-left justify-self-start rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
+         overflow-hidden p-10 inset-0 rounded-[40px]
+           ring-1 ring-white/40 text-white">
+                        <h2 class=" text-4xl capitalize text-white font-medium mb-8">Human Centered Design</h2>
+                        <p class=" font-normal text-lg text-white">How you transform your business as technology, consumer,
                             habits industry dynamics change? Find out from those leading the charge.</p>
                         <p class=" w-10 h-20 text-4xl font-bold overflow-hidden absolute bottom-10 left-10">20
                             16</p>
