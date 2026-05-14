@@ -49,7 +49,7 @@ onUnmounted(() => {
 
     <!-- CONTACT INFO -->
     <div class="relative z-10 bg-[#FFF9EB] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
-        <section class=" w-full h-auto bg-[#E7C899]">
+        <section class=" w-full h-auto bg-[#E7C899] rounded-[3rem] relative -top-10">
             <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-4 gap-6">
 
                 <div class=" w-full h-full flex flex-col items-start">
