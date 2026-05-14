@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full max-w-4/5 mx-auto my-20 rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+    <div class="w-full max-w-4/5 mx-auto my-20 rounded-[5rem] border border-white/10 bg-gradient-to-br from-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0 rounded-[40px]
            ring-1 ring-white/40 text-white">

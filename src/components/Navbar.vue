@@ -21,7 +21,7 @@ const isOpen = ref(false)
             <RouterLink to="/" class="transition-all hover:text-[#788663]">Home</RouterLink>
             <RouterLink to="about" class="transition-all hover:text-[#788663]">About Us</RouterLink>
             <RouterLink to="#" class="transition-all hover:text-[#788663]">Events</RouterLink>
-            <RouterLink to="#" class="transition-all hover:text-[#788663]">Speakers</RouterLink>
+            <RouterLink to="profile" class="transition-all hover:text-[#788663]">Profile</RouterLink>
             <RouterLink to="ourHistory" class="transition-all hover:text-[#788663]">Our Story</RouterLink>
             <RouterLink to="contact" class="transition-all hover:text-[#788663]">Contact Us</RouterLink>
         </div>
@@ -49,7 +49,7 @@ const isOpen = ref(false)
         <RouterLink to="/" class=" text-lg hover:text-blue-800">Home</RouterLink>
         <RouterLink to="about" class=" text-lg hover:text-blue-800">Pages</RouterLink>
         <RouterLink to="#" class=" text-lg hover:text-blue-800">Events</RouterLink>
-        <RouterLink to="#" class=" text-lg hover:text-blue-800">Speakers</RouterLink>
+        <RouterLink to="profile" class=" text-lg hover:text-blue-800">Profile</RouterLink>
         <RouterLink to="ourHistory" class=" text-lg hover:text-blue-800">Our Story</RouterLink>
         <RouterLink to="contact" class=" text-lg hover:text-blue-800">Contact Us</RouterLink>
 

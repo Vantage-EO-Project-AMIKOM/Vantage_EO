@@ -50,12 +50,12 @@ onUnmounted(() => {
     <!-- CONTACT INFO -->
     <div class="relative z-10 bg-[#2B3B4C] rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
         <section class=" w-full h-auto bg-[#FF0000] rounded-t-[3rem] relative -top-5">
-            <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-4 gap-6">
+            <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-4 gap-20">
 
                 <div class=" w-full h-full flex flex-col items-start text-white">
                     <i class="fa fa-phone text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">contact us 24/7</h4>
-                    <p class=" text-lg font-normal">vantage@gmail.com <br> +6288828123</p>
+                    <p class=" text-lg font-normal">+628654877728123</p>
                 </div>
 
                 <div class=" w-full h-full flex flex-col items-start text-white">
