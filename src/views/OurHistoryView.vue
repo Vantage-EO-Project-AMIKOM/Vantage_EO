@@ -54,9 +54,9 @@ onUnmounted(() => {
                 <div class=" w-full h-100 grid grid-cols-2 gap-8 mb-25">
 
                     <div
-                        class=" w-4/5 h-5/6 relative text-right justify-self-end rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+                        class=" w-4/5 h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden p-10 inset-0 rounded-[40px]
+         overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
                         <h2 class=" text-4xl capitalize text-white font-medium mb-8">marketing matters!</h2>
                         <p class=" font-normal text-lg text-white">How you transform your business as technology, consumer,
@@ -80,9 +80,9 @@ onUnmounted(() => {
                     </div>
 
                     <div
-                        class=" w-4/5 h-5/6 relative text-left justify-self-start rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+                        class=" w-4/5 h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden p-10 inset-0 rounded-[40px]
+         overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
                         <h2 class=" text-4xl capitalize text-white font-medium mb-8">reinventing experiences</h2>
                         <p class=" font-normal text-lg text-white">How you transform your business as technology, consumer,
@@ -96,9 +96,9 @@ onUnmounted(() => {
                 <div class=" w-full h-100 grid grid-cols-2 gap-8 mb-25">
 
                     <div
-                        class="w-4/5 h-5/6 relative text-right justify-self-end rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+                        class="w-4/5 h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden p-10 inset-0 rounded-[40px]
+         overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
                         <h2 class=" text-4xl capitalize text-white font-medium mb-8">cultures of creativity</h2>
                         <p class=" font-normal text-lg text-white">How you transform your business as technology, consumer,
@@ -122,9 +122,9 @@ onUnmounted(() => {
                     </div>
 
                     <div
-                        class=" w-4/5 h-5/6 relative text-left justify-self-start rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+                        class=" w-4/5 h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden p-10 inset-0 rounded-[40px]
+         overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
                         <h2 class=" text-4xl capitalize text-white font-medium mb-8">Human Centered Design</h2>
                         <p class=" font-normal text-lg text-white">How you transform your business as technology, consumer,

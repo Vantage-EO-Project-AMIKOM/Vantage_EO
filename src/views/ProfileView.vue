@@ -33,18 +33,12 @@ onUnmounted(() => {
   <!-- HERO -->
   <section class="w-full h-130 z-10 flex items-center relative overflow-hidden">
     <div class="absolute inset-0 bg-black/60">
-      <img
-        src="./../components/img/bg/hero-bg.jpg"
-        alt=""
+      <img src="./../components/img/bg/hero-bg.jpg" alt=""
         class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover"
-        draggable="false"
-        :style="{ transform: `translateY(${parallaxOffset}px)` }"
-      />
+        draggable="false" :style="{ transform: `translateY(${parallaxOffset}px)` }" />
     </div>
     <div class="w-full max-w-3/5 mx-auto z-10">
-      <h1
-        class="w-2/3 capitalize text-7xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5"
-      >
+      <h1 class="w-2/3 capitalize text-7xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5">
         Profile
       </h1>
       <p class="text-lg font-normal uppercase text-white">vantage > profile</p>
@@ -52,13 +46,9 @@ onUnmounted(() => {
   </section>
 
   <!-- DID -->
-  <div
-    class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]"
-  >
-    <section class="max-w-6xl w-full mx-auto my-5 px-5">
-      <div
-        class="rounded-[5rem] border border-white/10 bg-gradient-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-[40px] ring-1 ring-white/40"
-      >
+  <div class="relative z-10 bg-[#2B3B4C] py-20 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+    <section class="max-w-7/8 w-full mx-auto">
+      <div class="bg-linear-to-br from-[#24364d] to-[#1d2d42] overflow-hidden p-10 rounded-[60px]">
         <h2 class="text-6xl capitalize font-semibold mb-8 text-center text-white">
           DID YOU KNOW US?
         </h2>
@@ -88,17 +78,13 @@ onUnmounted(() => {
       <div class="w-full max-w-4/5 mx-auto py-20">
         <h2 class="text-6xl capitalize font-semibold text-center text-white">Our Profile</h2>
 
-        <div class="grid grid-cols-3 mt-10">
+        <div class="grid grid-cols-3 gap-10 mt-10">
           <div class="w-110 h-145 overflow-hidden rounded-full">
-          <img
-            class="   w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
-            src="./../components/img/profilePage/profile/profile1.jpeg"
-            alt="Azka"
-          />
+            <img class=" w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
+              src="./../components/img/profilePage/profile/profile1.jpeg" alt="Azka" />
           </div>
           <div
-            class="w-230 h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-[40px] ring-1 ring-white/40 py-20 self-center"
-          >
+            class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
             <h2 class="text-4xl capitalize font-semibold text-left text-white">
               Dhiya Muhammad Azka
             </h2>
@@ -113,10 +99,9 @@ onUnmounted(() => {
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-3 mt-10">
+        <div class="grid grid-cols-3 gap-10 mt-10">
           <div
-            class="w-230 h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-[40px] ring-1 ring-white/40 py-20 self-center"
-          >
+            class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
             <h2 class="text-4xl capitalize font-semibold text-right text-white">Puan Aeesya</h2>
             <h2 class="text-4xl capitalize font-semibold mb-8 text-right text-white">24.61.0274</h2>
             <p class="text-2xl italic text-white mb-10 text-right">
@@ -128,26 +113,18 @@ onUnmounted(() => {
               <img src="./../components/img/profilePage/githubicon.png" alt="github_icon" />
             </div>
           </div>
-          <div></div>
-          <div class="w-110 h-145 overflow-hidden rounded-full">
-            <img
-            class="w-full h-full object-cover object-[85%_15%] scale-150 origin-center"
-            src="./../components/img/profilePage/profile/profile2.jpeg"
-            alt="Puan"
-          />
+          <div class="w-full h-145 overflow-hidden rounded-full">
+            <img class="w-full h-full object-cover object-[85%_15%] scale-150 origin-center"
+              src="./../components/img/profilePage/profile/profile2.jpeg" alt="Puan" />
           </div>
         </div>
         <div class="grid grid-cols-3 mt-10">
           <div class="w-110 h-145 overflow-hidden rounded-full">
-          <img
-            class="   w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
-            src="./../components/img/profilePage/profile/profile3.jpeg"
-            alt="Angga"
-          />
+            <img class=" w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
+              src="./../components/img/profilePage/profile/profile3.jpeg" alt="Angga" />
           </div>
           <div
-            class="w-230 h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-[40px] ring-1 ring-white/40 py-20 self-center"
-          >
+            class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
             <h2 class="text-4xl capitalize font-semibold text-left text-white">
               L.M.Hanggara Putra Akbar
             </h2>
@@ -162,10 +139,9 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="grid grid-cols-3 mt-10">
+        <div class="grid grid-cols-3 gap-10 mt-10">
           <div
-            class="w-230 h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-[40px] ring-1 ring-white/40 py-20 self-center"
-          >
+            class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
             <h2 class="text-4xl capitalize font-semibold text-right text-white">Dani Zakhran</h2>
             <h2 class="text-4xl capitalize font-semibold mb-8 text-right text-white">22.11.xxxx</h2>
             <p class="text-2xl italic text-white mb-10 text-right">
@@ -176,13 +152,9 @@ onUnmounted(() => {
               <img src="./../components/img/profilePage/githubicon.png" alt="github_icon" />
             </div>
           </div>
-          <div></div>
-          <div class="w-110 h-145 overflow-hidden rounded-full">
-            <img
-            class="w-full h-full object-cover object-[85%_15%] scale-150 origin-center"
-            src="./../components/img/profilePage/profile/profile4.jpeg"
-            alt="Puan"
-          />
+          <div class="w-full h-145 overflow-hidden rounded-full">
+            <img class="w-full h-full object-cover object-[85%_15%] scale-150 origin-center"
+              src="./../components/img/profilePage/profile/profile4.jpeg" alt="Puan" />
           </div>
         </div>
       </div>

@@ -150,7 +150,7 @@ onUnmounted(() => {
         </section>
 
         <!-- SPONSOR -->
-        <section class=" w-full h-auto border border-white/30 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+        <section class=" w-full h-auto border border-white/30 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden   inset-0 rounded-[3rem]
            ring-1 ring-white/30">

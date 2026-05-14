@@ -118,16 +118,16 @@ const parallaxOffset = ref(0);
 
                     <RouterLink to="/">
                         <button
-                            class="px-7 py-4 border-2 border-white rounded-full transition-all hover:translate-x-2 cursor-pointer text-white border">Get Ticket</button>
+                            class="px-7 py-4 border-2 border-white rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">Get Ticket</button>
                     </RouterLink>
 
                 </div>
 
                 <div class=" grid grid-cols-2 grid-rows-2 gap-8 ">
 
-                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+                    <div class=" w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden p-10 inset-0 rounded-[40px]
+         overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
                         <i class="fa fa-microphone text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">advance speakers</h3>
@@ -135,9 +135,9 @@ const parallaxOffset = ref(0);
                             event!</p>
                     </div>
 
-                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden p-10 inset-0 rounded-[40px]
+         overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
                         <i class="fa fa-briefcase text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">daily worshops</h3>
@@ -145,9 +145,9 @@ const parallaxOffset = ref(0);
                             event!</p>
                     </div>
 
-                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+                    <div class=" w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden p-10 inset-0 rounded-[40px]
+         overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
                         <i class="fa fa-commenting text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">Q&A sessions</h3>
@@ -155,9 +155,9 @@ const parallaxOffset = ref(0);
                             event!</p>
                     </div>
 
-                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+                    <div class=" w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden p-10 inset-0 rounded-[40px]
+         overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
                         <i class="fa fa-television text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">live training</h3>
@@ -172,9 +172,9 @@ const parallaxOffset = ref(0);
         </section>
 
         <!-- USER TESTIMONI -->
-        <section class=" w-full h-auto rounded-[5rem] border border-white/10 bg-gradient-to-br rom-[#24364d] to-[#1d2d42]
+        <section class=" w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden p-10 inset-0 rounded-[40px]
+         overflow-hidden p-10 inset-0
            ring-1 ring-white/40 ">
             <div class=" w-full max-w-4/5 mx-auto py-15 grid grid-cols-3">
 
