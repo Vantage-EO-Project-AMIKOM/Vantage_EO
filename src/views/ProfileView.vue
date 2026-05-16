@@ -154,7 +154,7 @@ onUnmounted(() => {
           </div>
           <div class="w-full h-145 overflow-hidden rounded-full">
             <img class="w-full h-full object-cover object-[85%_15%] scale-150 origin-center"
-              src="./../components/img/profilePage/profile/profile4.jpeg" alt="Puan" />
+              src="#" alt="Dani" />
           </div>
         </div>
       </div>
