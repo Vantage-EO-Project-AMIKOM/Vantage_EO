@@ -57,9 +57,9 @@
     <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
       <section class=" w-full h-auto">
 
-        <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">
+        <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-1 xl:grid-cols-2 gap-4">
 
-          <div class=" grid grid-cols-2 grid-rows-2 gap-6 pr-10">
+          <div class=" grid grid-cols-2 grid-rows-2 gap-6 pr-10 mb-15 xl:mb-0">
             <div class="w-8/10 h-9/10 rounded-2xl justify-self-end self-end overflow-hidden relative -bottom-6">
               <img src="./../components/img/bg/c1.jpeg" alt="" class=" w-full h-full object-cover object-center"
                 draggable="false">
@@ -87,7 +87,7 @@
               aliqua. Ut enim ad minim veniam
               quis nostrud exercitation ulla mco sed do eiusmod tempor incid idunt ut labore et dolore magna.</p>
 
-            <div class=" grid grid-cols-3 grid-rows-2 gap-8 mb-15">
+            <div class=" grid grid-cols-2 md:grid-cols-3 gap-8 mb-15">
               <div class=" flex items-center transition-all hover:text-[#EE0034]">
                 <i class="fa fa-users text-3xl mr-4" aria-hidden="true"></i>
                 <p>Up to 2500 Guest</p>

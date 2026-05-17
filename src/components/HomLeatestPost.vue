@@ -10,7 +10,7 @@
                 All</button>
         </div>
 
-        <div class=" w-full grid grid-cols-4 grid-rows-2 gap-8">
+        <div class=" w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 grid-rows-2 gap-8">
             <div class=" h-80 flex flex-col items-start rounded-2xl shadow-md transition-all
         hover:scale-101 hover:-translate-y-1">
                 <img class=" w-full h-3/5 object-cover object-center rounded-t-xl" src="./img/bg/ulp.jpeg" alt="content" draggable="false">
