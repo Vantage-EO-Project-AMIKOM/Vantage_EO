@@ -48,7 +48,7 @@ const parallaxOffset = ref(0);
     </section>
 
     <!-- CONTENT I -->
-    <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+    <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
         <section class=" w-full h-auto">
 
             <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">

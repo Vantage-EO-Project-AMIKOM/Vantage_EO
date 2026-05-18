@@ -46,7 +46,7 @@ onUnmounted(() => {
   </section>
 
   <!-- DID -->
-  <div class="relative z-10 bg-[#2B3B4C] py-20 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+  <div class="relative z-10 bg-[#2B3B4C] py-20 rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
     <section class="max-w-7/8 w-full mx-auto">
       <div class="bg-linear-to-br from-[#24364d] to-[#1d2d42] overflow-hidden p-10 rounded-[60px]">
         <h2 class="text-6xl capitalize font-semibold mb-8 text-center text-white">
@@ -153,7 +153,7 @@ onUnmounted(() => {
             </div>
           </div>
           <div class="w-full h-145 overflow-hidden rounded-full">
-            <img class="w-full h-full object-cover object-[85%_15%] scale-150 origin-center" src="" alt="Dani" />
+            <img class="w-full h-full object-cover object-[10%_-6rem] scale-150 origin-center" src="./../components/img/profilePage/profile/profile4.jpeg" alt="Dani" />
           </div>
         </div>
       </div>
