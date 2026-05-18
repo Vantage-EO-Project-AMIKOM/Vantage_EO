@@ -40,7 +40,7 @@
           class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover"
           draggable="false" :style="{ transform: `translateY(${parallaxOffset}px)` }">
       </div>
-      <div class="w-full max-w-3/5 mx-auto z-10">
+      <div class="w-full max-w-3/4 mx-auto z-10">
         <h1 class="w-2/3 capitalize text-7xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5">let's create
           your event with vantage</h1>
         <RouterLink to="/">
@@ -54,7 +54,7 @@
     </section>
 
     <!-- CONTENT I -->
-    <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+    <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
       <section class=" w-full h-auto">
 
         <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-1 xl:grid-cols-2 gap-4">

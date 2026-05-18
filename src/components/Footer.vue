@@ -11,7 +11,7 @@
                     <input type="email" class=" w-2/3 h-full bg-white rounded-l-full py-5 px-8 text-lg outline-none"
                         placeholder="Your email address">
                     <button
-                        class=" w-1/3 h-full bg-[#2B3B4C] rounded-r-full text-lg capitalize hover:bg-[#4c5053] text-white cursor-pointer">subscribe</button>
+                        class=" w-1/3 h-full bg-[#17202A] rounded-r-full text-lg capitalize hover:bg-[#4c5053] text-white cursor-pointer">subscribe</button>
                 </div>
             </div>
 

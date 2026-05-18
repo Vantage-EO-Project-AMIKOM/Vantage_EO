@@ -118,7 +118,7 @@ const parallaxOffset = ref(0);
 
                     <RouterLink to="/">
                         <button
-                            class="px-7 py-4 border-2 border-white rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">Get Ticket</button>
+                            class="px-15 py-3 border-2 border-white bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">Get Ticket</button>
                     </RouterLink>
 
                 </div>
@@ -135,12 +135,12 @@ const parallaxOffset = ref(0);
                             event!</p>
                     </div>
 
-                    <div class=" w-full h-auto rounded-[5rem] border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
+                    <div class=" w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
                         <i class="fa fa-briefcase text-5xl mb-4" aria-hidden="true"></i>
-                        <h3 class=" text-2xl font-bold capitalize mb-2">daily worshops</h3>
+                        <h3 class=" text-2xl font-bold capitalize mb-2">daily workshops</h3>
                         <p>Hear 9 inspiring talks, meet the best product people in Europe, and party together after the
                             event!</p>
                     </div>
@@ -274,7 +274,7 @@ const parallaxOffset = ref(0);
                         </div>
 
                         <button
-                            class="px-7 py-4 bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">
+                            class="px-10 py-3 bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">
                             Get Direction</button>
                     </div>
 

@@ -37,7 +37,7 @@ onUnmounted(() => {
         class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover"
         draggable="false" :style="{ transform: `translateY(${parallaxOffset}px)` }" />
     </div>
-    <div class="w-full max-w-3/5 mx-auto z-10">
+    <div class="w-full max-w-3/4 mx-auto z-10">
       <h1 class="w-2/3 capitalize text-7xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5">
         Profile
       </h1>
