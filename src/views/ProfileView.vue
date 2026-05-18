@@ -48,11 +48,11 @@ onUnmounted(() => {
   <!-- DID -->
   <div class="relative z-10 bg-[#2B3B4C] py-20 rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
     <section class="max-w-7/8 w-full mx-auto">
-      <div class="bg-linear-to-br from-[#24364d] to-[#1d2d42] overflow-hidden p-10 rounded-[60px]">
+      <div class="bg-linear-to-br from-[#24364d] to-[#1d2d42] overflow-hidden p-15 rounded-[60px]">
         <h2 class="text-6xl capitalize font-semibold mb-8 text-center text-white">
           DID YOU KNOW US?
         </h2>
-        <p class="text-white text-2xl indent-15 text-justify">
+        <p class="text-white text-2xl indent-15 mb-8 text-justify">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis lacinia leo. Donec
           tincidunt congue augue vel ullamcorper. Mauris venenatis id ligula et viverra. Mauris
           suscipit aliquam tellus nec euismod. Vestibulum vestibulum dictum venenatis. Curabitur
@@ -85,7 +85,7 @@ onUnmounted(() => {
           </div>
           <div
             class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
-            <h2 class="text-4xl capitalize font-semibold text-left text-white">
+            <h2 class="text-4xl capitalize font-semibold mb-2 text-left text-white">
               Dhiya Muhammad Azka
             </h2>
             <h2 class="text-4xl capitalize font-semibold mb-8 text-left text-white">24.61.0270</h2>
@@ -102,7 +102,7 @@ onUnmounted(() => {
         <div class="grid grid-cols-3 gap-10 mt-10">
           <div
             class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
-            <h2 class="text-4xl capitalize font-semibold text-right text-white">Puan Aeesya</h2>
+            <h2 class="text-4xl capitalize font-semibold mb-2 text-right text-white">Puan Aeesya</h2>
             <h2 class="text-4xl capitalize font-semibold mb-8 text-right text-white">24.61.0274</h2>
             <p class="text-2xl italic text-white mb-10 text-right">
               “Elegan dalam sikap, berani dalam mimpi, dan tetap bersinar tanpa harus merendahkan
@@ -125,7 +125,7 @@ onUnmounted(() => {
           </div>
           <div
             class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
-            <h2 class="text-4xl capitalize font-semibold text-left text-white">
+            <h2 class="text-4xl capitalize font-semibold mb-2 text-left text-white">
               L.M.Hanggara Putra Akbar
             </h2>
             <h2 class="text-4xl capitalize font-semibold mb-8 text-left text-white">24.61.0279</h2>
@@ -142,8 +142,8 @@ onUnmounted(() => {
         <div class="grid grid-cols-3 gap-10 mt-10">
           <div
             class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
-            <h2 class="text-4xl capitalize font-semibold text-right text-white">Dani Zakhran</h2>
-            <h2 class="text-4xl capitalize font-semibold mb-8 text-right text-white">22.11.xxxx</h2>
+            <h2 class="text-4xl capitalize font-semibold mb-2 text-right text-white">Dani Zakhran</h2>
+            <h2 class="text-4xl capitalize font-semibold mb-8 text-right text-white">21.61.0227</h2>
             <p class="text-2xl italic text-white mb-10 text-right">
               “Bukan tentang seberapa cepat melaju, tapi seberapa konsisten tetap bertahan sampai tujuan.”
             </p>
