@@ -39,7 +39,7 @@ const isOpen = ref(false)
             </button>
         </div>
 
-        <button @click="isOpen = !isOpen" class="xl:hidden text-2xl text-[#788663] focus:outline-none">
+        <button @click="isOpen = !isOpen" class="xl:hidden text-2xl text-blue-800 focus:outline-none">
             <i :class="isOpen ? 'fa fa-times' : 'fa fa-bars'"></i>
         </button>
     </nav>

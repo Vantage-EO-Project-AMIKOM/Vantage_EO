@@ -17,7 +17,7 @@
                 <div class=" w-full h-auto p-5">
                     <div class=" w-full flex mb-2">
                         <div class=" w-fit bg-white px-3 mr-3 rounded-full">
-                            <p class=" text-sm font-normal capitalize">concert</p>
+                            <p class=" text-sm font-normal text-black capitalize">concert</p>
                         </div>
                         <p class=" text-sm font-normal text-white">2026-06-06</p>
                     </div>
@@ -35,7 +35,7 @@
                 <div class=" w-full h-auto p-5">
                     <div class=" w-full flex mb-2">
                         <div class=" w-fit bg-white px-3 mr-3 rounded-full">
-                            <p class=" text-sm font-normal capitalize">concert</p>
+                            <p class=" text-sm font-normal text-black capitalize">concert</p>
                         </div>
                         <p class=" text-sm font-normal text-white">2026-06-06</p>
                     </div>
@@ -53,7 +53,7 @@
                 <div class=" w-full h-auto p-5">
                     <div class=" w-full flex mb-2">
                         <div class=" w-fit bg-white px-3 mr-3 rounded-full">
-                            <p class=" text-sm font-normal capitalize">concert</p>
+                            <p class=" text-sm font-normal text-black capitalize">concert</p>
                         </div>
                         <p class=" text-sm font-normal text-white">2026-06-06</p>
                     </div>
@@ -71,7 +71,7 @@
                 <div class=" w-full h-auto p-5">
                     <div class=" w-full flex mb-2">
                         <div class=" w-fit bg-white px-3 mr-3 rounded-full">
-                            <p class=" text-sm font-normal capitalize">concert</p>
+                            <p class=" text-sm font-normal text-black capitalize">concert</p>
                         </div>
                         <p class=" text-sm font-normal text-white">2026-06-06</p>
                     </div>
@@ -89,7 +89,7 @@
                 <div class=" w-full h-auto p-5">
                     <div class=" w-full flex mb-2">
                         <div class=" w-fit bg-white px-3 mr-3 rounded-full">
-                            <p class=" text-sm font-normal capitalize">concert</p>
+                            <p class=" text-sm font-normal text-black capitalize">concert</p>
                         </div>
                         <p class=" text-sm font-normal text-white">2026-06-06</p>
                     </div>
@@ -107,7 +107,7 @@
                 <div class=" w-full h-auto p-5">
                     <div class=" w-full flex mb-2">
                         <div class=" w-fit bg-white px-3 mr-3 rounded-full">
-                            <p class=" text-sm font-normal capitalize">concert</p>
+                            <p class=" text-sm font-normal text-black capitalize">concert</p>
                         </div>
                         <p class=" text-sm font-normal text-white">2026-06-06</p>
                     </div>
@@ -125,7 +125,7 @@
                 <div class=" w-full h-auto p-5">
                     <div class=" w-full flex mb-2">
                         <div class=" w-fit bg-white px-3 mr-3 rounded-full">
-                            <p class=" text-sm font-normal capitalize">concert</p>
+                            <p class=" text-sm font-normal text-black capitalize">concert</p>
                         </div>
                         <p class=" text-sm font-normal text-white">2026-06-06</p>
                     </div>
@@ -143,7 +143,7 @@
                 <div class=" w-full h-auto p-5">
                     <div class=" w-full flex mb-2">
                         <div class=" w-fit bg-white px-3 mr-3 rounded-full">
-                            <p class=" text-sm font-normal capitalize">concert</p>
+                            <p class=" text-sm font-normal text-black capitalize">concert</p>
                         </div>
                         <p class=" text-sm font-normal text-white">2026-06-06</p>
                     </div>
