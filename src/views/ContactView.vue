@@ -97,23 +97,23 @@ onUnmounted(() => {
                         </div>
 
                         <div class=" w-full ml-10 p-15 bg-[#FF0000] rounded-4xl flex flex-col">
-                            <p class=" text-2xl font-normal text-white text-left mb-4">To find out the price and go to
+                            <p class=" text-2xl font-bold text-white text-left mb-4">To find out the price and go to
                                 the
                                 selection tickets, fill out the forms fields</p>
 
                             <div class=" w-full h-full grid grid-cols-2 gap-8">
 
                                 <input type="text" placeholder="Name"
-                                    class=" w-full h-full border border-black bg-[#FFF9EB] outline-none rounded-full px-5">
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-full px-5">
                                 <input type="email" placeholder="Email"
-                                    class=" w-full h-full border border-black bg-[#FFF9EB] outline-none rounded-full px-5">
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-full px-5">
                                 <input type="number" placeholder="Phone"
-                                    class=" w-full h-full border border-black bg-[#FFF9EB] outline-none rounded-full px-5">
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-full px-5">
                                 <input type="text" placeholder="Subject"
-                                    class=" w-full h-full border border-black bg-[#FFF9EB] outline-none rounded-full px-5">
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-full px-5">
 
                                 <textarea name="" id=""
-                                    class=" w-full h-full border border-black bg-[#FFF9EB] outline-none rounded-4xl p-5"
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-4xl p-5"
                                     placeholder="Message"></textarea>
 
                                 <div class=" relative">
@@ -158,7 +158,7 @@ onUnmounted(() => {
 
                 <div class=" w-full flex justify-between items-center mb-10">
                     <div class=" w-full border border-white"></div>
-                    <p class=" w-100 text-lg font-normal text-white text-center capitalize">our sponsors</p>
+                    <p class=" w-150 text-2xl font-bold text-white text-center capitalize">our sponsors</p>
                     <div class=" w-full border border-white"></div>
                 </div>
 
