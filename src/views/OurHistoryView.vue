@@ -42,7 +42,7 @@ onUnmounted(() => {
 
         <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black">
             <h1 class=" capitalize text-7xl font-bold mb-5">our story</h1>
-            <p class=" text-lg font-normal uppercase">vantage > about us</p>
+            <p class=" text-lg font-normal uppercase">vantage > our story</p>
         </div>
 
     </section>
@@ -54,7 +54,7 @@ onUnmounted(() => {
                 <div class=" w-full h-100 grid grid-cols-2 gap-8 mb-25">
 
                     <div
-                        class=" w-4/5 h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
+                        class=" w-5/5 h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
@@ -80,7 +80,7 @@ onUnmounted(() => {
                     </div>
 
                     <div
-                        class=" w-4/5 h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
+                        class=" w-5/5 h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
@@ -96,7 +96,7 @@ onUnmounted(() => {
                 <div class=" w-full h-100 grid grid-cols-2 gap-8 mb-25">
 
                     <div
-                        class="w-4/5 h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
+                        class="w-5/5 h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
@@ -122,7 +122,7 @@ onUnmounted(() => {
                     </div>
 
                     <div
-                        class=" w-4/5 h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
+                        class=" w-5/5 h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
