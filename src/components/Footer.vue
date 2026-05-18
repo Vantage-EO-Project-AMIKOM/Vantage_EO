@@ -3,8 +3,8 @@
         <div class=" w-full max-w-4/5 mx-auto pb-20">
 
             <div
-                class=" w-full h-auto bg-[#FF0000] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-15 mb-10">
-                <h2 class=" text-3xl xl:text-4xl text-center text-white lg:text-left font-bold mb-3 lg:mb-0">Subscribe
+                class=" w-full h-auto bg-[#FF0000] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-10 mb-10">
+                <h2 class=" text-3xl xl:text-3xl text-center text-white lg:text-left font-bold mb-3 lg:mb-0">Subscribe
                     to Our Newsletter</h2>
 
                 <div class=" flex w-full md:w-6/7 xl:w-1/2 h-15 items-center">
@@ -72,22 +72,22 @@
                     <div class=" flex flex-col items-start">
                         <h3 class=" text-3xl font-bold text-white text-left capitalize mb-5">quick links</h3>
                         <RouterLink to="/"
-                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Home
+                            class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">Home
                         </RouterLink>
                         <RouterLink to="about"
-                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">
+                            class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
                             About</RouterLink>
                         <RouterLink to="#"
-                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Events
+                            class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">Events
                         </RouterLink>
                         <RouterLink to="#"
-                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">
+                            class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
                             Speakers</RouterLink>
                         <RouterLink to="ourHistory"
-                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Our Story
+                            class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">Our Story
                         </RouterLink>
                         <RouterLink to="contact"
-                            class="text-white my-2 transition-all hover:text-[#788663] hover:translate-x-1">Contact
+                            class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">Contact
                             Us</RouterLink>
                     </div>
                 </div>
