@@ -10,11 +10,11 @@ const isOpen = ref(false)
 
 <template>
     <nav
-        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] xl:w-[90%] h-18 px-5 xl:px-10 bg-[#FF0000] shadow-xl rounded-full flex justify-between items-center z-50 text-white">
+        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] xl:w-[90%] h-18 px-5 xl:px-10 bg-[#EE0034] shadow-xl rounded-full flex justify-between items-center z-50 text-white">
 
         <RouterLink to="/" class=" flex justify-center items-center">
             <img src="./img/onlyLogo.png" alt="Logo" class="h-8 xl:h-10 w-auto mr-2" draggable="false">
-            <p class=" text-lg font-bold">Vantage</p>
+            <p class=" text-lg font-bold text-blue-950">Vantage</p>
         </RouterLink>
 
         <div class="hidden xl:flex items-center space-x-6">
@@ -39,7 +39,7 @@ const isOpen = ref(false)
             </button>
         </div>
 
-        <button @click="isOpen = !isOpen" class="xl:hidden text-2xl text-blue-800 focus:outline-none">
+        <button @click="isOpen = !isOpen" class="xl:hidden text-2xl text-blue-950 focus:outline-none">
             <i :class="isOpen ? 'fa fa-times' : 'fa fa-bars'"></i>
         </button>
     </nav>

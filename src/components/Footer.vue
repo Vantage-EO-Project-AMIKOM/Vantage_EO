@@ -31,7 +31,7 @@
                     <div class="flex absolute bottom-0 left-0">
 
                         <div
-                            class=" w-13 h-13 bg-[#FF0000] rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
+                            class=" w-13 h-13 bg-[#EE0034] rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
                             <svg width="800px" height="800px" viewBox="0 0 24 24" id="facebook" data-name="Flat Color"
                                 xmlns="http://www.w3.org/2000/svg" class=" w-8 h-8 fill-white">
                                 <path id="primary"
@@ -40,7 +40,7 @@
                             </svg>
                         </div>
                         <div
-                            class=" w-13 h-13 bg-[#FF0000] rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
+                            class=" w-13 h-13 bg-[#EE0034] rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
                             <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                 data-name="Layer 1" class=" w-8 h-8 fill-white">
                                 <path
@@ -48,7 +48,7 @@
                             </svg>
                         </div>
                         <div
-                            class=" w-13 h-13 bg-[#FF0000] text-white rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
+                            class=" w-13 h-13 bg-[#EE0034] text-white rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
                             <svg width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                 data-name="Layer 1" class=" w-8 h-8 fill-white">
                                 <path
@@ -56,7 +56,7 @@
                             </svg>
                         </div>
                         <div
-                            class=" w-13 h-13 bg-[#FF0000] text-white rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
+                            class=" w-13 h-13 bg-[#EE0034] text-white rounded-full mr-2 text-2xl flex justify-center items-center transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="currentColor"
                                 fill-rule="evenodd" class=" w-8 h-8">
                                 <path
