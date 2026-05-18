@@ -49,7 +49,7 @@ onUnmounted(() => {
 
     <!-- CONTACT INFO -->
     <div class="relative z-10 bg-[#2B3B4C] rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
-        <section class=" w-full h-auto bg-[#FF0000] rounded-t-[3rem] relative -top-5">
+        <section class=" w-full h-auto bg-[#EE0034] rounded-t-[3rem] relative -top-5">
             <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-4 gap-20">
 
                 <div class=" w-full h-full flex flex-col items-start text-white">
@@ -96,7 +96,7 @@ onUnmounted(() => {
                                 class=" w-full h-full object-cover object-top">
                         </div>
 
-                        <div class=" w-full ml-10 p-15 bg-[#FF0000] rounded-4xl flex flex-col">
+                        <div class=" w-full ml-10 p-15 bg-[#EE0034] rounded-4xl flex flex-col">
                             <p class=" text-2xl font-bold text-white text-left mb-4">To find out the price and go to
                                 the
                                 selection tickets, fill out the forms fields</p>

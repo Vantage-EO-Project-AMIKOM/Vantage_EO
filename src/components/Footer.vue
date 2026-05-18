@@ -3,7 +3,7 @@
         <div class=" w-full max-w-4/5 mx-auto pb-20">
 
             <div
-                class=" w-full h-auto bg-[#FF0000] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-10 mb-10">
+                class=" w-full h-auto bg-[#EE0034] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-10 mb-10">
                 <h2 class=" text-3xl xl:text-3xl text-center text-white lg:text-left font-bold mb-3 lg:mb-0">Subscribe
                     to Our Newsletter</h2>
 
