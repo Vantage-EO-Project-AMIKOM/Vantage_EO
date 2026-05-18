@@ -6,7 +6,7 @@
 
         <div class=" w-full flex justify-between items-center mb-10">
             <h2 class=" text-4xl font-bold capitalize text-white">our latest post</h2>
-            <button class=" px-7 py-4 bg-[#EE0034] text-white rounded-full transition-all hover:-translate-x-2 cursor-pointer">View
+            <button class=" px-14 py-3 bg-[#EE0034] text-white rounded-full transition-all hover:-translate-x-2 cursor-pointer">View
                 All</button>
         </div>
 
