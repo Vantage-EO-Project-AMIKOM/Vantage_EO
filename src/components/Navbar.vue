@@ -10,7 +10,7 @@ const isOpen = ref(false)
 
 <template>
     <nav
-        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] xl:w-[90%] h-18 px-5 xl:px-10 bg-[#EE0034] shadow-xl rounded-full flex justify-between items-center z-50 text-white">
+        class="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] xl:w-[90%] h-18 px-5 xl:px-10 bg-[#FF0000] shadow-xl rounded-full flex justify-between items-center z-50 text-white">
 
         <RouterLink to="/" class=" flex justify-center items-center">
             <img src="./img/onlyLogo.png" alt="Logo" class="h-8 xl:h-10 w-auto mr-2" draggable="false">
@@ -46,13 +46,7 @@ const isOpen = ref(false)
 
     <div v-if="isOpen"
         class="fixed top-28 left-1/2 -translate-x-1/2 w-[95%] bg-[#17202A] text-white shadow-2xl rounded-2xl p-6 flex flex-col space-y-4 z-40 xl:hidden">
-        <RouterLink to="/" class=" text-lg hover:text-blue-800">Home</RouterLink>
-        <RouterLink to="about" class=" text-lg hover:text-blue-800">Pages</RouterLink>
-        <RouterLink to="#" class=" text-lg hover:text-blue-800">Events</RouterLink>
-        <RouterLink to="profile" class=" text-lg hover:text-blue-800">Profile</RouterLink>
-        <RouterLink to="ourHistory" class=" text-lg hover:text-blue-800">Our Story</RouterLink>
-        <RouterLink to="contact" class=" text-lg hover:text-blue-800">Contact Us</RouterLink>
-
+        
         <div class="flex w-full mt-4">
             <input type="text" placeholder="Search..."
                 class="w-full bg-white pl-5 pr-2 py-3 rounded-l-full outline-none border border-gray-200">
@@ -60,6 +54,15 @@ const isOpen = ref(false)
                 <i class="fa fa-search text-black" aria-hidden="true"></i>
             </button>
         </div>
+        
+        <RouterLink to="/" class=" text-lg hover:text-blue-800">Home</RouterLink>
+        <RouterLink to="about" class=" text-lg hover:text-blue-800">Pages</RouterLink>
+        <RouterLink to="#" class=" text-lg hover:text-blue-800">Events</RouterLink>
+        <RouterLink to="profile" class=" text-lg hover:text-blue-800">Profile</RouterLink>
+        <RouterLink to="ourHistory" class=" text-lg hover:text-blue-800">Our Story</RouterLink>
+        <RouterLink to="contact" class=" text-lg hover:text-blue-800">Contact Us</RouterLink>
+
+        
         <button
             class="w-full bg-[#FF0000] text-white font-bold px-5 py-3 mt-2 rounded-full transition-all hover:bg-[#ac2c2c]">Register</button>
     </div>
