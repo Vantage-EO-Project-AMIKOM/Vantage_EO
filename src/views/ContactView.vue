@@ -50,7 +50,7 @@ onUnmounted(() => {
     <!-- CONTACT INFO -->
     <div class="relative z-10 bg-[#2B3B4C] rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
         <section class=" w-full h-auto bg-[#EE0034] rounded-t-[3rem] relative -top-5">
-            <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-4 gap-20">
+            <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-20">
 
                 <div class=" w-full h-full flex flex-col items-start text-white">
                     <i class="fa fa-phone text-[4rem] mb-5" aria-hidden="true"></i>
@@ -89,36 +89,36 @@ onUnmounted(() => {
                 <div class=" w-full text-center">
                     <h2 class=" text-5xl font-bold mb-30 text-white">Have Be Any Question? <br> Feel free to contact with us.</h2>
 
-                    <div class=" w-full h-auto flex">
+                    <div class=" w-full h-auto flex flex-col xl:flex-row">
 
-                        <div class=" w-4/10 h-120 rounded-4xl overflow-hidden">
+                        <div class=" w-full xl:w-4/10 h-120 rounded-4xl overflow-hidden mb-10 xl:mb-0">
                             <img src="./../components/img/contactPage/cs.jpeg" alt=""
                                 class=" w-full h-full object-cover object-top">
                         </div>
 
-                        <div class=" w-full ml-10 p-15 bg-[#EE0034] rounded-4xl flex flex-col">
+                        <div class=" w-full ml-0 xl:ml-10 p-10 md:p-15 bg-[#EE0034] rounded-4xl flex flex-col">
                             <p class=" text-2xl font-bold text-white text-left mb-4">To find out the price and go to
                                 the
                                 selection tickets, fill out the forms fields</p>
 
-                            <div class=" w-full h-full grid grid-cols-2 gap-8">
+                            <div class=" w-full h-full grid grid-cols-1 xl:grid-cols-2 gap-8">
 
                                 <input type="text" placeholder="Name"
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-full px-5">
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
                                 <input type="email" placeholder="Email"
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-full px-5">
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
                                 <input type="number" placeholder="Phone"
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-full px-5">
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
                                 <input type="text" placeholder="Subject"
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-full px-5">
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
 
                                 <textarea name="" id=""
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none rounded-4xl p-5"
+                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-4xl p-5"
                                     placeholder="Message"></textarea>
 
                                 <div class=" relative">
                                     <button
-                                        class="px-7 py-4 m-auto bg-[#2B3B4C] rounded-full transition-all hover:translate-x-2 cursor-pointer absolute top-0 left-0 capitalize text-white font-bold">
+                                        class="w-full xl:w-auto px-7 py-4 m-auto bg-[#2B3B4C] rounded-full transition-all hover:translate-x-2 cursor-pointer xl:absolute top-0 left-0 capitalize text-white font-bold">
                                         register now
                                         <i class="fa fa-long-arrow-right font-extralight -rotate-45"
                                             aria-hidden="true"></i>
@@ -137,7 +137,7 @@ onUnmounted(() => {
 
         <!-- MAPS -->
         <section class=" w-full h-auto">
-            <div class=" w-full max-w-4/5 mx-auto py-20 px-20">
+            <div class=" w-full max-w-4/5 mx-auto py-20 px-0 xl:px-20">
 
                 <div class=" w-full h-100 rounded-4xl overflow-hidden shadow-lg/25 shadow-black">
                     <iframe class=" w-full h-full object-cover"
@@ -162,7 +162,7 @@ onUnmounted(() => {
                     <div class=" w-full border border-white"></div>
                 </div>
 
-                <div class=" w-full grid grid-cols-8 gap-12">
+                <div class=" w-full grid grid-cols-8 gap-2 sm:gap-4 xl:gap-12">
 
                     <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center">
                         <img src="./../components/img/contactPage/sponsorsLogo/logo1.png" alt="" draggable="false">
