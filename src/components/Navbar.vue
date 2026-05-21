@@ -56,7 +56,7 @@ const isOpen = ref(false)
         </div>
         
         <RouterLink to="/" class=" text-lg hover:text-blue-800">Home</RouterLink>
-        <RouterLink to="about" class=" text-lg hover:text-blue-800">Pages</RouterLink>
+        <RouterLink to="about" class=" text-lg hover:text-blue-800">ABout Us</RouterLink>
         <RouterLink to="#" class=" text-lg hover:text-blue-800">Events</RouterLink>
         <RouterLink to="profile" class=" text-lg hover:text-blue-800">Profile</RouterLink>
         <RouterLink to="ourHistory" class=" text-lg hover:text-blue-800">Our Story</RouterLink>

@@ -51,10 +51,10 @@ onUnmounted(() => {
         <section class=" w-full h-auto">
             <div class=" w-full max-w-4/5 mx-auto py-20">
 
-                <div class=" w-full h-100 grid grid-cols-2 gap-8 mb-25">
+                <div class=" w-full min-h-100 grid grid-cols-1 xl:grid-cols-2 gap-8 mb-25">
 
                     <div
-                        class=" w-5/5 h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
+                        class=" w-5/5 h-100 xl:h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
@@ -65,22 +65,22 @@ onUnmounted(() => {
                             10</p>
                     </div>
 
-                    <div class=" w-full h-full rounded-4xl overflow-hidden">
+                    <div class=" w-full max-h-100 rounded-4xl overflow-hidden">
                         <img src="./../components/img/ourHistoryPage/h1.jpeg" alt="" draggable="false"
                             class=" w-full h-full object-cover object-[0_-12rem]">
                     </div>
 
                 </div>
 
-                <div class=" w-full h-100 grid grid-cols-2 gap-8 mb-25">
+                <div class=" w-full min-h-100 grid grid-cols-1 xl:grid-cols-2 gap-8 mb-25">
 
-                    <div class=" w-full h-full rounded-4xl overflow-hidden">
+                    <div class=" w-full max-h-100 rounded-4xl overflow-hidden">
                         <img src="./../components/img/ourHistoryPage/h2.jpeg" alt="" draggable="false"
                             class=" w-full h-full object-cover object-center">
                     </div>
 
                     <div
-                        class=" w-5/5 h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
+                        class=" w-5/5 h-100 xl:h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
@@ -93,10 +93,10 @@ onUnmounted(() => {
 
                 </div>
 
-                <div class=" w-full h-100 grid grid-cols-2 gap-8 mb-25">
+                <div class=" w-full min-h-100 grid grid-cols-1 xl:grid-cols-2 gap-8 mb-25">
 
                     <div
-                        class="w-5/5 h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
+                        class="w-5/5 h-100 xl:h-5/6 relative text-right justify-self-end rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
@@ -107,22 +107,22 @@ onUnmounted(() => {
                             14</p>
                     </div>
 
-                    <div class=" w-full h-full rounded-4xl overflow-hidden">
+                    <div class=" w-full max-h-100 rounded-4xl overflow-hidden">
                         <img src="./../components/img/ourHistoryPage/h3.jpeg" alt="" draggable="false"
                             class=" w-full h-full object-cover object-center">
                     </div>
 
                 </div>
 
-                <div class=" w-full h-100 grid grid-cols-2 gap-8">
+                <div class=" w-full min-h-100 grid grid-cols-1 xl:grid-cols-2 gap-8">
 
-                    <div class=" w-full h-full rounded-4xl overflow-hidden">
+                    <div class=" w-full max-h-100 rounded-4xl overflow-hidden">
                         <img src="./../components/img/ourHistoryPage/h4.jpeg" alt="" draggable="false"
                             class=" w-full h-full object-cover object-center">
                     </div>
 
                     <div
-                        class=" w-5/5 h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
+                        class=" w-5/5 h-100 xl:h-5/6 relative text-left justify-self-start rounded-4xl border border-white/10 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 text-white">
