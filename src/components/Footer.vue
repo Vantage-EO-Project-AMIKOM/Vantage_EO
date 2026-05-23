@@ -78,9 +78,6 @@
                             class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
                             About</RouterLink>
                         <RouterLink to="#"
-                            class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">Events
-                        </RouterLink>
-                        <RouterLink to="#"
                             class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
                             Speakers</RouterLink>
                         <RouterLink to="ourHistory"
