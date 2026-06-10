@@ -4,7 +4,8 @@ import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
 import OurHistoryView from '@/views/OurHistoryView.vue'
 import ProfileView from '@/views/ProfileView.vue'
-
+import LoginView from '@/views/LoginView.vue'
+import RegisterView from '@/views/RegisterView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -32,7 +33,18 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: ProfileView,
-    }
+    },
+    {
+     path: '/login',
+     name: 'login',
+     component: LoginView,
+    },
+    {
+     path: '/register',
+     name: 'register',
+     component: RegisterView,
+    },
+
   ],
 })
 
