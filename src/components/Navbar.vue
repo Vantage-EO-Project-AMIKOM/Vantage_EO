@@ -33,9 +33,9 @@ const isOpen = ref(false)
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
             </div>
-            <button class="bg-[#17202A] text-white px-5 py-2 rounded-full transition-all hover:bg-[#425c79]">Register
-                <i class="fa fa-long-arrow-right font-extralight -rotate-45" aria-hidden="true"></i>
-            </button>
+            <RouterLink to="/register" class="bg-[#17202A] text-white px-5 py-2 rounded-full transition-all hover:bg-[#425c79]">Register
+             <i class="fa fa-long-arrow-right font-extralight -rotate-45" aria-hidden="true"></i>
+             </RouterLink>
         </div>
 
         <button @click="isOpen = !isOpen" class="xl:hidden text-2xl text-blue-950 focus:outline-none">
@@ -59,9 +59,6 @@ const isOpen = ref(false)
         <RouterLink to="profile" class=" text-lg hover:text-blue-800">Profile</RouterLink>
         <RouterLink to="ourHistory" class=" text-lg hover:text-blue-800">Our Story</RouterLink>
         <RouterLink to="contact" class=" text-lg hover:text-blue-800">Contact Us</RouterLink>
-
-        
-        <button
-            class="w-full bg-[#FF0000] text-white font-bold px-5 py-3 mt-2 rounded-full transition-all hover:bg-[#ac2c2c]">Register</button>
+        <RouterLink to="/register"class="w-full bg-[#FF0000] text-white font-bold px-5 py-3 mt-2 rounded-full transition-all hover:bg-[#ac2c2c] text-center">Register</RouterLink>
     </div>
 </template>
