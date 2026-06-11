@@ -41,7 +41,7 @@
           draggable="false" :style="{ transform: `translateY(${parallaxOffset}px)` }">
       </div>
       <div class="w-full max-w-3/4 mx-auto z-10">
-        <h1 class="w-2/5 capitalize text-5xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5">let's create
+        <h1 class="w-full lg:w-2/5 capitalize text-5xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5">let's create
           your event with vantage</h1>
         <RouterLink to="/">
           <button

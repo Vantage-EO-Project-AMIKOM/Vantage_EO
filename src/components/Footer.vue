@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <div class=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-4">
+            <div class=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-4">
 
                 <div class=" min-h-60 flex flex-col items-start relative">
                     <RouterLink to="#" class=" flex justify-center items-center mb-4">
@@ -68,7 +68,7 @@
                     </div>
                 </div>
 
-                <div class=" flex justify-start md:justify-center">
+                <div class=" hidden xl:flex justify-start md:justify-center">
                     <div class=" flex flex-col items-start">
                         <h3 class=" text-3xl font-bold text-white text-left capitalize mb-5">quick links</h3>
                         <RouterLink to="/"
@@ -77,9 +77,6 @@
                         <RouterLink to="about"
                             class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
                             About</RouterLink>
-                        <RouterLink to="#"
-                            class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">Events
-                        </RouterLink>
                         <RouterLink to="#"
                             class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
                             Speakers</RouterLink>
@@ -92,7 +89,7 @@
                     </div>
                 </div>
 
-                <div class=" flex flex-col items-start">
+                <div class=" hidden xl:flex flex-col items-start">
                     <h3 class=" text-3xl font-bold text-white text-left capitalize mb-5">upcoming events</h3>
                     <div class=" w-full h-full grid grid-rows-2 gap-4">
 
@@ -130,7 +127,7 @@
                     </div>
                 </div>
 
-                <div class=" flex justify-start md:justify-center">
+                <div class=" hidden lg:flex justify-start md:justify-center">
                     <div class=" flex flex-col items-start">
                         <h3 class=" text-3xl font-bold text-white text-left capitalize mb-5">contact info</h3>
                         <div class=" flex items-center text-lg font-normal text-white mb-2">

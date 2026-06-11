@@ -51,13 +51,13 @@ const parallaxOffset = ref(0);
     <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
         <section class=" w-full h-auto">
 
-            <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">
+            <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-1 xl:grid-cols-2 gap-4">
 
-                <div class=" grid grid-cols-2 gap-6 pr-20">
+                <div class=" grid md:grid-cols-2 gap-6 xl:pr-10">
 
                     <div class=" w-full h-150 rounded-2xl overflow-hidden">
                         <img src="./../components/img/aboutBG/cb1.jpeg" alt="" draggable="false"
-                            class=" w-full h-full object-cover object-[-23rem]">
+                            class=" w-full h-full object-cover object-[60%]">
                     </div>
 
                     <div class=" w-full h-150 rounded-2xl overflow-hidden">
@@ -106,7 +106,7 @@ const parallaxOffset = ref(0);
         <!-- CONTENT II -->
         <section class=" w-full h-auto">
 
-            <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-2 gap-4">
+            <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-1 xlgrid-cols-2 gap-4">
 
                 <div class=" flex flex-col self-center pr-20">
                     <h2 class=" w-3/5 text-4xl capitalize text-white font-semibold mb-8">We Bring The Best
@@ -176,9 +176,9 @@ const parallaxOffset = ref(0);
          shadow-[0_10px_40px_rgba(0,0,0,0.35)]
          overflow-hidden p-10 inset-0
            ring-1 ring-white/40 ">
-            <div class=" w-full max-w-4/5 mx-auto py-15 grid grid-cols-3">
+            <div class=" w-full max-w-4/5 mx-auto py-15 grid grid-cols-2 xl:grid-cols-3">
 
-                <div class=" flex flex-col items-center">
+                <div class=" col-span-2 xl:col-span-1 flex flex-col items-center mb-10 xl:mb-0">
                     <h2 class=" w-4/5 text-4xl capitalize text-white font-semibold mb-8">What our client's say about us</h2>
                     <img src="./../components/img/aboutBG/shc.png" alt="" draggable="false">
                 </div>
@@ -246,9 +246,9 @@ const parallaxOffset = ref(0);
         <section class=" w-full h-auto">
             <div class=" w-full max-w-4/5 mx-auto py-15 flex flex-col">
                 <h2 class=" text-4xl font-bold text-white text-center mb-15">Get direction to the event hall</h2>
-                <div class=" w-full flex justify-between">
+                <div class=" w-full flex flex-col xl:flex-row justify-between">
 
-                    <div class=" w-3/10 h-100 bg-[#FF0000] rounded-4xl flex flex-col items-start justify-center p-20 ">
+                    <div class=" w-full xl:w-3/10 h-100 bg-[#FF0000] rounded-4xl flex flex-col items-start justify-center p-20 mb-10 xl:mb-0">
 
                         <div class=" w-full flex flex-col mb-10">
 
@@ -278,7 +278,7 @@ const parallaxOffset = ref(0);
                             Get Direction</button>
                     </div>
 
-                    <div class=" w-7/10 h-100 rounded-4xl overflow-hidden ml-10">
+                    <div class=" w-full xl:w-7/10 h-100 rounded-4xl overflow-hidden xl:ml-10">
                         <iframe class=" w-full h-full object-cover"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.280430130844!2d110.4065606759763!3d-7.76005487696027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a599bd3bdc4ef%3A0x6f1714b0c4544586!2sUniversity%20of%20Amikom%20Yogyakarta!5e0!3m2!1sen!2sid!4v1777812436113!5m2!1sen!2sid"
                             width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
