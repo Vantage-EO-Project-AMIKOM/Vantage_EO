@@ -86,7 +86,7 @@ onUnmounted(() => {
           <div
             class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
             <h2 class="text-4xl capitalize font-semibold mb-2 text-left text-white">
-              Dhiya Muhammad Azka
+              Dhiya mamat Azka
             </h2>
             <h2 class="text-4xl capitalize font-semibold mb-8 text-left text-white">24.61.0270</h2>
             <p class="text-2xl italic text-white mb-10 text-justify">
