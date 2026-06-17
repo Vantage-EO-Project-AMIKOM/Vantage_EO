@@ -85,35 +85,37 @@ onUnmounted(() => {
 
     <!-- Our Profile Section -->
     <section class="w-full h-auto">
-      <div class="w-full max-w-4/5 mx-auto py-20">
-        <h2 class="text-6xl capitalize font-semibold text-center text-white">Our Profile</h2>
+    <div class="w-full max-w-4/5 mx-auto py-20">
+      <h2 class="text-6xl capitalize font-semibold text-center text-white">Our Profile</h2>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 mt-10 items-center">
-          <div class="w-110 h-145 overflow-hidden rounded-full">
-            <img class=" w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
-              src="./../components/img/profilePage/profile/profile1.jpeg" alt="Azka" />
-          </div>
-          <div
-            class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
-            <h2 class="text-4xl capitalize font-semibold mb-2 text-left text-white">
-              Dhiya mamat Azka
-            </h2>
-            <h2 class="text-4xl capitalize font-semibold mb-8 text-left text-white">24.61.0270</h2>
-            <p class="text-2xl italic text-white mb-10 text-justify">
-              “Tenang dalam langkah, kuat dalam tujuan, dan selalu jadi cahaya di setiap
-              perjalanan.”
-            </p>
-            <div class="flex justify-start items-center gap-3 mt-10">
-              <img src="./../components/img/profilePage/githubicon.png" alt="github_icon" />
-              <h5 class="text-white text-2xl ml-3 self-center">MehmedAzka</h5>
-            </div>
-          </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 mt-10 items-center justify-items-center">
+      
+      <div class="w-full max-w-70 sm:max-w-87.5 md:max-w-105 aspect-square overflow-hidden rounded-full shrink-0">
+        <img class="w-full h-full object-cover object-center scale-110"
+          src="./../components/img/profilePage/profile/profile1.jpeg" alt="Azka" />
+      </div>
+      
+      <div class="w-full h-full col-span-1 lg:col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] rounded-4xl ring-1 ring-white/40 p-8 md:p-10 flex flex-col justify-center">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl capitalize font-semibold mb-2 text-center lg:text-left text-white">
+          Dhiya Muhammad Azka
+        </h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl capitalize font-semibold mb-6 text-center lg:text-left text-white">
+          24.61.0270
+        </h2>
+        <p class="text-xl md:text-2xl italic text-white mb-6 text-center lg:text-left">
+          “Tenang dalam langkah, kuat dalam tujuan, dan selalu jadi cahaya di setiap perjalanan.”
+        </p>
+        <div class="flex justify-center lg:justify-start items-center gap-3 mt-4">
+          <img src="./../components/img/profilePage/githubicon.png" alt="github_icon" class="w-8 h-8 object-contain" />
+          <h5 class="text-white text-xl md:text-2xl">MehmedAzka</h5>
         </div>
+      </div>
+    </div>
         <div class="grid grid-cols-3 gap-10 mt-10">
           <div
             class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
-            <h2 class="text-4xl capitalize font-semibold mb-2 text-right text-white">Puan Aeesya</h2>
-            <h2 class="text-4xl capitalize font-semibold mb-8 text-right text-white">24.61.0274</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl capitalize font-semibold mb-2 text-right text-white">Puan Aeesya</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl capitalize font-semibold mb-8 text-right text-white">24.61.0274</h2>
             <p class="text-2xl italic text-white mb-10 text-right">
               “Elegan dalam sikap, berani dalam mimpi, dan tetap bersinar tanpa harus merendahkan
               siapa pun.”
@@ -135,10 +137,10 @@ onUnmounted(() => {
           </div>
           <div
             class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
-            <h2 class="text-4xl capitalize font-semibold mb-2 text-left text-white">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl4xl capitalize font-semibold mb-2 text-center lg:text-left text-white">
               L.M.Hanggara Putra Akbar
             </h2>
-            <h2 class="text-4xl capitalize font-semibold mb-8 text-left text-white">24.61.0279</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl capitalize font-semibold mb-8 text-center lg:text-left text-white">24.61.0279</h2>
             <p class="text-2xl italic text-white mb-10 text-justify">
               “Dilahirkan untuk memimpin, tumbuh untuk menginspirasi, dan melangkah tanpa takut menghadapi dunia.”
             </p>
@@ -149,7 +151,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-10 mt-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center mt-10">
           <div
             class="w-full h-auto col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 inset-0 rounded-4xl ring-1 ring-white/40 py-20 self-center">
             <h2 class="text-4xl capitalize font-semibold mb-2 text-right text-white">Dani Zakhran</h2>
