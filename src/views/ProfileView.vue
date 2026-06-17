@@ -114,14 +114,14 @@ onUnmounted(() => {
               <img src="./../components/img/profilePage/githubicon.png" alt="github_icon" class="w-6 h-6 lg:w-auto" />
             </div>
           </div>
-          <div class="w-full max-w-[320px] lg:max-w-none aspect-[110/145] overflow-hidden rounded-full mx-auto order-1 lg:order-2">
+          <div class="w-full max-w-[320px] lg:max-w-none aspect-110/145 overflow-hidden rounded-full mx-auto order-1 lg:order-2">
             <img class="w-full h-full object-cover object-[85%_15%] scale-150 origin-center"
               src="./../components/img/profilePage/profile/profile2.jpeg" alt="Puan" />
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center">
-          <div class="w-full max-w-[320px] lg:max-w-none aspect-[110/145] overflow-hidden rounded-full mx-auto">
+          <div class="w-full max-w-[320px] lg:max-w-none aspect-110/145 overflow-hidden rounded-full mx-auto">
             <img class="w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
               src="./../components/img/profilePage/profile/profile3.jpeg" alt="Angga" />
           </div>
@@ -154,7 +154,7 @@ onUnmounted(() => {
               <img src="./../components/img/profilePage/githubicon.png" alt="github_icon" class="w-6 h-6 lg:w-auto" />
             </div>
           </div>
-          <div class="w-full max-w-[320px] lg:max-w-none aspect-[110/145] overflow-hidden rounded-full mx-auto order-1 lg:order-2">
+          <div class="w-full max-w-[320px] lg:max-w-none aspect-110/145 overflow-hidden rounded-full mx-auto order-1 lg:order-2">
             <img class="w-full h-full object-cover object-[10%_-6rem] scale-150 origin-center" src="./../components/img/profilePage/profile/profile4.jpeg" alt="Dani" />
           </div>
         </div>
