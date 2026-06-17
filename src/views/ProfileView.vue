@@ -55,7 +55,7 @@ onUnmounted(() => {
   <div
     class="relative z-10 bg-[#2B3B4C]
     py-10 sm:py-16 md:py-20
-    rounded-t-[2rem] md:rounded-[3rem]"
+    rounded-t-4xl md:rounded-[3rem]"
 >
     <section class="max-w-[90%] md:max-w-[87.5%] w-full mx-auto px-4">
       <div class="bg-linear-to-br from-[#24364d] to-[#1d2d42] overflow-hidden p-15 rounded-[60px]">
@@ -129,7 +129,7 @@ onUnmounted(() => {
           </div>
         </div>
         <div class="grid grid-cols-3 mt-10">
-          <div class="w-full max-w-[280px] sm:max-w-[350px] md:max-w-[420px] h-[320px] sm:h-[420px] md:h-[560px] mx-auto overflow-hidden rounded-full">
+          <div class="w-full max-w-70 sm:max-w-87.5 md:max-w-105 h-80 sm:h-105 md:h-140 mx-auto overflow-hidden rounded-full">
             <img class=" w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
               src="./../components/img/profilePage/profile/profile3.jpeg" alt="Angga" />
           </div>
