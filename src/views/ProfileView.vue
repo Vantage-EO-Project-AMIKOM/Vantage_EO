@@ -31,35 +31,45 @@ onUnmounted(() => {
 </script>
 <template>
   <!-- HERO -->
-  <section class="w-full h-130 z-10 flex items-center relative overflow-hidden">
+  <section
+  class="w-full min-h-[70vh] md:min-h-[85vh] flex items-center relative overflow-hidden">
+  >
     <div class="absolute inset-0 bg-black/60">
       <img src="./../components/img/bg/hero-bg.jpg" alt=""
         class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover"
         draggable="false" :style="{ transform: `translateY(${parallaxOffset}px)` }" />
     </div>
     <div class="w-full max-w-3/4 mx-auto z-10">
-      <h1 class="w-2/3 capitalize text-7xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5">
+      <h1
+        class="w-full md:w-2/3 capitalize
+        text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+        font-bold text-white leading-tight"
+      >
         Profile
       </h1>
-      <p class="text-lg font-normal uppercase text-white">vantage > profile</p>
+      <p class="text-sm sm:text-base md:text-lg uppercase text-white">vantage > profile</p>
     </div>
   </section>
 
   <!-- DID -->
-  <div class="relative z-10 bg-[#2B3B4C] py-20 rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
-    <section class="max-w-7/8 w-full mx-auto">
+  <div
+    class="relative z-10 bg-[#2B3B4C]
+    py-10 sm:py-16 md:py-20
+    rounded-t-[2rem] md:rounded-[3rem]"
+>
+    <section class="max-w-[90%] md:max-w-[87.5%] w-full mx-auto px-4">
       <div class="bg-linear-to-br from-[#24364d] to-[#1d2d42] overflow-hidden p-15 rounded-[60px]">
-        <h2 class="text-6xl capitalize font-semibold mb-8 text-center text-white">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl capitalize font-semibold">
           DID YOU KNOW US?
         </h2>
-        <p class="text-white text-2xl indent-15 mb-8 text-justify">
+        <p class="text-white text-base sm:text-lg md:text-xl lg:text-2xl">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis lacinia leo. Donec
           tincidunt congue augue vel ullamcorper. Mauris venenatis id ligula et viverra. Mauris
           suscipit aliquam tellus nec euismod. Vestibulum vestibulum dictum venenatis. Curabitur
           laoreet eu augue ut maximus. Curabitur a arcu enim. Mauris viverra velit euismod sem
           feugiat, ut porta est semper.
         </p>
-        <p class="text-white text-2xl indent-15 text-justify">
+        <p class="text-white text-base sm:text-lg md:text-xl lg:text-2xl">
           Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
           himenaeos. Sed efficitur nisi lorem, eget mattis massa aliquam et. Morbi ultricies justo
           ullamcorper diam semper efficitur. Nulla eget nulla nec massa imperdiet tristique et non
@@ -78,7 +88,7 @@ onUnmounted(() => {
       <div class="w-full max-w-4/5 mx-auto py-20">
         <h2 class="text-6xl capitalize font-semibold text-center text-white">Our Profile</h2>
 
-        <div class="grid grid-cols-3 gap-10 mt-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 mt-10 items-center">
           <div class="w-110 h-145 overflow-hidden rounded-full">
             <img class=" w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
               src="./../components/img/profilePage/profile/profile1.jpeg" alt="Azka" />
@@ -119,7 +129,7 @@ onUnmounted(() => {
           </div>
         </div>
         <div class="grid grid-cols-3 mt-10">
-          <div class="w-110 h-145 overflow-hidden rounded-full">
+          <div class="w-full max-w-[280px] sm:max-w-[350px] md:max-w-[420px] h-[320px] sm:h-[420px] md:h-[560px] mx-auto overflow-hidden rounded-full">
             <img class=" w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
               src="./../components/img/profilePage/profile/profile3.jpeg" alt="Angga" />
           </div>
@@ -147,7 +157,7 @@ onUnmounted(() => {
             <p class="text-2xl italic text-white mb-10 text-right">
               “Bukan tentang seberapa cepat melaju, tapi seberapa konsisten tetap bertahan sampai tujuan.”
             </p>
-            <div class="flex justify-end items-center gap-3 mt-10">
+            <div class="flex justify-center lg:justify-end items-center gap-3 mt-6 md:mt-10">
               <h5 class="text-white text-2xl ml-3 self-center">Danizakhran</h5>
               <img src="./../components/img/profilePage/githubicon.png" alt="github_icon" />
             </div>
