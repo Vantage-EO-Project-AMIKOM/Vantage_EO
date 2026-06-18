@@ -21,12 +21,35 @@ const handleScroll = () => {
     contentOffset.value = window.scrollY * -0.05;
 };
 
+// --- LOGIKA ANIMASI SCROLL DUA ARAH ---
+const observer = ref(null);
+
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
+
+    // Konfigurasi Intersection Observer
+    observer.value = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Tambahkan class saat elemen masuk viewport
+                entry.target.classList.add('show-animated');
+            } else {
+                // Hapus class saat elemen keluar viewport agar bisa dianimasikan ulang
+                entry.target.classList.remove('show-animated');
+            }
+        });
+    }, {
+        threshold: 0.15, // Memicu animasi ketika 15% elemen terlihat
+        rootMargin: "-20px 0px" // Memberikan jarak respons yang lebih natural
+    });
+
+    // Observasi semua elemen dengan class 'scroll-animate'
+    document.querySelectorAll('.scroll-animate').forEach(el => observer.value.observe(el));
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+    if (observer.value) observer.value.disconnect();
 });
 </script>
 
@@ -47,6 +70,7 @@ onUnmounted(() => {
 
     </section>
 
+    <!-- KONTEN TIMELINE -->
     <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
         <section class=" w-full h-auto">
             <div class=" w-full max-w-4/5 mx-auto py-20">
@@ -139,3 +163,18 @@ onUnmounted(() => {
         </section>
     </div>
 </template>
+
+<style scoped>
+.scroll-animate {
+    opacity: 0;
+    transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    will-change: transform, opacity;
+}
+.fade-up {
+    transform: translateY(50px);
+}
+.scroll-animate.show-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>

@@ -13,7 +13,6 @@ const contentOffset = ref(0);
 const handleScroll = () => {
     parallaxOffset.value = window.scrollY * 0.4;
 
-    // Apply parallax to grid images with different speeds
     imageOffsets.value.c1 = window.scrollY * 0.3;
     imageOffsets.value.c2 = window.scrollY * 0.25;
     imageOffsets.value.c3 = window.scrollY * 0.35;
@@ -21,17 +20,35 @@ const handleScroll = () => {
     contentOffset.value = window.scrollY * -0.05;
 };
 
+// --- ANIMASI SCROLL DUA ARAH (UP & DOWN) ---
+const observer = ref(null);
+
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
+
+    observer.value = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show-animated');
+            } else {
+                entry.target.classList.remove('show-animated');
+            }
+        });
+    }, { 
+        threshold: 0.1,
+        rootMargin: "-20px 0px -20px 0px" 
+    });
+
+    document.querySelectorAll('.scroll-animate').forEach(el => observer.value.observe(el));
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+    if (observer.value) observer.value.disconnect();
 });
 </script>
 
 <template>
-    <!-- ABOUT BG -->
     <section class="w-full h-130 z-10 flex justify-center items-center relative overflow-hidden">
 
         <div class="absolute inset-0 bg-black/60">
@@ -47,9 +64,9 @@ onUnmounted(() => {
 
     </section>
 
-    <!-- CONTACT INFO -->
     <div class="relative z-10 bg-[#2B3B4C] rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
-        <section class=" w-full h-auto bg-[#EE0034] rounded-t-[3rem] relative -top-5">
+        
+        <section class="w-full h-auto bg-[#EE0034] rounded-t-[3rem] relative -top-5 scroll-animate fade-up">
             <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-20">
 
                 <div class=" w-full h-full flex flex-col items-start text-white">
@@ -61,8 +78,7 @@ onUnmounted(() => {
                 <div class=" w-full h-full flex flex-col items-start text-white">
                     <i class="fa fa-map text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">our address</h4>
-                    <p class=" text-lg font-normal">830 Ringroad Street, Condongcatur,
-                        Sleman, Daerah Istimewa Yogyakarta</p>
+                    <p class=" text-lg font-normal">830 Ringroad Street, Condongcatur, Sleman, Daerah Istimewa Yogyakarta</p>
                 </div>
 
                 <div class=" w-full h-full flex flex-col items-start text-white">
@@ -74,16 +90,13 @@ onUnmounted(() => {
                 <div class=" w-full h-full flex flex-col items-start text-white">
                     <i class="fa fa-calendar text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">working time</h4>
-                    <p class=" text-lg font-normal">Monday - Friday 06.00 AM - 09.00 PM
-                        Saturday to Sunday Closed</p>
+                    <p class=" text-lg font-normal">Monday - Friday 06.00 AM - 09.00 PM Saturday to Sunday Closed</p>
                 </div>
-
 
             </div>
         </section>
 
-        <!-- CONTACT US!! -->
-        <section class=" w-full h-auto">
+        <section class="w-full h-auto scroll-animate fade-up">
             <div class=" w-full max-w-4/5 mx-auto py-20 flex flex-col items-center">
 
                 <div class=" w-full text-center">
@@ -97,37 +110,26 @@ onUnmounted(() => {
                         </div>
 
                         <div class=" w-full ml-0 xl:ml-10 p-10 md:p-15 bg-[#EE0034] rounded-4xl flex flex-col">
-                            <p class=" text-2xl font-bold text-white text-left mb-4">To find out the price and go to
-                                the
-                                selection tickets, fill out the forms fields</p>
+                            <p class=" text-2xl font-bold text-white text-left mb-4">To find out the price and go to the selection tickets, fill out the forms fields</p>
 
                             <div class=" w-full h-full grid grid-cols-1 xl:grid-cols-2 gap-8">
 
-                                <input type="text" placeholder="Name"
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
-                                <input type="email" placeholder="Email"
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
-                                <input type="number" placeholder="Phone"
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
-                                <input type="text" placeholder="Subject"
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
+                                <input type="text" placeholder="Name" class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
+                                <input type="email" placeholder="Email" class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
+                                <input type="number" placeholder="Phone" class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
+                                <input type="text" placeholder="Subject" class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5">
 
-                                <textarea name="" id=""
-                                    class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-4xl p-5"
-                                    placeholder="Message"></textarea>
+                                <textarea class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-4xl p-5" placeholder="Message"></textarea>
 
                                 <div class=" relative">
-                                    <button
-                                        class="w-full xl:w-auto px-7 py-4 m-auto bg-[#2B3B4C] rounded-full transition-all hover:translate-x-2 cursor-pointer xl:absolute top-0 left-0 capitalize text-white font-bold">
+                                    <button class="w-full xl:w-auto px-7 py-4 m-auto bg-[#2B3B4C] rounded-full transition-all hover:translate-x-2 cursor-pointer xl:absolute top-0 left-0 capitalize text-white font-bold">
                                         register now
-                                        <i class="fa fa-long-arrow-right font-extralight -rotate-45"
-                                            aria-hidden="true"></i>
+                                        <i class="fa fa-long-arrow-right font-extralight -rotate-45" aria-hidden="true"></i>
                                     </button>
                                 </div>
 
                             </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -135,8 +137,7 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <!-- MAPS -->
-        <section class=" w-full h-auto">
+        <section class="w-full h-auto scroll-animate fade-up">
             <div class=" w-full max-w-4/5 mx-auto py-20 px-0 xl:px-20">
 
                 <div class=" w-full h-100 rounded-4xl overflow-hidden shadow-lg/25 shadow-black">
@@ -149,11 +150,7 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <!-- SPONSOR -->
-        <section class=" w-full h-auto border border-white/30 bg-linear-to-br rom-[#24364d] to-[#1d2d42]
-         shadow-[0_10px_40px_rgba(0,0,0,0.35)]
-         overflow-hidden   inset-0 rounded-[3rem]
-           ring-1 ring-white/30">
+        <section class="w-full h-auto border border-white/30 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden rounded-[3rem] ring-1 ring-white/30 scroll-animate fade-up">
             <div class=" w-full max-w-4/5 mx-auto py-20 mb-20 flex flex-col ">
 
                 <div class=" w-full flex justify-between items-center mb-10">
@@ -163,47 +160,35 @@ onUnmounted(() => {
                 </div>
 
                 <div class=" w-full grid grid-cols-8 gap-2 sm:gap-4 xl:gap-12">
-
-                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center">
-                        <img src="./../components/img/contactPage/sponsorsLogo/logo1.png" alt="" draggable="false">
-                    </div>
-
-                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center">
-                        <img src="./../components/img/contactPage/sponsorsLogo/logo2.png" alt="" draggable="false">
-                    </div>
-
-                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center">
-                        <img src="./../components/img/contactPage/sponsorsLogo/logo3.png" alt="" draggable="false">
-                    </div>
-
-                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center">
-                        <img src="./../components/img/contactPage/sponsorsLogo/logo4.png" alt="" draggable="false">
-                    </div>
-
-                    <div class=" w-full h-full overflow-hidden col-span-2 col-start-2 flex justify-center">
-                        <img src="./../components/img/contactPage/sponsorsLogo/logo5.png" alt="" draggable="false">
-                    </div>
-
-                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center">
-                        <img src="./../components/img/contactPage/sponsorsLogo/logo6.png" alt="" draggable="false">
-                    </div>
-
-                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center">
-                        <img src="./../components/img/contactPage/sponsorsLogo/logo7.png" alt="" draggable="false">
-                    </div>
-
-                    <div class=" w-full h-full overflow-hidden col-span-2 col-start-3 flex justify-center">
-                        <img src="./../components/img/contactPage/sponsorsLogo/logo8.png" alt="" draggable="false">
-                    </div>
-
-                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center">
-                        <img src="./../components/img/contactPage/sponsorsLogo/logo9.png" alt="" draggable="false">
-                    </div>
-
-
+                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center"><img src="./../components/img/contactPage/sponsorsLogo/logo1.png" alt="" draggable="false"></div>
+                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center"><img src="./../components/img/contactPage/sponsorsLogo/logo2.png" alt="" draggable="false"></div>
+                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center"><img src="./../components/img/contactPage/sponsorsLogo/logo3.png" alt="" draggable="false"></div>
+                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center"><img src="./../components/img/contactPage/sponsorsLogo/logo4.png" alt="" draggable="false"></div>
+                    <div class=" w-full h-full overflow-hidden col-span-2 col-start-2 flex justify-center"><img src="./../components/img/contactPage/sponsorsLogo/logo5.png" alt="" draggable="false"></div>
+                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center"><img src="./../components/img/contactPage/sponsorsLogo/logo6.png" alt="" draggable="false"></div>
+                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center"><img src="./../components/img/contactPage/sponsorsLogo/logo7.png" alt="" draggable="false"></div>
+                    <div class=" w-full h-full overflow-hidden col-span-2 col-start-3 flex justify-center"><img src="./../components/img/contactPage/sponsorsLogo/logo8.png" alt="" draggable="false"></div>
+                    <div class=" w-full h-full overflow-hidden col-span-2 flex justify-center"><img src="./../components/img/contactPage/sponsorsLogo/logo9.png" alt="" draggable="false"></div>
                 </div>
 
             </div>
         </section>
     </div>
 </template>
+
+<style scoped>
+.scroll-animate {
+    opacity: 0;
+    transition: transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.8s ease;
+    will-change: transform, opacity;
+}
+
+.fade-up {
+    transform: translateY(50px) scale(0.98);
+}
+
+.scroll-animate.show-animated {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+</style>

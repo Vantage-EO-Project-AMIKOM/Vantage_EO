@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const parallaxOffset = ref(0)
@@ -21,14 +21,37 @@ const handleScroll = () => {
   contentOffset.value = window.scrollY * -0.05
 }
 
+// --- LOGIKA ANIMASI SCROLL DUA ARAH ---
+const observer = ref(null)
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+
+  observer.value = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Ketika masuk layar (scroll kebawah/keatas)
+        entry.target.classList.add('show-animated')
+      } else {
+        // Ketika keluar layar, hapus class untuk memicu animasi ulang nanti
+        entry.target.classList.remove('show-animated')
+      }
+    })
+  }, {
+    threshold: 0.1, // Beraksi ketika minimal 10% elemen terdeteksi di layar
+    rootMargin: "-20px 0px" // Buffer deteksi agar transisinya terasa dinamis
+  })
+
+  // Daftarkan semua elemen ber-class 'scroll-animate'
+  document.querySelectorAll('.scroll-animate').forEach(el => observer.value.observe(el))
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  if (observer.value) observer.value.disconnect()
 })
 </script>
+
 <template>
   <!-- HERO -->
   <section class="w-full h-130 z-10 flex items-center relative overflow-hidden">
@@ -73,12 +96,11 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <!-- Our Profile Section -->
-   <section class="w-full h-auto">
+    <section class="w-full h-auto">
       <div class="w-full max-w-[95%] xl:max-w-4/5 mx-auto py-20">
-        <h2 class="text-4xl lg:text-6xl capitalize font-semibold text-center text-white">Our Profile</h2>
+        <h2 class="text-4xl lg:text-6xl capitalize font-semibold text-center text-white scroll-animate fade-up">Our Profile</h2>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center scroll-animate fade-up">
           <div class="w-full max-w-[320px] lg:max-w-none aspect-110/145 overflow-hidden rounded-full mx-auto">
             <img class="w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
               src="./../components/img/profilePage/profile/profile1.jpeg" alt="Azka" />
@@ -100,7 +122,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center scroll-animate fade-up">
           <div
             class="w-full h-auto lg:col-span-2 order-2 lg:order-1 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-6 lg:p-10 rounded-4xl ring-1 ring-white/40 py-10 lg:py-20">
             <h2 class="text-2xl lg:text-4xl capitalize font-semibold mb-2 text-left lg:text-right text-white">Puan Aeesya</h2>
@@ -120,7 +142,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center scroll-animate fade-up">
           <div class="w-full max-w-[320px] lg:max-w-none aspect-110/145 overflow-hidden rounded-full mx-auto">
             <img class="w-full h-full object-cover object-[0%_100%] scale-130 origin-center"
               src="./../components/img/profilePage/profile/profile3.jpeg" alt="Angga" />
@@ -141,7 +163,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center scroll-animate fade-up">
           <div
             class="w-full h-auto lg:col-span-2 order-2 lg:order-1 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-6 lg:p-10 rounded-4xl ring-1 ring-white/40 py-10 lg:py-20">
             <h2 class="text-2xl lg:text-4xl capitalize font-semibold mb-2 text-left lg:text-right text-white">Dani Zakhran</h2>
@@ -163,3 +185,17 @@ onUnmounted(() => {
   </div>
 </template>
 
+<style scoped>
+.scroll-animate {
+  opacity: 0;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  will-change: transform, opacity;
+}
+.fade-up {
+  transform: translateY(50px);
+}
+.scroll-animate.show-animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
