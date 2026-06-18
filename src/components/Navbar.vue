@@ -42,9 +42,9 @@ const isOpen = ref(false)
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
                 </div>
-                <button class="hidden xl:block bg-[#17202A] text-white w-35 h-11 rounded-full transition-all hover:bg-[#425c79]">Register
-                    <i class="fa fa-long-arrow-right font-extralight -rotate-45" aria-hidden="true"></i>
-                </button>
+                <RouterLink to="/register" class="hidden xl:block bg-[#17202A] text-white w-35 h-11 rounded-full transition-all hover:bg-[#425c79] text-center px-4 py-2">Register
+                 <i class="fa fa-long-arrow-right font-extralight -rotate-45" aria-hidden="true"></i>
+                </RouterLink>
             </div>
             <button @click="isOpen = !isOpen" class="xl:hidden text-2xl text-blue-950 focus:outline-none">
                 <i :class="isOpen ? 'fa fa-times' : 'fa fa-bars'"></i>
@@ -61,9 +61,8 @@ const isOpen = ref(false)
         <RouterLink to="profile" class=" text-lg hover:text-blue-800">Profile</RouterLink>
         <RouterLink to="ourHistory" class=" text-lg hover:text-blue-800">Our Story</RouterLink>
         <RouterLink to="contact" class=" text-lg hover:text-blue-800">Contact Us</RouterLink>
-
+        <RouterLink to="/register" class="w-full bg-[#EE0034] text-white font-bold px-5 py-3 mt-2 rounded-full transition-all hover:bg-[#ac2c2c] text-center">Register</RouterLink>
         
-        <button
-            class="w-full bg-[#EE0034] text-white font-bold px-5 py-3 mt-2 rounded-full transition-all hover:bg-[#ac2c2c]">Register</button>
+        
     </div>
 </template>
