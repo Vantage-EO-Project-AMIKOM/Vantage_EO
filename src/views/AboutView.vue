@@ -20,21 +20,35 @@ const handleScroll = () => {
   contentOffset.value = window.scrollY * -0.05;
 };
 
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+const observer = ref(null);
 
-  // Begitu pindah ke page ini, langsung aktifkan animasi muncul
-  setTimeout(() => {
-    isAnimate.value = true;
-  }, 100); 
-});
+onMounted(() => { 
+  window.addEventListener('scroll', handleScroll); 
 
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
-</script>
+  observer.value = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show-animated');
+      } else {
+        entry.target.classList.remove('show-animated');
+      }
+    });
+  }, { 
+    threshold: 0.1,
+    rootMargin: "-50px 0px -50px 0px" 
+  }); 
+  
+  document.querySelectorAll('.scroll-animate').forEach(el => observer.value.observe(el));
+}); 
+
+onUnmounted(() => { 
+  window.removeEventListener('scroll', handleScroll); 
+  if (observer.value) observer.value.disconnect();
+}); 
+</script> 
 
 <template>
+    
     <section class="w-full h-130 z-10 flex justify-center items-center relative overflow-hidden">
         <div class="absolute inset-0 bg-black/60">
             <img src="./../components/img/bg/hero-bg.jpg" alt="" draggable="false"
@@ -201,17 +215,13 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Transisi Smooth saat Elemen Muncul Pertama Kali */
-.page-animation {
+.scroll-animate {
   opacity: 0;
-  transform: translateY(50px);
-  transition: transform 1s cubic-bezier(0.215, 0.610, 0.355, 1), opacity 0.8s ease;
-  will-change: transform, opacity;
+  transform: translateY(50px) scale(0.98); /* Sedikit mengecil dan turun ke bawah */
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-/* Ketika isAnimate bernilai true, class ini otomatis aktif */
-.page-animation.show {
+.scroll-animate.show-animated {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 </style>
