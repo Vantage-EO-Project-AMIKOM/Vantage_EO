@@ -43,14 +43,20 @@ async function handleLogin() {
   errorMessage.value = ''
 
   try {
-    const response = await axios.post('http://localhost:8000/api/login', {
+    const response = await axios.post('http://127.0.0.1:8000/api/login', {
       email: email.value,
       password: password.value,
     })
-
+    
     localStorage.setItem('token', response.data.token)
-    router.push('/')
-  } catch (error) {
+    localStorage.setItem('user', JSON.stringify(response.data.user))
+    
+    if (response.data.user.role === 'admin') {
+      router.push('/admin')
+    } else {
+     router.push('/')
+     }
+    } catch (error) {
     errorMessage.value = 'Invalid email or password.'
   } finally {
     loading.value = false
