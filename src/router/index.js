@@ -53,5 +53,19 @@ const router = createRouter({
 
   ],
 })
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
 
+  if (to.name === 'admin' && !token) {
+    // Not logged in, trying to access admin → redirect to login
+    next('/login')
+  } else if (to.name === 'admin' && user?.role !== 'admin') {
+    // Logged in but not admin → redirect to home
+    next('/')
+  } else {
+    // All good, proceed
+    next()
+  }
+})
 export default router
