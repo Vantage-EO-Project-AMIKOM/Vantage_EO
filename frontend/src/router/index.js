@@ -6,6 +6,7 @@ import OurHistoryView from '@/views/OurHistoryView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import AdminDashboard from '@/views/AdminDashboard.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -44,8 +45,27 @@ const router = createRouter({
      name: 'register',
      component: RegisterView,
     },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminDashboard,
+    },
 
   ],
 })
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  const user = JSON.parse(localStorage.getItem('user'))
 
+  if (to.name === 'admin' && !token) {
+    // Not logged in, trying to access admin → redirect to login
+    next('/login')
+  } else if (to.name === 'admin' && user?.role !== 'admin') {
+    // Logged in but not admin → redirect to home
+    next('/')
+  } else {
+    // All good, proceed
+    next()
+  }
+})
 export default router

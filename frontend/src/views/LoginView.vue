@@ -43,14 +43,20 @@ async function handleLogin() {
   errorMessage.value = ''
 
   try {
-    const response = await axios.post('http://localhost:8000/api/login', {
+    const response = await axios.post('http://127.0.0.1:8000/api/login', {
       email: email.value,
       password: password.value,
     })
-
+    
     localStorage.setItem('token', response.data.token)
-    router.push('/')
-  } catch (error) {
+    localStorage.setItem('user', JSON.stringify(response.data.user))
+    
+    if (response.data.user.role === 'admin') {
+      router.push('/admin')
+    } else {
+     router.push('/')
+     }
+    } catch (error) {
     errorMessage.value = 'Invalid email or password.'
   } finally {
     loading.value = false
@@ -59,87 +65,127 @@ async function handleLogin() {
 </script>
 
 <style scoped>
+/* Latar belakang luar menggunakan warna pekat agar kontras */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f5f5f5;
+  min-height: 100vh;
+  background-color: #17202A;
+  padding: 1.5rem;
 }
+
+/* Menggunakan tema kontainer biru tua Vantage #2B3B4C */
 .login-box {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 12px;
+  background: #2B3B4C;
+  padding: 3rem 2.5rem;
+  border-radius: 2.5rem; /* Lengkungan disamakan dengan komponen lainnya */
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  max-width: 450px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
+
 h2 {
   margin: 0 0 0.3rem;
-  font-size: 22px;
+  font-size: 26px;
+  color: #ffffff;
+  font-weight: 700;
+  text-transform: capitalize;
 }
+
 .subtitle {
-  color: #888;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
-  margin: 0 0 1.5rem;
+  margin: 0 0 2rem;
 }
+
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
+
 .form-group label {
   display: block;
   font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 6px;
-  color: #555;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #ffffff;
 }
+
+/* Input text diatur melingkar penuh (rounded-full) ber-background putih */
 .form-group input {
   width: 100%;
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
   font-size: 14px;
   box-sizing: border-box;
-}
-.form-group input:focus {
+  background-color: #FFFFFF;
+  color: #000000;
   outline: none;
-  border-color: #4f46e5;
+  transition: all 0.3s ease;
 }
+
+.form-group input:focus {
+  border-color: #EE0034; /* Focus border menggunakan warna merah */
+  box-shadow: 0 0 0 3px rgba(238, 0, 52, 0.2);
+}
+
+/* Tombol Sign In utama dengan warna merah khas Vantage #EE0034 */
 button {
   width: 100%;
-  padding: 0.7rem;
-  background: #4f46e5;
+  padding: 0.9rem;
+  background: #EE0034;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 9999px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(238, 0, 52, 0.3);
 }
+
 button:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
+  box-shadow: none;
 }
+
 button:hover:not(:disabled) {
-  background: #4338ca;
+  background: #d6002f;
+  transform: translateY(-1px);
 }
+
 .error {
-  background: #fee2e2;
-  color: #dc2626;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
+  background: rgba(220, 38, 38, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
   font-size: 13px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
+
 .register-link {
   text-align: center;
-  font-size: 13px;
-  color: #888;
-  margin-top: 1.2rem;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 1.5rem;
 }
+
 .register-link a {
-  color: #4f46e5;
+  color: #EE0034;
+  font-weight: 600;
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.register-link a:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 </style>
