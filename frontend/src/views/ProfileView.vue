@@ -55,7 +55,8 @@ onUnmounted(() => {
       >
         Profile
       </h1>
-      <p class="text-lg font-normal uppercase text-white">vantage > profile</p>
+      <p class=" text-xl font-normal text-white">A trusted event management platform designed to empower creators, speakers, </p>
+      <p class=" text-xl font-normal text-white">and audiences through seamless event creation and professional collaboration.</p>
     </div>
   </section>
 

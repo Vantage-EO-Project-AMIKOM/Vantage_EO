@@ -34,9 +34,9 @@ onMounted(() => {
                 entry.target.classList.remove('show-animated');
             }
         });
-    }, { 
+    }, {
         threshold: 0.1,
-        rootMargin: "-20px 0px -20px 0px" 
+        rootMargin: "-20px 0px -20px 0px"
     });
 
     document.querySelectorAll('.scroll-animate').forEach(el => observer.value.observe(el));
@@ -59,13 +59,14 @@ onUnmounted(() => {
 
         <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black">
             <h1 class=" capitalize text-7xl font-bold mb-5">contact us</h1>
-            <p class=" text-lg font-normal uppercase">vantage > contact us</p>
+            <p class=" text-xl font-normal ">Have an idea or want to host an event?</p>
+            <p class=" text-xl font-normal "> Get in touch with our team today and let's create something memorable together.</p>
         </div>
 
     </section>
 
     <div class="relative z-10 bg-[#2B3B4C] rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
-        
+
         <section class="w-full h-auto bg-[#EE0034] rounded-t-[3rem] relative -top-5 scroll-animate fade-up">
             <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-20">
 

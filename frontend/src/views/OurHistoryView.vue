@@ -65,7 +65,8 @@ onUnmounted(() => {
 
         <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black">
             <h1 class=" capitalize text-7xl font-bold mb-5">our story</h1>
-            <p class=" text-lg font-normal uppercase">vantage > our story</p>
+            <p class=" text-xl font-normal">Born from a passion for connection, our journey started with a simple idea</p>
+            <p class=" text-xl font-normal">"Making event management accessible for everyone, anywhere."</p>
         </div>
 
     </section>

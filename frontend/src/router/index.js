@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
+import EventView from '../views/EventView.vue'
 import OurHistoryView from '@/views/OurHistoryView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import LoginView from '@/views/LoginView.vue'
@@ -21,6 +22,11 @@ const router = createRouter({
       component: AboutView,
     },
     {
+      path: '/event',
+      name: 'event',
+      component: EventView,
+    },
+    {
       path: '/contact',
       name: 'contact',
       component: ContactView,
@@ -36,26 +42,34 @@ const router = createRouter({
       component: ProfileView,
     },
     {
-     path: '/login',
-     name: 'login',
-     component: LoginView,
+      path: '/login',
+      name: 'login',
+      component: LoginView,
     },
     {
-     path: '/register',
-     name: 'register',
-     component: RegisterView,
+      path: '/register',
+      name: 'register',
+      component: RegisterView,
     },
     {
       path: '/admin',
       name: 'admin',
       component: AdminDashboard,
     },
-
   ],
 })
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
-  const user = JSON.parse(localStorage.getItem('user'))
+  const storedUser = localStorage.getItem('user')
+  let user = null
+
+  if (storedUser) {
+    try {
+      user = JSON.parse(storedUser)
+    } catch {
+      user = null
+    }
+  }
 
   if (to.name === 'admin' && !token) {
     // Not logged in, trying to access admin → redirect to login

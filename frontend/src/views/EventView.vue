@@ -1,52 +1,3 @@
-<script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-import CountPerson from '@/components/CountPerson.vue';
-
-const parallaxOffset = ref(0);
-const imageOffsets = ref({c1: 0, c2: 0, c3: 0, c4: 0});
-const contentOffset = ref(0);
-
-// State untuk memicu animasi masuk pertama kali page dibuka
-const isAnimate = ref(false);
-
-const handleScroll = () => {
-  parallaxOffset.value = window.scrollY * 0.4;
-
-  // Apply parallax to grid images with different speeds
-  imageOffsets.value.c1 = window.scrollY * 0.3;
-  imageOffsets.value.c2 = window.scrollY * 0.25;
-  imageOffsets.value.c3 = window.scrollY * 0.35;
-  imageOffsets.value.c4 = window.scrollY * 0.2;
-  contentOffset.value = window.scrollY * -0.05;
-};
-
-const observer = ref(null);
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-
-  observer.value = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show-animated');
-      } else {
-        entry.target.classList.remove('show-animated');
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: "-50px 0px -50px 0px"
-  });
-
-  document.querySelectorAll('.scroll-animate').forEach(el => observer.value.observe(el));
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-  if (observer.value) observer.value.disconnect();
-});
-</script>
-
 <template>
 
     <section class="w-full h-130 z-10 flex justify-center items-center relative overflow-hidden">
@@ -56,9 +7,9 @@ onUnmounted(() => {
         </div>
 
         <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black">
-            <h1 class=" capitalize text-7xl font-bold mb-5">about us</h1>
-            <p class=" text-xl font-normal">We are a passionate team dedicated to bringing people together.</p>
-            <p class=" text-xl font-normal"> From seamless planning to unforgettable executions, we turn visions into extraordinary experiences.</p>
+            <h1 class=" capitalize text-7xl font-bold mb-3">event</h1>
+            <p class=" text-xl font-normal">Discover our latest events and upcoming activities.</p>
+            <p class=" text-xl font-normal">Join us to learn, connect, and share memorable experiences or create your own event with us.</p>
         </div>
     </section>
 
@@ -224,5 +175,15 @@ onUnmounted(() => {
 .scroll-animate.show-animated {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+</style>
+
+<script setup>
+
+</script>
+
+<style scoped>
+.event-hero {
+  min-height: 40vh;
 }
 </style>
