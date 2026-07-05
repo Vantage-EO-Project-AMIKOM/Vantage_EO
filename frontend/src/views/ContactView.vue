@@ -65,7 +65,7 @@ onUnmounted(() => {
 
     </section>
 
-    <div class="relative z-10 bg-[#2B3B4C] rounded-[3rem] -mt-10 mb-250 xl:mb-162.5 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+    <div class="relative z-10 bg-[#2B3B4C] rounded-[3rem] -mt-10 mb-20 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
 
         <section class="w-full h-auto bg-[#EE0034] rounded-t-[3rem] relative -top-5 scroll-animate fade-up">
             <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-20">

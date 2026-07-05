@@ -57,8 +57,7 @@ onUnmounted(() => {
 
         <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black">
             <h1 class=" capitalize text-7xl font-bold mb-5">about us</h1>
-            <p class=" text-xl font-normal">We are a passionate team dedicated to bringing people together.</p>
-            <p class=" text-xl font-normal"> From seamless planning to unforgettable executions, we turn visions into extraordinary experiences.</p>
+
         </div>
     </section>
 
