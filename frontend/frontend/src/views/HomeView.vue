@@ -52,13 +52,9 @@ onUnmounted(() => {
         draggable="false" :style="{ transform: `translateY(${parallaxOffset}px)` }">
     </div>
     <div class="w-full max-w-3/4 mx-auto z-10">
-      <h1 class="w-full lg:w-2/5 capitalize text-5xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5">
-        let's create your event with vantage</h1>
-      <RouterLink to="/event">
-        <button
-          class="px-9 py-4 bg-[#EE0034] rounded-full text-white transition-all hover:translate-x-2 cursor-pointer">
-          Check this out!
-        </button>
+      <h1 class="w-full lg:w-2/5 capitalize text-5xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5">let's create your event with vantage</h1>
+      <RouterLink to="/">
+        <button class="px-9 py-4 bg-[#EE0034] rounded-full text-white transition-all hover:translate-x-2 cursor-pointer">Check this out!</button>
       </RouterLink>
     </div>
   </section>
@@ -70,28 +66,22 @@ onUnmounted(() => {
 
         <div class="grid grid-cols-2 grid-rows-2 gap-6 pr-10 mb-15 xl:mb-0">
           <div class="w-8/10 h-9/10 rounded-2xl justify-self-end self-end overflow-hidden relative -bottom-6">
-            <img src="./../components/img/bg/c1.jpeg" alt="" class="w-full h-full object-cover object-center"
-              draggable="false">
+            <img src="./../components/img/bg/c1.jpeg" alt="" class="w-full h-full object-cover object-center" draggable="false">
           </div>
           <div class="w-full h-80 rounded-2xl overflow-hidden">
-            <img src="./../components/img/bg/c2.jpeg" alt="" class="w-full h-full object-cover object-center"
-              draggable="false">
+            <img src="./../components/img/bg/c2.jpeg" alt="" class="w-full h-full object-cover object-center" draggable="false">
           </div>
           <div class="w-9/10 h-80 rounded-2xl justify-self-end overflow-hidden relative -bottom-6">
-            <img src="./../components/img/bg/c3.jpeg" alt="" class="w-full h-full object-cover object-center"
-              draggable="false">
+            <img src="./../components/img/bg/c3.jpeg" alt="" class="w-full h-full object-cover object-center" draggable="false">
           </div>
           <div class="w-9/10 h-9/10 rounded-2xl justify-self-start self-start overflow-hidden">
-            <img src="./../components/img/bg/c4.jpeg" alt="" class="w-full h-full object-cover object-center"
-              draggable="false">
+            <img src="./../components/img/bg/c4.jpeg" alt="" class="w-full h-full object-cover object-center" draggable="false">
           </div>
         </div>
 
         <div class="flex flex-col self-center text-white">
           <h2 class="w-3/5 text-4xl capitalize font-semibold mb-8">Welcome the Greatest Digital Conference</h2>
-          <p class="text-lg font-normal mb-15">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ulla mco sed do eiusmod tempor incid idunt
-            ut labore et dolore magna.</p>
+          <p class="text-lg font-normal mb-15">Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ulla mco sed do eiusmod tempor incid idunt ut labore et dolore magna.</p>
 
           <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-15">
             <div class="flex items-center transition-all hover:text-[#EE0034]">
@@ -113,9 +103,7 @@ onUnmounted(() => {
           </div>
 
           <RouterLink to="/">
-            <button
-              class="px-7 py-4 border-2 border-white bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer">View
-              Our Schedule</button>
+            <button class="px-7 py-4 border-2 border-white bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer">View Our Schedule</button>
           </RouterLink>
         </div>
 
@@ -125,11 +113,7 @@ onUnmounted(() => {
     <section class="w-full h-auto scroll-animate">
       <div class="w-full max-w-3/5 mx-auto py-20 text-white">
         <h2 class="text-4xl capitalize font-semibold mb-8 text-center">Our Service</h2>
-        <p class="text-lg font-normal text-center">Di Vantage Event Organizer, kami senantiasa menghadirkan rangkaian
-          layanan terintegrasi yang dirancang untuk menjadikan acara Anda spektakuler. Sebagai Event Organizer (EO) di
-          Indonesia, kami menghadirkan kreativitas, ketepatan, dan inovasi dalam setiap aspek perencanaan dan
-          pelaksanaan acara, baik itu Corporate Gathering, FGD, Summit, Expo, Sport Event, MICE, hingga CSR Activity.
-        </p>
+        <p class="text-lg font-normal text-center">Di Vantage Event Organizer, kami senantiasa menghadirkan rangkaian layanan terintegrasi yang dirancang untuk menjadikan acara Anda spektakuler. Sebagai Event Organizer (EO) di Indonesia, kami menghadirkan kreativitas, ketepatan, dan inovasi dalam setiap aspek perencanaan dan pelaksanaan acara, baik itu Corporate Gathering, FGD, Summit, Expo, Sport Event, MICE, hingga CSR Activity.</p>
       </div>
     </section>
 
@@ -146,11 +130,9 @@ onUnmounted(() => {
 <style scoped>
 .scroll-animate {
   opacity: 0;
-  transform: translateY(50px) scale(0.98);
-  /* Sedikit mengecil dan turun ke bawah */
+  transform: translateY(50px) scale(0.98); /* Sedikit mengecil dan turun ke bawah */
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
 .scroll-animate.show-animated {
   opacity: 1;
   transform: translateY(0) scale(1);

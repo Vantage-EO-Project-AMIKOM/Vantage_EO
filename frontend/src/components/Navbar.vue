@@ -164,5 +164,15 @@ watch(
       class="w-full bg-[#EE0034] text-white font-bold px-5 py-3 mt-2 rounded-full transition-all hover:bg-[#ac2c2c] text-center"
       >Register</RouterLink
     >
+  <div v-if="isOpen"
+    class="fixed top-24 left-1/2 -translate-x-1/2 w-[95%] bg-[#17202A] text-white shadow-2xl rounded-2xl p-6 flex flex-col space-y-4 z-40 xl:hidden">
+
+    <RouterLink to="/" exact-active-class="text-[#EE0034] font-bold" class="text-lg hover:text-blue-800">Home</RouterLink>
+    <RouterLink to="/event" exact-active-class="text-[#EE0034] font-bold" class="text-lg hover:text-blue-800">Event</RouterLink>
+    <RouterLink to="/about" active-class="text-[#EE0034] font-bold" class="text-lg hover:text-blue-800">About Us</RouterLink>
+    <RouterLink to="/profile" active-class="text-[#EE0034] font-bold" class="text-lg hover:text-blue-800">Profile</RouterLink>
+    <RouterLink to="/ourHistory" active-class="text-[#EE0034] font-bold" class="text-lg hover:text-blue-800">Our Story</RouterLink>
+    <RouterLink to="/contact" active-class="text-[#EE0034] font-bold" class="text-lg hover:text-blue-800">Contact Us</RouterLink>
+    <RouterLink to="/register" class="w-full bg-[#EE0034] text-white font-bold px-5 py-3 mt-2 rounded-full transition-all hover:bg-[#ac2c2c] text-center">Register</RouterLink>
   </div>
 </template>
