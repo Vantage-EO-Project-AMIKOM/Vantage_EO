@@ -1,3 +1,4 @@
+
 <template>
   <footer class="w-full h-auto relative">
     <!-- Pop-up Toast Notification -->
@@ -22,12 +23,12 @@
         </h2>
 
         <div class="flex w-full md:w-6/7 xl:w-1/2 h-15 items-center">
-          <input 
+          <input
             v-model="emailInput"
-            type="email" 
+            type="email"
             required
             class="w-2/3 h-full bg-white rounded-l-full py-5 px-8 text-lg outline-none text-gray-800"
-            placeholder="Your email address" 
+            placeholder="Your email address"
           />
           <button
             type="submit"
@@ -146,7 +147,7 @@
         <div class="hidden lg:flex justify-start md:justify-center">
           <div class="flex flex-col items-start">
             <h3 class="text-3xl font-bold text-white text-left capitalize mb-5">contact info</h3>
-            
+
             <div class="flex items-center text-lg font-normal text-white mb-2">
               <i class="fa fa-thumb-tack mr-3" aria-hidden="true"></i>
               <a href="https://maps.app.goo.gl/u4UzBW7Pk3PoZb1MA" target="_blank" rel="noopener noreferrer" class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
@@ -180,7 +181,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, defineOptions } from 'vue'
+defineOptions({
+  name: 'AppFooter',
+})
 
 // Definisikan state untuk Vue 3 (Composition API)
 const emailInput = ref('')
@@ -190,10 +194,10 @@ const handleSubscribe = () => {
   if (emailInput.value.trim() !== '') {
     // Memunculkan toast notification
     showToast.value = true
-    
+
     // Reset form inputan email
     emailInput.value = ''
-    
+
     // Menyembunyikan toast secara otomatis setelah 4 detik
     setTimeout(() => {
       showToast.value = false
