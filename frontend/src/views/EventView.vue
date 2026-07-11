@@ -11,12 +11,12 @@ import eventImage from '@/components/img/bg/c5.png'
     <Navbar />
 
     <!-- Hero -->
-    <section class="relative min-h-[320px] overflow-hidden pt-24 md:min-h-[390px]">
+    <section class="relative min-h-80 overflow-hidden pt-24 md:min-h-97.5">
       <img :src="heroBg" alt="Event crowd" class="absolute inset-0 h-full w-full object-cover" />
       <div class="absolute inset-0 bg-black/60"></div>
 
       <div
-        class="relative z-10 mx-auto flex min-h-[320px] w-4/5 flex-col justify-center text-white md:min-h-[390px]"
+        class="relative z-10 mx-auto flex min-h-80 w-4/5 flex-col justify-center text-white md:min-h-97.5"
       >
         <h1 class="text-5xl font-bold md:text-6xl">Event</h1>
         <p class="mt-2 text-sm font-medium md:text-base">VANTAGE &gt; Event</p>

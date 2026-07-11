@@ -98,7 +98,7 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
 
 <template>
   <div>
-    <section class="relative min-h-[320px] overflow-hidden pt-24 md:min-h-[390px]">
+    <section class="relative min-h-80 overflow-hidden pt-24 md:min-h-97.5">
       <img
         :src="heroBg"
         alt="Event detail banner"
@@ -174,7 +174,7 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
                 :key="item.time"
                 class="flex gap-4 rounded-2xl border border-white/10 bg-white/5 p-4"
               >
-                <div class="min-w-[72px] text-sm font-semibold text-[#EE0034]">{{ item.time }}</div>
+                <div class="min-w-18 text-sm font-semibold text-[#EE0034]">{{ item.time }}</div>
                 <div>
                   <h4 class="font-semibold text-white">{{ item.title }}</h4>
                   <p class="mt-1 text-sm leading-6 text-slate-300">{{ item.detail }}</p>
@@ -185,7 +185,7 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
         </div>
 
         <aside class="space-y-6">
-          <div class="rounded-[1.5rem] border border-white/10 bg-[#24364d] p-6 text-white">
+          <div class="rounded-3xl border border-white/10 bg-[#24364d] p-6 text-white">
             <h3 class="text-xl font-semibold">Quick info</h3>
             <ul class="mt-4 space-y-3 text-sm text-slate-300">
               <li><i class="fa fa-calendar mr-2 text-[#EE0034]"></i>{{ post.date }}</li>
@@ -195,7 +195,7 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
             </ul>
           </div>
 
-          <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
             <h3 class="text-xl font-semibold text-white">Organizer</h3>
             <p class="mt-3 font-semibold text-white">{{ post.organizer }}</p>
             <p class="mt-2 text-sm leading-7 text-slate-300">{{ post.organizerDescription }}</p>
