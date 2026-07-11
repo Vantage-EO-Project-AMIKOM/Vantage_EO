@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import ContactView from '@/views/ContactView.vue'
 import EventView from '../views/EventView.vue'
+import EventDetailView from '@/views/EventDetailView.vue'
 import CreateEventView from '@/views/CreateEventView.vue'
 import OurHistoryView from '@/views/OurHistoryView.vue'
 import ProfileView from '@/views/ProfileView.vue'
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/event',
       name: 'event',
       component: EventView,
+    },
+    {
+      path: '/event/:slug',
+      name: 'event-detail',
+      component: EventDetailView,
     },
     {
       path: '/event/create',
