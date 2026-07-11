@@ -23,9 +23,6 @@ const handleScroll = () => {
 const observer = ref(null);
 
 onMounted(() => {
-  // Set isAnimate ke true saat mounted agar animasi non-scroll langsung jalan
-  isAnimate.value = true;
-  
   window.addEventListener('scroll', handleScroll);
 
   observer.value = new IntersectionObserver((entries) => {
@@ -51,6 +48,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+
     <section class="w-full h-130 z-10 flex justify-center items-center relative overflow-hidden">
         <div class="absolute inset-0 bg-black/60">
             <img src="./../components/img/bg/hero-bg.jpg" alt="" draggable="false"
@@ -58,12 +56,8 @@ onUnmounted(() => {
         </div>
 
         <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black">
-            <!-- Judul Utama -->
-            <h1 class="capitalize text-7xl font-bold mb-4 drop-shadow-md">about us</h1>
-            
-            <!-- Kalimat Sub-judul Pendukung (Gaya Our Story) -->
-            <p class=" text-xl font-normal text-white">Empowering creators and organizing unforgettable experiences</p>
-            <p class=" text-xl font-normal text-white">through one integrated event platform.</p>
+            <h1 class=" capitalize text-7xl font-bold mb-5">about us</h1>
+
         </div>
     </section>
 
@@ -212,8 +206,7 @@ onUnmounted(() => {
                         <button class="px-10 py-3 bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">Get Direction</button>
                     </div>
                     <div class=" w-full xl:w-7/10 h-100 rounded-4xl overflow-hidden xl:ml-10">
-                        <!-- Perubahan di properti allowfullscreen agar bernilai boolean true -->
-                        <iframe class=" w-full h-full object-cover" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.280430130844!2d110.4065606759763!3d-7.76005487696027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a599bd3bdc4ef%3A0x6f1714b0c4544586!2sUniversity%20of%20Amikom%20Yogyakarta!5e0!3m2!1sen!2sid!4v1777812436113!5m2!1sen!2sid" width="600" height="450" style="border:0;" :allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe class=" w-full h-full object-cover" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.280430130844!2d110.4065606759763!3d-7.76005487696027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a599bd3bdc4ef%3A0x6f1714b0c4544586!2sUniversity%20of%20Amikom%20Yogyakarta!5e0!3m2!1sen!2sid!4v1777812436113!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
@@ -224,7 +217,7 @@ onUnmounted(() => {
 <style scoped>
 .scroll-animate {
   opacity: 0;
-  transform: translateY(50px) scale(0.98);
+  transform: translateY(50px) scale(0.98); /* Sedikit mengecil dan turun ke bawah */
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .scroll-animate.show-animated {

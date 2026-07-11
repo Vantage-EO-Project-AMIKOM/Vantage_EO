@@ -98,7 +98,6 @@ onUnmounted(() => {
           Our Profile
         </h2>
 
-        <!-- Profile 1: Azka -->
         <div
           class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation"
           :class="{ show: isAnimate }"
@@ -125,19 +124,17 @@ onUnmounted(() => {
               “Tenang dalam langkah, kuat dalam tujuan, dan selalu jadi cahaya di setiap
               perjalanan.”
             </p>
-            <!-- Tautan GitHub Azka dengan efek hover warna tulisan -->
-            <a href="https://github.com/MehmedAzka" target="_blank" rel="noopener noreferrer" class="group inline-flex justify-start items-center gap-3 mt-10 w-fit">
+            <div class="flex justify-start items-center gap-3 mt-10">
               <img
                 src="./../components/img/profilePage/githubicon.png"
                 alt="github_icon"
-                class="w-10 h-10 lg:w-auto transition-transform duration-300 group-hover:scale-105"
+                class="w-10 h-10 lg:w-auto"
               />
-              <h5 class="text-white text-lg lg:text-2xl ml-3 transition-colors duration-300 group-hover:text-[#EE0034]">MehmedAzka</h5>
-            </a>
+              <h5 class="text-white text-lg lg:text-2xl ml-3">MehmedAzka</h5>
+            </div>
           </div>
         </div>
 
-        <!-- Profile 2: Puan -->
         <div
           class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation"
           :class="{ show: isAnimate }"
@@ -159,15 +156,14 @@ onUnmounted(() => {
               “Elegan dalam sikap, berani dalam mimpi, dan tetap bersinar tanpa harus merendahkan
               siapa pun.”
             </p>
-            <!-- Tautan GitHub Puan dengan efek hover warna tulisan -->
-            <a href="https://github.com/syaaaa07" target="_blank" rel="noopener noreferrer" class="group flex justify-start lg:justify-end items-center gap-3 mt-10 w-full lg:w-auto ml-auto">
-              <h5 class="text-white text-lg lg:text-2xl mr-3 lg:ml-3 transition-colors duration-300 group-hover:text-[#EE0034]">syaaaa07</h5>
+            <div class="flex justify-start lg:justify-end items-center gap-3 mt-10">
+              <h5 class="text-white text-lg lg:text-2xl mr-3 lg:ml-3">syaaaa07</h5>
               <img
                 src="./../components/img/profilePage/githubicon.png"
                 alt="github_icon"
-                class="w-10 h-10 lg:w-auto transition-transform duration-300 group-hover:scale-105"
+                class="w-10 h-10 lg:w-auto"
               />
-            </a>
+            </div>
           </div>
           <div
             class="w-full max-w-[320px] lg:max-w-none aspect-110/145 overflow-hidden rounded-full mx-auto order-1 lg:order-2"
@@ -180,7 +176,6 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <!-- Profile 3: Angga -->
         <div
           class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation"
           :class="{ show: isAnimate }"
@@ -198,7 +193,7 @@ onUnmounted(() => {
             class="w-full h-auto lg:col-span-2 border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-6 lg:p-10 rounded-4xl ring-1 ring-white/40 py-10 lg:py-20"
           >
             <h2 class="text-2xl lg:text-4xl capitalize font-semibold mb-2 text-left text-white">
-              L.M Hanggara Putra Akbar
+              L.M.Hanggara Putra Akbar
             </h2>
             <h2 class="text-2xl lg:text-4xl capitalize font-semibold mb-8 text-left text-white">
               24.61.0279
@@ -207,19 +202,17 @@ onUnmounted(() => {
               “Dilahirkan untuk memimpin, tumbuh untuk menginspirasi, dan melangkah tanpa takut
               menghadapi dunia.”
             </p>
-            <!-- Tautan GitHub Angga dengan efek hover warna tulisan -->
-            <a href="https://github.com/agashesh" target="_blank" rel="noopener noreferrer" class="group inline-flex justify-start items-center gap-3 mt-10 w-fit">
+            <div class="flex justify-start items-center gap-3 mt-10">
               <img
                 src="./../components/img/profilePage/githubicon.png"
                 alt="github_icon"
-                class="w-10 h-10 lg:w-auto transition-transform duration-300 group-hover:scale-105"
+                class="w-10 h-10 lg:w-auto"
               />
-              <h5 class="text-white text-lg lg:text-2xl ml-3 transition-colors duration-300 group-hover:text-[#EE0034]">agashesh</h5>
-            </a>
+              <h5 class="text-white text-lg lg:text-2xl ml-3">agashesh</h5>
+            </div>
           </div>
         </div>
 
-        <!-- Profile 4: Dani -->
         <div
           class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation"
           :class="{ show: isAnimate }"
@@ -230,7 +223,7 @@ onUnmounted(() => {
             <h2
               class="text-2xl lg:text-4xl capitalize font-semibold mb-2 text-left lg:text-right text-white"
             >
-              M. Kahlil Dani Zakhran
+              Dani Zakhran
             </h2>
             <h2
               class="text-2xl lg:text-4xl capitalize font-semibold mb-8 text-left lg:text-right text-white"
@@ -241,15 +234,14 @@ onUnmounted(() => {
               “Bukan tentang seberapa cepat melaju, tapi seberapa konsisten tetap bertahan sampai
               tujuan.”
             </p>
-            <!-- Tautan GitHub Dani dengan efek hover warna tulisan -->
-            <a href="https://github.com/Danizakhran" target="_blank" rel="noopener noreferrer" class="group flex justify-start lg:justify-end items-center gap-3 mt-10 w-full lg:w-auto ml-auto">
-              <h5 class="text-white text-lg lg:text-2xl mr-3 lg:ml-3 transition-colors duration-300 group-hover:text-[#EE0034]">Danizakhran</h5>
+            <div class="flex justify-start lg:justify-end items-center gap-3 mt-10">
+              <h5 class="text-white text-lg lg:text-2xl mr-3 lg:ml-3">Danizakhran</h5>
               <img
                 src="./../components/img/profilePage/githubicon.png"
                 alt="github_icon"
-                class="w-10 h-10 lg:w-auto transition-transform duration-300 group-hover:scale-105"
+                class="w-10 h-10 lg:w-auto"
               />
-            </a>
+            </div>
           </div>
           <div
             class="w-full max-w-[320px] lg:max-w-none aspect-110/145 overflow-hidden rounded-full mx-auto order-1 lg:order-2"
