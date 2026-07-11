@@ -1,5 +1,8 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { computed } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const posts = [
   {
@@ -19,6 +22,23 @@ const posts = [
     image: './img/bg/hero-bg.jpg',
   },
 ]
+
+const searchTerm = computed(() => {
+  const value = route.query.search
+  return value ? String(value).trim().toLowerCase() : ''
+})
+
+const filteredPosts = computed(() => {
+  if (!searchTerm.value) {
+    return posts
+  }
+
+  return posts.filter((post) => {
+    return [post.title, post.category, post.location, post.date].some((field) =>
+      String(field).toLowerCase().includes(searchTerm.value),
+    )
+  })
+})
 </script>
 
 <template>
@@ -34,9 +54,16 @@ const posts = [
       </button>
     </div>
 
-    <div class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+    <div
+      v-if="filteredPosts.length === 0"
+      class="rounded-2xl border border-white/10 bg-white/10 px-6 py-5 text-sm text-white/80"
+    >
+      No events match your search.
+    </div>
+
+    <div v-else class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
       <RouterLink
-        v-for="post in posts"
+        v-for="post in filteredPosts"
         :key="post.slug"
         :to="`/event/${post.slug}`"
         class="flex h-80 flex-col items-start rounded-2xl shadow-md transition-all hover:scale-[1.01] hover:-translate-y-1"
