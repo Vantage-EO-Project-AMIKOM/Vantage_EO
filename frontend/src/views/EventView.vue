@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar.vue'
 import HomLeatestPost from '@/components/HomLeatestPost.vue'
 
 import heroBg from '@/components/img/bg/hero-bg.jpg'
-import createEventImage from '@/components/img/bg/hero2.jpeg'
+import eventImage from '@/components/img/bg/c5.png'
 </script>
 
 <template>
@@ -27,7 +27,7 @@ import createEventImage from '@/components/img/bg/hero2.jpeg'
     <main
       class="relative z-20 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-20 shadow-[0_0_80px_rgba(0,0,0,0.15)]"
     >
-      <section class="mx-auto grid w-4/5 items-center gap-10 grid grid-cols-1 xl:grid-cols-2 gap-10">
+      <section class="mx-auto grid w-4/5 items-center gap-10 grid-cols-1 xl:grid-cols-2">
         <div class="text-white">
           <h2 class="max-w-md text-5xl font-bold leading-tight md:text-6xl">
             Make your<br />own event
@@ -47,8 +47,13 @@ import createEventImage from '@/components/img/bg/hero2.jpeg'
         </div>
 
         <div class="w-9/10 h-9/10 rounded-2xl justify-self-start self-start overflow-hidden">
-            <img src="./../components/img/bg/c5.png" alt="" class="w-full h-full object-cover object-center" draggable="false">
-          </div>
+          <img
+            :src="eventImage"
+            alt="Event"
+            class="w-full h-full object-cover object-center"
+            draggable="false"
+          />
+        </div>
       </section>
 
       <!-- Komponen latest post yang sudah ada -->

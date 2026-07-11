@@ -1,44 +1,40 @@
-# vantage
+# Vantage EO Microservices Setup
 
-This template should help get you started developing with Vue 3 in Vite.
+This workspace now contains a frontend app plus four backend services:
 
-## Recommended IDE Setup
+- Auth service: Vantage-auth-service-main
+- Event service: Vantage-EO-Event-Service/Vantage-EO-Event-Service
+- Ticket service: Vantage-ticket-service
+- Analytics service: Vantage-analytics-service
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Service responsibilities
 
-## Recommended Browser Setup
+- Auth service: login, logout, user profile, token handling
+- Event service: event CRUD and event metadata
+- Ticket service: ticket creation, updates, and status tracking
+- Analytics service: event view and conversion metrics
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## Initial API endpoints
 
-## Customize configuration
+### Ticket service
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- GET /api/tickets
+- POST /api/tickets
+- GET /api/tickets/{id}
+- PUT /api/tickets/{id}
+- DELETE /api/tickets/{id}
 
-## Project Setup
+### Analytics service
 
-```sh
-npm install
-```
+- GET /api/analytics
+- POST /api/analytics
+- GET /api/analytics/{id}
+- PUT /api/analytics/{id}
+- DELETE /api/analytics/{id}
 
-### Compile and Hot-Reload for Development
+## Next steps
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+1. Add authentication between services with Sanctum or JWT.
+2. Connect the frontend join form to the ticket service.
+3. Send analytics events from the event detail page.
+4. Add Docker Compose and service discovery for local orchestration.

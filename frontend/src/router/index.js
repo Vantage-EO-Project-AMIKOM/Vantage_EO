@@ -5,6 +5,7 @@ import ContactView from '@/views/ContactView.vue'
 import EventView from '../views/EventView.vue'
 import EventDetailView from '@/views/EventDetailView.vue'
 import CreateEventView from '@/views/CreateEventView.vue'
+import JoinEventView from '@/views/JoinEventView.vue'
 import OurHistoryView from '@/views/OurHistoryView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import LoginView from '@/views/LoginView.vue'
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/event/create',
       name: 'event-create',
       component: CreateEventView,
+    },
+    {
+      path: '/event/:slug/join',
+      name: 'event-join',
+      component: JoinEventView,
     },
     {
       path: '/contact',

@@ -97,7 +97,7 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
 </script>
 
 <template>
-  <div >
+  <div>
     <section class="relative min-h-[320px] overflow-hidden pt-24 md:min-h-[390px]">
       <img
         :src="heroBg"
@@ -142,12 +142,12 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
           <p class="mt-4 text-lg leading-8 text-slate-300">{{ post.description }}</p>
 
           <div class="mt-6 flex flex-wrap gap-3">
-            <a
-              href="#"
+            <RouterLink
+              :to="{ name: 'event-join', params: { slug: route.params.slug } }"
               class="inline-flex items-center rounded-full bg-[#EE0034] px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-1 hover:bg-[#c9002c]"
             >
               <i class="fa fa-ticket mr-2"></i>Join This Event
-            </a>
+            </RouterLink>
             <a
               href="#"
               class="inline-flex items-center rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold transition hover:border-[#EE0034] hover:text-[#EE0034]"
