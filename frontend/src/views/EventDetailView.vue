@@ -4,7 +4,6 @@ import { useRoute } from 'vue-router'
 
 import heroBg from '@/components/img/bg/hero-bg.jpg'
 import eventImage from '@/components/img/bg/ulp.jpeg'
-import concertImage from '@/components/img/bg/c6.jpeg'
 
 const route = useRoute()
 
@@ -98,19 +97,17 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
 </script>
 
 <template>
-  <div class="bg-[#f5f7fb] text-slate-800">
+  <div >
     <section class="relative min-h-[320px] overflow-hidden pt-24 md:min-h-[390px]">
       <img
-        src="heroBg"
+        :src="heroBg"
         alt="Event detail banner"
         class="absolute inset-0 h-full w-full object-cover"
       />
-      <div
-        class="absolute inset-0 bg-gradient-to-r from-[#101921]/90 via-[#101921]/70 to-[#101921]/40"
-      ></div>
+      <div class="absolute inset-0 bg-black/60"></div>
 
       <div
-        class="relative z-10 mx-auto flex min-h-[320px] w-4/5 flex-col justify-center py-16 md:min-h-[390px]"
+        class="relative z-20 mx-auto flex min-h-80 w-4/5 flex-col justify-center py-16 md:min-h-97.5"
       >
         <p class="text-sm font-semibold uppercase tracking-[0.35em] text-[#EE0034]">
           {{ post.category }}
@@ -131,18 +128,18 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
     </section>
 
     <main
-      class="mx-auto -mt-10 mb-20 w-4/5 rounded-[2rem] bg-white p-6 shadow-[0_20px_60px_rgba(0,0,0,0.12)] md:p-10"
+      class="relative z-10 -mt-10 mb-20 rounded-[3rem] bg-[#2B3B4C] text-white shadow-[0_0_80px_rgba(0,0,0,0.15)] md:px-10 md:py-10"
     >
       <div class="grid gap-8 lg:grid-cols-[1.7fr_0.9fr]">
         <div>
           <img
             src="./../components/img/bg/c6.jpeg"
             alt="Event preview"
-            class="h-[320px] w-full rounded-[1.5rem] object-cover md:h-[420px]"
+            class="h-80 w-full rounded-3xl object-cover md:h-105"
           />
 
-          <h2 class="mt-8 text-3xl font-semibold text-slate-900">About this event</h2>
-          <p class="mt-4 text-lg leading-8 text-slate-600">{{ post.description }}</p>
+          <h2 class="mt-8 text-3xl font-semibold text-white">About this event</h2>
+          <p class="mt-4 text-lg leading-8 text-slate-300">{{ post.description }}</p>
 
           <div class="mt-6 flex flex-wrap gap-3">
             <a
@@ -153,7 +150,7 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
             </a>
             <a
               href="#"
-              class="inline-flex items-center rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:border-[#EE0034] hover:text-[#EE0034]"
+              class="inline-flex items-center rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold transition hover:border-[#EE0034] hover:text-[#EE0034]"
             >
               <i class="fa fa-share-alt mr-2"></i>Share Event
             </a>
@@ -163,24 +160,24 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
             <div
               v-for="item in post.highlights"
               :key="item"
-              class="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-slate-700"
+              class="rounded-2xl border border-white/10 bg-white/10 p-4 text-slate-100"
             >
               <i class="fa fa-check-circle mr-2 text-[#EE0034]"></i>{{ item }}
             </div>
           </div>
 
           <section class="mt-10">
-            <h3 class="text-2xl font-semibold text-slate-900">Event agenda</h3>
+            <h3 class="text-2xl font-semibold text-white">Event agenda</h3>
             <div class="mt-6 space-y-4">
               <div
                 v-for="item in post.agenda"
                 :key="item.time"
-                class="flex gap-4 rounded-2xl border border-slate-200 p-4"
+                class="flex gap-4 rounded-2xl border border-white/10 bg-white/5 p-4"
               >
                 <div class="min-w-[72px] text-sm font-semibold text-[#EE0034]">{{ item.time }}</div>
                 <div>
-                  <h4 class="font-semibold text-slate-900">{{ item.title }}</h4>
-                  <p class="mt-1 text-sm leading-6 text-slate-600">{{ item.detail }}</p>
+                  <h4 class="font-semibold text-white">{{ item.title }}</h4>
+                  <p class="mt-1 text-sm leading-6 text-slate-300">{{ item.detail }}</p>
                 </div>
               </div>
             </div>
@@ -188,7 +185,7 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
         </div>
 
         <aside class="space-y-6">
-          <div class="rounded-[1.5rem] bg-[#2B3B4C] p-6 text-white">
+          <div class="rounded-[1.5rem] border border-white/10 bg-[#24364d] p-6 text-white">
             <h3 class="text-xl font-semibold">Quick info</h3>
             <ul class="mt-4 space-y-3 text-sm text-slate-300">
               <li><i class="fa fa-calendar mr-2 text-[#EE0034]"></i>{{ post.date }}</li>
@@ -198,10 +195,10 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
             </ul>
           </div>
 
-          <div class="rounded-[1.5rem] border border-slate-200 p-6">
-            <h3 class="text-xl font-semibold text-slate-900">Organizer</h3>
-            <p class="mt-3 font-semibold text-slate-900">{{ post.organizer }}</p>
-            <p class="mt-2 text-sm leading-7 text-slate-600">{{ post.organizerDescription }}</p>
+          <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+            <h3 class="text-xl font-semibold text-white">Organizer</h3>
+            <p class="mt-3 font-semibold text-white">{{ post.organizer }}</p>
+            <p class="mt-2 text-sm leading-7 text-slate-300">{{ post.organizerDescription }}</p>
           </div>
 
           <RouterLink
