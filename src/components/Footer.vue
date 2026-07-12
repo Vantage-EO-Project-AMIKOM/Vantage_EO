@@ -1,21 +1,41 @@
 <template>
-  <footer class="w-full h-auto">
+  <footer class="w-full h-auto relative">
+    <!-- Pop-up Toast Notification -->
+    <Transition name="fade">
+      <div v-if="showToast" class="fixed bottom-5 right-5 z-50 bg-[#17202A] text-white border-l-4 border-green-500 px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <div>
+          <p class="font-bold text-base text-white">Sukses!</p>
+          <p class="text-sm text-gray-300">Terima kasih! Anda berhasil berlangganan newsletter Vantage. Cek email kamu untuk konfirmasi.</p>
+        </div>
+      </div>
+    </Transition>
+
     <div class="w-full max-w-4/5 mx-auto pb-20">
-      <div
+      <!-- Form Newsletter dengan Event Listener -->
+      <form @submit.prevent="handleSubscribe"
         class="w-full h-auto bg-[#EE0034] rounded-4xl sm:rounded-full flex flex-col lg:flex-row justify-between items-center p-5 md:p-10 lg:p-10 mb-10">
         <h2 class="text-3xl xl:text-3xl text-center text-white lg:text-left font-bold mb-3 lg:mb-0">
           Subscribe to Our Newsletter
         </h2>
 
         <div class="flex w-full md:w-6/7 xl:w-1/2 h-15 items-center">
-          <input type="email" class="w-2/3 h-full bg-white rounded-l-full py-5 px-8 text-lg outline-none"
-            placeholder="Your email address" />
+          <input 
+            v-model="emailInput"
+            type="email" 
+            required
+            class="w-2/3 h-full bg-white rounded-l-full py-5 px-8 text-lg outline-none text-gray-800"
+            placeholder="Your email address" 
+          />
           <button
-            class="w-1/3 h-full bg-[#17202A] rounded-r-full text-lg capitalize hover:bg-[#4c5053] text-white cursor-pointer">
+            type="submit"
+            class="w-1/3 h-full bg-[#17202A] rounded-r-full text-lg capitalize hover:bg-[#4c5053] text-white cursor-pointer transition-colors duration-300">
             subscribe
           </button>
         </div>
-      </div>
+      </form>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-4">
         <div class="min-h-60 flex flex-col items-start relative">
@@ -127,27 +147,28 @@
           <div class="flex flex-col items-start">
             <h3 class="text-3xl font-bold text-white text-left capitalize mb-5">contact info</h3>
             
-            <!-- Bagian Address yang sekarang bisa diklik ke Google Maps Amikom -->
             <div class="flex items-center text-lg font-normal text-white mb-2">
               <i class="fa fa-thumb-tack mr-3" aria-hidden="true"></i>
-              <a href="https://maps.app.goo.gl/u4UzBW7Pk3PoZb1MA" target="_blank" rel="noopener noreferrer" class="capitalize hover:text-[#EE0034] transition-colors duration-300">
+              <a href="https://maps.app.goo.gl/u4UzBW7Pk3PoZb1MA" target="_blank" rel="noopener noreferrer" class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
                 Address
               </a>
             </div>
 
             <div class="flex items-center text-lg font-normal text-white mb-2">
               <i class="fa fa-phone mr-3" aria-hidden="true"></i>
-              <p class="capitalize">+62883847294</p>
+              <a href="tel:+62883847294" class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
+                +62883847294
+              </a>
             </div>
             <div class="flex items-center text-lg font-normal text-white mb-2">
               <i class="fa fa-envelope mr-3" aria-hidden="true"></i>
-              <a href="mailto:vantage@gmail.com" class="lowercase hover:text-[#EE0034] transition-colors duration-300">
+              <a href="mailto:vantage@gmail.com" class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
                 vantage@gmail.com
               </a>
             </div>
             <div class="flex items-center text-lg font-normal text-white mb-2">
               <i class="fa fa-globe mr-3" aria-hidden="true"></i>
-              <a href="https://vantage.com" target="_blank" class="lowercase hover:text-[#EE0034] transition-colors duration-300">
+              <a href="https://vantage.com" target="_blank" class="text-white my-2 transition-all hover:text-red-800 hover:translate-x-1">
                 vantage.com
               </a>
             </div>
@@ -157,3 +178,40 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+
+// Definisikan state untuk Vue 3 (Composition API)
+const emailInput = ref('')
+const showToast = ref(false)
+
+const handleSubscribe = () => {
+  if (emailInput.value.trim() !== '') {
+    // Memunculkan toast notification
+    showToast.value = true
+    
+    // Reset form inputan email
+    emailInput.value = ''
+    
+    // Menyembunyikan toast secara otomatis setelah 4 detik
+    setTimeout(() => {
+      showToast.value = false
+    }, 4000)
+  }
+}
+</script>
+
+<style scoped>
+/* Animasi transisi halus untuk pop up toast */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+</style>

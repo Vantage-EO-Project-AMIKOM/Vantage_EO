@@ -1,6 +1,15 @@
 <template>
   <div class="register-container">
     <div class="register-box">
+      <button
+        class="back-btn inline-flex w-auto items-center justify-center rounded-full bg-[#EE0034] px-3 py-2 text-sm font-semibold text-white transition hover:-translate-y-1 hover:bg-[#c9002c]"
+        type="button"
+        @click="router.push('/')"
+        aria-label="Back"
+        style="text-transform: none"
+      >
+        <i class="fa fa-arrow-left"></i> Go Back
+      </button>
       <h2>Create Account</h2>
       <p class="subtitle">Join Vantage today</p>
 
@@ -31,9 +40,7 @@
         {{ loading ? 'Creating account...' : 'Register' }}
       </button>
 
-      <p class="login-link">
-        Already have an account? <a href="/login">Sign In</a>
-      </p>
+      <p class="login-link">Already have an account? <a href="/login">Sign In</a></p>
     </div>
   </div>
 </template>
@@ -88,19 +95,24 @@ async function handleRegister() {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #17202A; /* Menyesuaikan warna gelap pekat backdrop luar */
+  background-color: #17202a; /* Menyesuaikan warna gelap pekat backdrop luar */
   padding: 1.5rem;
 }
 
 /* Box menggunakan tema biru tua Vantage #2B3B4C */
 .register-box {
-  background: #2B3B4C;
+  background: #2b3b4c;
   padding: 3rem 2.5rem;
   border-radius: 2.5rem; /* Lengkungan disamakan dengan modul lainnya */
   width: 100%;
   max-width: 450px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.back-btn {
+  width: auto;
+  margin-bottom: 1rem;
 }
 
 h2 {
@@ -137,14 +149,14 @@ h2 {
   border-radius: 9999px; /* Dibuat melingkar (rounded-full) agar sama dengan contact us */
   font-size: 14px;
   box-sizing: border-box;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #000000;
   outline: none;
   transition: all 0.3s ease;
 }
 
 .form-group input:focus {
-  border-color: #EE0034; /* Focus border menggunakan warna merah */
+  border-color: #ee0034; /* Focus border menggunakan warna merah */
   box-shadow: 0 0 0 3px rgba(238, 0, 52, 0.2);
 }
 
@@ -152,7 +164,7 @@ h2 {
 button {
   width: 100%;
   padding: 0.9rem;
-  background: #EE0034;
+  background: #ee0034;
   color: white;
   border: none;
   border-radius: 9999px; /* rounded-full */
@@ -205,7 +217,7 @@ button:hover:not(:disabled) {
 }
 
 .login-link a {
-  color: #EE0034;
+  color: #ee0034;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;

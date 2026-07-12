@@ -5,6 +5,19 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const isSubmitting = ref(false)
 
+const categories = [
+  { id: 1, name: 'Concert' },
+  { id: 2, name: 'Seminar' },
+  { id: 3, name: 'Workshop' },
+  { id: 4, name: 'Festival' },
+]
+
+const venues = [
+  { id: 1, name: 'Jogja Expo Center' },
+  { id: 2, name: 'Auditorium Universitas' },
+  { id: 3, name: 'Convention Hall' },
+]
+
 const form = reactive({
   title: '',
   category_id: '',
@@ -35,11 +48,12 @@ const submitEvent = async () => {
 </script>
 
 <template>
-  <main class="min-h-screen bg-[#2B3B4C] px-5 py-28 text-white md:px-12">
+  <main
+    class="min-h-screen bg-[#2B3B4C] -mt-10 mb-20 px-5 py-40 text-white md:px-12 rounded-b-[3rem] shadow-[0_0_80px_rgba(0,0,0,0.15)]"
+  >
     <section class="mx-auto max-w-5xl">
       <div class="mb-8 flex items-center justify-between">
         <div>
-          <p class="text-sm text-white/60">VANTAGE &gt; Event &gt; Create</p>
           <h1 class="mt-2 text-3xl font-bold md:text-4xl">Create New Event</h1>
         </div>
 
@@ -68,27 +82,35 @@ const submitEvent = async () => {
           </label>
 
           <label class="flex flex-col gap-2">
-            <span class="font-medium">Category ID</span>
-            <input
+            <span class="font-medium">Category</span>
+
+            <select
               v-model="form.category_id"
               required
-              min="1"
-              type="number"
-              placeholder="Contoh: 1"
               class="rounded-xl bg-white px-4 py-3 text-slate-800 outline-none ring-[#EE0034] focus:ring-2"
-            />
+            >
+              <option disabled value="">Select category</option>
+
+              <option v-for="category in categories" :key="category.id" :value="category.id">
+                {{ category.name }}
+              </option>
+            </select>
           </label>
 
           <label class="flex flex-col gap-2">
-            <span class="font-medium">Venue ID</span>
-            <input
+            <span class="font-medium">Venue</span>
+
+            <select
               v-model="form.venue_id"
               required
-              min="1"
-              type="number"
-              placeholder="Contoh: 1"
               class="rounded-xl bg-white px-4 py-3 text-slate-800 outline-none ring-[#EE0034] focus:ring-2"
-            />
+            >
+              <option disabled value="">Select venue</option>
+
+              <option v-for="venue in venues" :key="venue.id" :value="venue.id">
+                {{ venue.name }}
+              </option>
+            </select>
           </label>
 
           <label class="flex flex-col gap-2">
