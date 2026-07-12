@@ -6,41 +6,64 @@ const parallaxOffset = ref(0);
 const imageOffsets = ref({c1: 0, c2: 0, c3: 0, c4: 0});
 const contentOffset = ref(0);
 
-// State untuk memicu animasi masuk pertama kali page dibuka
+// State untuk memicu animasi Pop Up pertama kali page dibuka
 const isAnimate = ref(false);
+
+// State untuk melacak arah gerak scroll (Up / Down)
+const lastScrollY = ref(0);
+const scrollDirection = ref('down');
 
 const handleScroll = () => {
   parallaxOffset.value = window.scrollY * 0.4;
 
-  // Apply parallax to grid images with different speeds
+  // Parallax untuk gambar grid
   imageOffsets.value.c1 = window.scrollY * 0.3;
   imageOffsets.value.c2 = window.scrollY * 0.25;
   imageOffsets.value.c3 = window.scrollY * 0.35;
   imageOffsets.value.c4 = window.scrollY * 0.2;
   contentOffset.value = window.scrollY * -0.05;
+
+  // Menentukan arah scroll untuk animasi dinamis
+  if (window.scrollY > lastScrollY.value) {
+    scrollDirection.value = 'down';
+  } else {
+    scrollDirection.value = 'up';
+  }
+  lastScrollY.value = window.scrollY;
 };
 
 const observer = ref(null);
 
 onMounted(() => {
-  // Set isAnimate ke true saat mounted agar animasi non-scroll langsung jalan
-  isAnimate.value = true;
+  // Aktifkan state animasi Pop-Up awal halaman dibuka
+  setTimeout(() => {
+    isAnimate.value = true;
+  }, 100);
   
   window.addEventListener('scroll', handleScroll);
 
+  // Observer untuk mendeteksi trigger scroll up dan scroll down
   observer.value = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('show-animated');
+        if (scrollDirection.value === 'down') {
+          entry.target.classList.add('show-down');
+          entry.target.classList.remove('show-up');
+        } else {
+          entry.target.classList.add('show-up');
+          entry.target.classList.remove('show-down');
+        }
       } else {
-        entry.target.classList.remove('show-animated');
+        // Hapus kelas agar animasi bisa berulang secara dinamis saat di-scroll kembali
+        entry.target.classList.remove('show-down', 'show-up');
       }
     });
   }, {
     threshold: 0.1,
-    rootMargin: "-50px 0px -50px 0px"
+    rootMargin: "-30px 0px -30px 0px"
   });
 
+  // Daftarkan elemen dengan class scroll-animate ke dalam observer
   document.querySelectorAll('.scroll-animate').forEach(el => observer.value.observe(el));
 });
 
@@ -54,22 +77,25 @@ onUnmounted(() => {
     <section class="w-full h-130 z-10 flex justify-center items-center relative overflow-hidden">
         <div class="absolute inset-0 bg-black/60">
             <img src="./../components/img/bg/hero-bg.jpg" alt="" draggable="false"
-                class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover" :style="{ transform: `translateY(${parallaxOffset}px)` }">
+                class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover animate-hero-pop" :style="{ transform: `translateY(${parallaxOffset}px)` }">
         </div>
 
-        <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black">
+        <!-- Pop Up Text Container (Menggunakan isAnimate untuk transisi scale & opacity) -->
+        <div class="w-full max-w-3/4 mx-auto z-20 text-white text-shadow-lg/30 shadow-black transition-all duration-1000 transform scale-95 opacity-0 ease-out"
+             :class="{ 'scale-100 opacity-100': isAnimate }">
             <!-- Judul Utama -->
             <h1 class="capitalize text-7xl font-bold mb-4 drop-shadow-md">about us</h1>
             
-            <!-- Kalimat Sub-judul Pendukung (Gaya Our Story) -->
+            <!-- Kalimat Sub-judul Pendukung -->
             <p class=" text-xl font-normal text-white">Empowering creators and organizing unforgettable experiences</p>
             <p class=" text-xl font-normal text-white">through one integrated event platform.</p>
         </div>
     </section>
 
-    <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-20 shadow-[0_0_80px_rgba(0,0,0,0.15)]">
+    <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-20 shadow-[0_0_80px_rgba(0,0,0,0.15)] overflow-hidden">
 
-        <section class="w-full h-auto page-animation" :class="{ 'show': isAnimate }">
+        <!-- Ditambahkan class scroll-animate untuk efek scroll-down & scroll-up -->
+        <section class="w-full h-auto page-animation scroll-animate" :class="{ 'show': isAnimate }">
             <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-1 xl:grid-cols-2 gap-4">
                 <div class=" grid md:grid-cols-2 gap-6 xl:pr-10">
                     <div class=" w-full h-150 rounded-2xl overflow-hidden">
@@ -103,7 +129,8 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <section class="w-full h-auto page-animation" :class="{ 'show': isAnimate }">
+        <!-- Ditambahkan class scroll-animate -->
+        <section class="w-full h-auto page-animation scroll-animate" :class="{ 'show': isAnimate }">
             <div class=" w-full max-w-4/5 mx-auto my-20 grid grid-cols-1 xl:grid-cols-2 gap-4">
                 <div class=" flex flex-col self-center pr-20">
                     <h2 class=" w-3/5 text-4xl capitalize text-white font-semibold mb-8">We Bring The Best Things for You</h2>
@@ -138,7 +165,8 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <section class="w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 ring-1 ring-white/40 page-animation" :class="{ 'show': isAnimate }">
+        <!-- Ditambahkan class scroll-animate -->
+        <section class="w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 ring-1 ring-white/40 page-animation scroll-animate" :class="{ 'show': isAnimate }">
             <div class=" w-full max-w-4/5 mx-auto py-15 grid grid-cols-2 xl:grid-cols-3">
                 <div class=" col-span-2 xl:col-span-1 flex flex-col items-center mb-10 xl:mb-0">
                     <h2 class=" w-4/5 text-4xl capitalize text-white font-semibold mb-8">What our client's say about us</h2>
@@ -184,11 +212,13 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <section class=" w-full h-auto page-animation" :class="{ 'show': isAnimate }">
+        <!-- Ditambahkan class scroll-animate -->
+        <section class=" w-full h-auto page-animation scroll-animate" :class="{ 'show': isAnimate }">
             <CountPerson />
         </section>
 
-        <section class="w-full h-auto page-animation" :class="{ 'show': isAnimate }">
+        <!-- Ditambahkan class scroll-animate -->
+        <section class="w-full h-auto page-animation scroll-animate" :class="{ 'show': isAnimate }">
             <div class=" w-full max-w-4/5 mx-auto py-15 flex flex-col">
                 <h2 class=" text-4xl font-bold text-white text-center mb-15">Get direction to the event hall</h2>
                 <div class=" w-full flex flex-col xl:flex-row justify-between">
@@ -212,7 +242,6 @@ onUnmounted(() => {
                         <button class="px-10 py-3 bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">Get Direction</button>
                     </div>
                     <div class=" w-full xl:w-7/10 h-100 rounded-4xl overflow-hidden xl:ml-10">
-                        <!-- Perubahan di properti allowfullscreen agar bernilai boolean true -->
                         <iframe class=" w-full h-full object-cover" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.280430130844!2d110.4065606759763!3d-7.76005487696027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a599bd3bdc4ef%3A0x6f1714b0c4544586!2sUniversity%20of%20Amikom%20Yogyakarta!5e0!3m2!1sen!2sid!4v1777812436113!5m2!1sen!2sid" width="600" height="450" style="border:0;" :allowfullscreen="true" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
@@ -222,13 +251,52 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+/* ===================================================
+   1. ANIMASI POP UP (Saat halaman pertama kali dibuka)
+   =================================================== */
+@keyframes heroPop {
+  0% {
+    transform: scale(1.1);
+    filter: brightness(0.1);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(0.4) saturate-50;
+  }
+}
+.animate-hero-pop {
+  animation: heroPop 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ===================================================
+   2. ANIMASI SCROLL (Down & Up Berbasis Arah)
+   =================================================== */
 .scroll-animate {
   opacity: 0;
-  transform: translateY(50px) scale(0.98);
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.scroll-animate.show-animated {
+
+/* KETIK SCROLL DOWN: Elemen meluncur lembut dari bawah ke atas */
+.scroll-animate.show-down {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+/* KETIK SCROLL UP: Elemen meluncur lembut dari atas ke bawah */
+.scroll-animate.show-up {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Mengatur transisi keluar saat elemen meninggalkan layar */
+.scroll-animate:not(.show-down):not(.show-up) {
+  opacity: 0;
+  /* Jika user scroll down melampaui elemen, ia bersiap di posisi atas (-50px) */
+  transform: translateY(50px) scale(0.98); 
+}
+
+/* Penyesuaian khusus ketika elemen dilewati dari atas */
+.scroll-animate:not(.show-down):not(.show-up)[class*="direction-up"] {
+  transform: translateY(-50px) scale(0.98);
 }
 </style>

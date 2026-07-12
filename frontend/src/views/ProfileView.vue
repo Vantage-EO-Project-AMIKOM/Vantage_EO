@@ -10,8 +10,12 @@ const imageOffsets = ref({
 })
 const contentOffset = ref(0)
 
-// State untuk memicu animasi masuk pertama kali page dibuka
+// State untuk memicu animasi Pop Up pertama kali page dibuka
 const isAnimate = ref(false)
+
+// State pelacak arah scroll (Scroll Up / Scroll Down)
+const lastScrollY = ref(0)
+const scrollDirection = ref('down')
 
 const handleScroll = () => {
   parallaxOffset.value = window.scrollY * 0.3
@@ -22,34 +26,73 @@ const handleScroll = () => {
   imageOffsets.value.c3 = window.scrollY * 0.35
   imageOffsets.value.c4 = window.scrollY * 0.2
   contentOffset.value = window.scrollY * -0.05
+
+  // Menentukan arah gerakan layar
+  if (window.scrollY > lastScrollY.value) {
+    scrollDirection.value = 'down'
+  } else {
+    scrollDirection.value = 'up'
+  }
+  lastScrollY.value = window.scrollY
 }
+
+const observer = ref(null)
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 
-  // Begitu pindah ke page ini, langsung aktifkan animasi muncul
+  // Mengaktifkan efek transisi Pop Up teks utama
   setTimeout(() => {
     isAnimate.value = true
   }, 100)
+
+  // Inisialisasi IntersectionObserver untuk kontrol animasi gulir
+  observer.value = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (scrollDirection.value === 'down') {
+          entry.target.classList.add('show-down')
+          entry.target.classList.remove('show-up')
+        } else {
+          entry.target.classList.add('show-up')
+          entry.target.classList.remove('show-down')
+        }
+      } else {
+        // Hapus kelas agar animasi dapat dipicu berulang kali ketika scroll bolak-balik
+        entry.target.classList.remove('show-down', 'show-up')
+      }
+    })
+  }, {
+    threshold: 0.05,
+    rootMargin: "-20px 0px -20px 0px"
+  })
+
+  // Daftarkan semua section/komponen dengan kelas scroll-animate
+  document.querySelectorAll('.scroll-animate').forEach(el => observer.value.observe(el))
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  if (observer.value) observer.value.disconnect()
 })
 </script>
 
 <template>
+  <!-- Hero Section -->
   <section class="w-full h-130 z-10 flex items-center relative overflow-hidden">
     <div class="absolute inset-0 bg-black/60">
       <img
         src="./../components/img/bg/hero-bg.jpg"
         alt=""
-        class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover"
+        class="w-full h-full object-cover brightness-[0.4] saturate-50 absolute top-0 left-0 opacity-100 bg-size-cover animate-hero-scale"
         draggable="false"
         :style="{ transform: `translateY(${parallaxOffset}px)` }"
       />
     </div>
-    <div class="w-full max-w-3/4 mx-auto z-10">
+    
+    <!-- Hero Text Container dengan animasi Pop Up Awal -->
+    <div class="w-full max-w-3/4 mx-auto z-10 transition-all duration-1000 transform scale-95 opacity-0 ease-out"
+         :class="{ 'scale-100 opacity-100': isAnimate }">
       <h1
         class="w-2/3 capitalize text-7xl font-bold text-white text-shadow-lg/50 text-shadow-black mb-5"
       >
@@ -60,10 +103,12 @@ onUnmounted(() => {
     </div>
   </section>
 
+  <!-- Container Utama -->
   <div
-    class="relative z-10 bg-[#2B3B4C] py-20 rounded-[3rem] -mt-10 mb-20 shadow-[0_0_80px_rgba(0,0,0,0.15)]"
+    class="relative z-10 bg-[#2B3B4C] py-20 rounded-[3rem] -mt-10 mb-20 shadow-[0_0_80px_rgba(0,0,0,0.15)] overflow-hidden"
   >
-    <section class="max-w-7/8 w-full mx-auto page-animation" :class="{ show: isAnimate }">
+    <!-- Did You Know Section (Menggunakan animasi Pop Up bawaan + interaksi scroll) -->
+    <section class="max-w-7/8 w-full mx-auto page-animation scroll-animate" :class="{ show: isAnimate }">
       <div class="bg-linear-to-br from-[#24364d] to-[#1d2d42] overflow-hidden p-15 rounded-[60px]">
         <h2 class="text-6xl capitalize font-semibold mb-8 text-center text-white">
           DID YOU KNOW US?
@@ -89,10 +134,11 @@ onUnmounted(() => {
       </div>
     </section>
 
+    <!-- Our Profile Section -->
     <section class="w-full h-auto">
       <div class="w-full max-w-[95%] xl:max-w-4/5 mx-auto py-20">
         <h2
-          class="text-4xl lg:text-6xl capitalize font-semibold text-center text-white page-animation mb-10"
+          class="text-4xl lg:text-6xl capitalize font-semibold text-center text-white page-animation mb-10 scroll-animate"
           :class="{ show: isAnimate }"
         >
           Our Profile
@@ -100,7 +146,7 @@ onUnmounted(() => {
 
         <!-- Profile 1: Azka -->
         <div
-          class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation"
+          class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation scroll-animate"
           :class="{ show: isAnimate }"
         >
           <div
@@ -125,7 +171,6 @@ onUnmounted(() => {
               “Tenang dalam langkah, kuat dalam tujuan, dan selalu jadi cahaya di setiap
               perjalanan.”
             </p>
-            <!-- Tautan GitHub Azka dengan efek hover warna tulisan -->
             <a href="https://github.com/MehmedAzka" target="_blank" rel="noopener noreferrer" class="group inline-flex justify-start items-center gap-3 mt-10 w-fit">
               <img
                 src="./../components/img/profilePage/githubicon.png"
@@ -139,7 +184,7 @@ onUnmounted(() => {
 
         <!-- Profile 2: Puan -->
         <div
-          class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation"
+          class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation scroll-animate"
           :class="{ show: isAnimate }"
         >
           <div
@@ -159,7 +204,6 @@ onUnmounted(() => {
               “Elegan dalam sikap, berani dalam mimpi, dan tetap bersinar tanpa harus merendahkan
               siapa pun.”
             </p>
-            <!-- Tautan GitHub Puan dengan efek hover warna tulisan -->
             <a href="https://github.com/syaaaa07" target="_blank" rel="noopener noreferrer" class="group flex justify-start lg:justify-end items-center gap-3 mt-10 w-full lg:w-auto ml-auto">
               <h5 class="text-white text-lg lg:text-2xl mr-3 lg:ml-3 transition-colors duration-300 group-hover:text-[#EE0034]">syaaaa07</h5>
               <img
@@ -182,7 +226,7 @@ onUnmounted(() => {
 
         <!-- Profile 3: Angga -->
         <div
-          class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation"
+          class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation scroll-animate"
           :class="{ show: isAnimate }"
         >
           <div
@@ -207,7 +251,6 @@ onUnmounted(() => {
               “Dilahirkan untuk memimpin, tumbuh untuk menginspirasi, dan melangkah tanpa takut
               menghadapi dunia.”
             </p>
-            <!-- Tautan GitHub Angga dengan efek hover warna tulisan -->
             <a href="https://github.com/agashesh" target="_blank" rel="noopener noreferrer" class="group inline-flex justify-start items-center gap-3 mt-10 w-fit">
               <img
                 src="./../components/img/profilePage/githubicon.png"
@@ -221,7 +264,7 @@ onUnmounted(() => {
 
         <!-- Profile 4: Dani -->
         <div
-          class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation"
+          class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10 mt-10 items-center page-animation scroll-animate"
           :class="{ show: isAnimate }"
         >
           <div
@@ -241,7 +284,6 @@ onUnmounted(() => {
               “Bukan tentang seberapa cepat melaju, tapi seberapa konsisten tetap bertahan sampai
               tujuan.”
             </p>
-            <!-- Tautan GitHub Dani dengan efek hover warna tulisan -->
             <a href="https://github.com/Danizakhran" target="_blank" rel="noopener noreferrer" class="group flex justify-start lg:justify-end items-center gap-3 mt-10 w-full lg:w-auto ml-auto">
               <h5 class="text-white text-lg lg:text-2xl mr-3 lg:ml-3 transition-colors duration-300 group-hover:text-[#EE0034]">Danizakhran</h5>
               <img
@@ -267,7 +309,22 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* Animasi Transisi Elemen Naik Saat Page Loaded */
+/* ===================================================
+   1. ANIMASI POP UP (Saat halaman pertama kali dibuka)
+   =================================================== */
+@keyframes heroScale {
+  0% {
+    transform: scale(1.15);
+    filter: brightness(0.1);
+  }
+  100% {
+    filter: brightness(0.4) saturate-50;
+  }
+}
+.animate-hero-scale {
+  animation: heroScale 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .page-animation {
   opacity: 0;
   transform: translateY(40px);
@@ -277,9 +334,35 @@ onUnmounted(() => {
   will-change: transform, opacity;
 }
 
-/* Aktif ketika class .show tersemat */
 .page-animation.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ===================================================
+   2. ANIMASI SCROLL (Mendukung Arah Down & Up)
+   =================================================== */
+.scroll-animate {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* KETIKA SCROLL DOWN: Elemen muncul mulus meluncur naik dari bawah */
+.scroll-animate.show-down {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* KETIKA SCROLL UP: Elemen muncul mulus meluncur turun dari atas */
+.scroll-animate.show-up {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Status reset saat elemen keluar/meninggalkan jendela pandang layar */
+.scroll-animate:not(.show-down):not(.show-up) {
+  opacity: 0;
+  transform: translateY(60px) scale(0.97);
 }
 </style>
