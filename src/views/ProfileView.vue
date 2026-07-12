@@ -259,7 +259,7 @@ onUnmounted(() => {
           </div>
           <div
             class="w-full max-w-[320px] lg:max-w-none aspect-110/145 overflow-hidden rounded-full mx-auto order-1 lg:order-2">
-            <img class="w-full h-full object-cover object-[10%_-6rem] scale-150 origin-center"
+            <img class="w-full h-full object-cover object-[10%_-6rem] scale-180 origin-left"
               src="./../components/img/profilePage/profile/profile4.jpeg" alt="Dani" />
           </div>
         </div>
