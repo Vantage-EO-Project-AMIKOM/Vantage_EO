@@ -70,24 +70,28 @@ onUnmounted(() => {
         <section class="w-full h-auto bg-[#EE0034] rounded-t-[3rem] relative -top-5 scroll-animate fade-up">
             <div class=" w-full max-w-4/5 mx-auto py-20 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-20">
 
-                <div class=" w-full h-full flex flex-col items-start text-white">
+                <!-- Fitur Klik Call/Telepon -->
+                <a href="tel:+628654877728123" class="w-full h-full flex flex-col items-start text-white group cursor-pointer transition-opacity duration-300 hover:opacity-90">
                     <i class="fa fa-phone text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">contact us 24/7</h4>
-                    <p class=" text-lg font-normal">+628654877728123</p>
-                </div>
+                    <p class=" text-lg font-normal group-hover:underline">+628654877728123</p>
+                </a>
 
-                <div class=" w-full h-full flex flex-col items-start text-white">
+                <!-- Fitur Klik Alamat -> Google Maps Universitas Amikom Yogyakarta -->
+                <a href="https://maps.google.com/?q=Universitas+Amikom+Yogyakarta" target="_blank" rel="noopener noreferrer" class="w-full h-full flex flex-col items-start text-white group cursor-pointer transition-opacity duration-300 hover:opacity-90">
                     <i class="fa fa-map text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">our address</h4>
-                    <p class=" text-lg font-normal">830 Ringroad Street, Condongcatur, Sleman, Daerah Istimewa Yogyakarta</p>
-                </div>
+                    <p class=" text-lg font-normal group-hover:underline">830 Ringroad Street, Condongcatur, Sleman, Daerah Istimewa Yogyakarta</p>
+                </a>
 
-                <div class=" w-full h-full flex flex-col items-start text-white">
+                <!-- Fitur Klik Buka Email Client -->
+                <a href="mailto:vantage@gmail.com" class="w-full h-full flex flex-col items-start text-white group cursor-pointer transition-opacity duration-300 hover:opacity-90">
                     <i class="fa fa-envelope text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">mail us</h4>
-                    <p class=" text-lg font-normal">vantage@gmail.com</p>
-                </div>
+                    <p class=" text-lg font-normal group-hover:underline">vantage@gmail.com</p>
+                </a>
 
+                <!-- Working Time (Tetap statis karena hanya bersifat informasi waktu) -->
                 <div class=" w-full h-full flex flex-col items-start text-white">
                     <i class="fa fa-calendar text-[4rem] mb-5" aria-hidden="true"></i>
                     <h4 class=" text-2xl font-bold capitalize mb-1">working time</h4>
