@@ -103,7 +103,7 @@ onUnmounted(() => {
                     <h2 class=" w-3/5 text-4xl capitalize text-white font-semibold mb-8">We Bring The Best Things for You</h2>
                     <p class=" text-lg font-normal mb-15 text-white">No conference has ever grown so large so fast. But we also pride ourselves in organising the “best technology conference on the planet”.</p>
                     <RouterLink to="/">
-                        <button class="px-15 py-3 border-2 border-white bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">Get Ticket</button>
+                        <button class="px-15 py-3 border-2 border-white bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer text-white">Get Ready</button>
                     </RouterLink>
                 </div>
 
@@ -111,22 +111,22 @@ onUnmounted(() => {
                     <div class=" w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 ring-1 ring-white/40 text-white">
                         <i class="fa fa-microphone text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">advance speakers</h3>
-                        <p>Hear 9 inspiring talks, meet the best product people in Europe, and party together after the event!</p>
+                        <p>Hear 9 inspiring talks, meet the best product people in Indonesia, and party together after the event!</p>
                     </div>
                     <div class=" w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 ring-1 ring-white/40 text-white">
                         <i class="fa fa-briefcase text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">daily workshops</h3>
-                        <p>Hear 9 inspiring talks, meet the best product people in Europe, and party together after the event!</p>
+                        <p>Hear 9 inspiring talks, meet the best product people in Indonesia, and party together after the event!</p>
                     </div>
                     <div class=" w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 ring-1 ring-white/40 text-white">
                         <i class="fa fa-commenting text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">Q&A sessions</h3>
-                        <p>Hear 9 inspiring talks, meet the best product people in Europe, and party together after the event!</p>
+                        <p>Hear 9 inspiring talks, meet the best product people in Indonesia, and party together after the event!</p>
                     </div>
                     <div class=" w-full h-auto rounded-4xl border border-white/10 bg-linear-to-br from-[#24364d] to-[#1d2d42] shadow-[0_10px_40px_rgba(0,0,0,0.35)] overflow-hidden p-10 ring-1 ring-white/40 text-white">
                         <i class="fa fa-television text-5xl mb-4" aria-hidden="true"></i>
                         <h3 class=" text-2xl font-bold capitalize mb-2">live training</h3>
-                        <p>Hear 9 inspiring talks, meet the best product people in Europe, and party together after the event!</p>
+                        <p>Hear 9 inspiring talks, meet the best product people in Indonesia, and party together after the event!</p>
                     </div>
                 </div>
             </div>
