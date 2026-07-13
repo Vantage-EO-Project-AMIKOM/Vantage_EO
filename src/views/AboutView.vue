@@ -33,7 +33,6 @@ const handleScroll = () => {
 const observer = ref(null);
 
 onMounted(() => {
-  // Aktifkan transisi pop up awal saat page dipindah/dimuat
   setTimeout(() => {
     isAnimate.value = true;
   }, 100);
@@ -59,7 +58,6 @@ onMounted(() => {
     rootMargin: "-30px 0px -30px 0px"
   });
 
-  // HANYA mengobservasi elemen dengan class .scroll-animate (section bawah)
   document.querySelectorAll('.scroll-animate').forEach(el => observer.value.observe(el));
 });
 
