@@ -52,10 +52,10 @@
       </div>
 
       <div class="sidebar-footer">
-        <div class="admin-avatar">AK</div>
+        <div class="admin-avatar">{{ (user?.name || 'AK').slice(0, 2).toUpperCase() }}</div>
         <div class="admin-info">
-          <div class="admin-name">Admin Vantage</div>
-          <div class="admin-role">Super Admin</div>
+          <div class="admin-name">{{ user?.name || 'Admin Vantage' }}</div>
+          <div class="admin-role">{{ user?.role === 'admin' ? 'Super Admin' : (user?.role || 'Admin') }}</div>
         </div>
         <button @click="handleLogout" class="logout-icon">
           <i class="fa fa-sign-out"></i>
@@ -74,9 +74,11 @@
         <div class="topbar-actions">
           <button class="icon-btn"><i class="fa fa-bell"></i></button>
           <button class="icon-btn"><i class="fa fa-search"></i></button>
-          <button class="btn-primary">+ Buat Event</button>
+          <RouterLink to="/event/create" class="btn-primary">+ Buat Event</RouterLink>
         </div>
       </div>
+
+      <div v-if="loadError" class="load-error-banner">{{ loadError }}</div>
 
       <!-- Stats Cards -->
       <div class="stats-grid">
@@ -85,40 +87,36 @@
             <i class="fa fa-calendar-check-o"></i>
           </div>
           <div class="stat-info">
-            <div class="stat-number">47</div>
-            <div class="stat-label">Total event aktif</div>
+            <div class="stat-number">{{ loading ? '—' : totalEvents }}</div>
+            <div class="stat-label">Total event</div>
           </div>
-          <div class="stat-badge green">↑ 1.8%</div>
         </div>
         <div class="stat-card">
           <div class="stat-icon blue">
             <i class="fa fa-users"></i>
           </div>
           <div class="stat-info">
-            <div class="stat-number">8.420</div>
+            <div class="stat-number">{{ loading ? '—' : totalParticipants.toLocaleString('id-ID') }}</div>
             <div class="stat-label">Total peserta</div>
           </div>
-          <div class="stat-badge green">↑ 1.14%</div>
         </div>
         <div class="stat-card">
           <div class="stat-icon green">
             <i class="fa fa-ticket"></i>
           </div>
           <div class="stat-info">
-            <div class="stat-number">12.670</div>
+            <div class="stat-number">{{ loading ? '—' : totalTicketsSold.toLocaleString('id-ID') }}</div>
             <div class="stat-label">Tiket terjual</div>
           </div>
-          <div class="stat-badge green">↑ 1.22%</div>
         </div>
         <div class="stat-card">
           <div class="stat-icon yellow">
             <i class="fa fa-money"></i>
           </div>
           <div class="stat-info">
-            <div class="stat-number">Rp 284jt</div>
-            <div class="stat-label">Pendapatan bulan ini</div>
+            <div class="stat-number">{{ loading ? '—' : formatRupiah(totalRevenue) }}</div>
+            <div class="stat-label">Total pendapatan</div>
           </div>
-          <div class="stat-badge red">↓ 3%</div>
         </div>
       </div>
 
@@ -264,12 +262,118 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { eventApi, ticketApi } from '@/lib/http'
 
 const router = useRouter()
 const user = ref(JSON.parse(localStorage.getItem('user')))
 
+const loading = ref(true)
+const loadError = ref('')
+
+const totalEvents = ref(0)
+const totalParticipants = ref(0)
+const totalTicketsSold = ref(0)
+const totalRevenue = ref(0)
+
+const upcomingEvents = ref([])
+const ticketSales = ref([])
+
+function formatRupiah(value) {
+  return 'Rp ' + Number(value || 0).toLocaleString('id-ID')
+}
+
+async function loadDashboard() {
+  loading.value = true
+  loadError.value = ''
+
+  const [eventsResult, ticketsResult] = await Promise.allSettled([
+    eventApi.get('/events'),
+    ticketApi.get('/tickets'),
+  ])
+
+  const events = eventsResult.status === 'fulfilled' ? (eventsResult.value.data.data ?? []) : []
+  const tickets = ticketsResult.status === 'fulfilled' ? (ticketsResult.value.data.data ?? []) : []
+
+  const failedParts = []
+  if (eventsResult.status === 'rejected') failedParts.push('Event Service')
+  if (ticketsResult.status === 'rejected') failedParts.push('Ticket Service')
+  if (failedParts.length > 0) {
+    loadError.value = `Gagal memuat data dari: ${failedParts.join(', ')}. Data lainnya tetap ditampilkan.`
+    if (ticketsResult.status === 'rejected') {
+      console.warn('Ticket Service unreachable:', ticketsResult.reason)
+    }
+    if (eventsResult.status === 'rejected') {
+      console.error('Event Service unreachable:', eventsResult.reason)
+    }
+  }
+
+  try {
+    totalEvents.value = events.length
+    totalTicketsSold.value = tickets.length
+    totalParticipants.value = tickets.reduce((sum, t) => sum + (t.quantity || 0), 0)
+    totalRevenue.value = tickets.reduce((sum, t) => sum + Number(t.amount || 0), 0)
+
+    upcomingEvents.value = [...events]
+      .filter((e) => e.event_date)
+      .sort((a, b) => new Date(a.event_date) - new Date(b.event_date))
+      .slice(0, 5)
+      .map((e) => {
+        const date = new Date(e.event_date)
+        return {
+          id: e.id,
+          day: date.getDate().toString().padStart(2, '0'),
+          month: date.toLocaleDateString('id-ID', { month: 'short' }).toUpperCase(),
+          name: e.title,
+          location: `${e.venue?.name ?? 'Venue belum ditentukan'} · ${e.quota} kuota`,
+          capacity: `${e.quota} peserta`,
+          status: e.status ?? 'draft',
+          statusClass: e.status === 'published' ? 'status-green' : 'status-blue',
+        }
+      })
+
+    // Aggregate raw tickets into per-event sales, since the ticket table
+    // tracks individual transactions, not ticket "types".
+    const salesByEvent = {}
+    for (const t of tickets) {
+      if (!salesByEvent[t.event_id]) {
+        salesByEvent[t.event_id] = { sold: 0 }
+      }
+      salesByEvent[t.event_id].sold += t.quantity || 0
+    }
+
+    const colors = ['#EE0034', '#3B82F6', '#22C55E', '#F97316']
+    ticketSales.value = Object.entries(salesByEvent)
+      .map(([eventId, stats], index) => {
+        const event = events.find((e) => e.id === Number(eventId))
+        const quota = event?.quota || stats.sold || 1
+        return {
+          id: eventId,
+          name: event?.title ?? `Event #${eventId}`,
+          price: formatRupiah(event?.price) + '/tiket',
+          sold: stats.sold,
+          total: quota,
+          percent: Math.min(100, Math.round((stats.sold / quota) * 100)),
+          color: colors[index % colors.length],
+        }
+      })
+      .slice(0, 4)
+  } catch (err) {
+    console.error('Failed to process dashboard data:', err)
+    if (!loadError.value) {
+      loadError.value = 'Terjadi kesalahan saat memproses data dashboard.'
+    }
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(loadDashboard)
+
+// Belum ada backing service untuk trend pendapatan bulanan, breakdown
+// kategori event, dan activity log — masih data statis sampai ada
+// endpoint/tabel yang mendukung.
 const barData = ref([
   { label: 'Jan', height: '45%', active: false },
   { label: 'Feb', height: '55%', active: false },
@@ -277,21 +381,6 @@ const barData = ref([
   { label: 'Apr', height: '50%', active: false },
   { label: 'Mei', height: '70%', active: false },
   { label: 'Jun', height: '90%', active: true },
-])
-
-const upcomingEvents = ref([
-  { id: 1, day: '24', month: 'JUN', name: 'Vantage Music Festival 2026', location: 'Alun-alun Yogyakarta', capacity: '2.500 peserta', status: 'Segera', statusClass: 'status-green' },
-  { id: 2, day: '28', month: 'JUN', name: 'Seminar Nasional Informatika 2026', location: 'UGM Convention Hall', capacity: '800 peserta', status: 'Hampir penuh', statusClass: 'status-yellow' },
-  { id: 3, day: '05', month: 'JUL', name: 'Workshop UI/UX Design Thinking', location: 'Co-working Space Malioboro', capacity: '120 peserta', status: 'Mendatang', statusClass: 'status-blue' },
-  { id: 4, day: '12', month: 'JUL', name: 'Pameran Seni & Budaya Nusantara', location: 'Taman Budaya Yogyakarta', capacity: '1.350 peserta', status: 'Mendatang', statusClass: 'status-blue' },
-  { id: 5, day: '15', month: 'JUL', name: 'Tech Summit Jogja 2026', location: 'Hotel Hyatt', capacity: '400 peserta', status: 'Selesai', statusClass: 'status-gray' },
-])
-
-const ticketSales = ref([
-  { id: 1, name: 'Music Festival - VIP', price: 'Rp 350.000/tiket', sold: '1.640', total: '2.000', percent: 82, color: '#EE0034' },
-  { id: 2, name: 'Seminar Informatika - Regular', price: 'Rp 75.000/tiket', sold: '728', total: '800', percent: 91, color: '#3B82F6' },
-  { id: 3, name: 'Workshop UI/UX - Early Bird', price: 'Rp 150.000/tiket', sold: '72', total: '120', percent: 60, color: '#22C55E' },
-  { id: 4, name: 'Pameran Seni - Umum', price: 'Rp 25.000/tiket', sold: '456', total: '1.000', percent: 46, color: '#F97316' },
 ])
 
 const recentActivities = ref([
@@ -519,6 +608,7 @@ function handleLogout() {
 .icon-btn:hover { border-color: #EE0034; color: #EE0034; }
 
 .btn-primary {
+  display: inline-block;
   background: #EE0034;
   color: white;
   border: none;
@@ -526,6 +616,7 @@ function handleLogout() {
   border-radius: 8px;
   font-size: 13px;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   transition: background 0.2s;
 }
@@ -592,6 +683,15 @@ function handleLogout() {
 
 .stat-badge.green { background: #DCFCE7; color: #16A34A; }
 .stat-badge.red { background: #FEE2E2; color: #DC2626; }
+
+.load-error-banner {
+  background: #FEE2E2;
+  color: #B91C1C;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 13px;
+  margin-bottom: 1.25rem;
+}
 
 /* ── Charts Row ── */
 .charts-row {
