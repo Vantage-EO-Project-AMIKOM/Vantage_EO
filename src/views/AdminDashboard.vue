@@ -69,7 +69,7 @@
       <div class="topbar">
         <div>
           <h1 class="page-title">Dashboard</h1>
-          <p class="page-date">Minggu, 21 Juni 2026</p>
+          <p class="page-date">{{ todayLabel }}</p>
         </div>
         <div class="topbar-actions">
           <button class="icon-btn"><i class="fa fa-bell"></i></button>
@@ -125,23 +125,17 @@
         <!-- Bar Chart -->
         <div class="chart-card wide">
           <div class="card-header">
-            <span class="card-title">Pendapatan bulanan</span>
+            <span class="card-title">Event bulanan</span>
             <a href="#" class="card-link">Lihat detail →</a>
           </div>
           <div class="bar-chart">
             <div class="y-axis">
-              <span>Rp 350jt</span>
-              <span>Rp 300jt</span>
-              <span>Rp 250jt</span>
-              <span>Rp 200jt</span>
-              <span>Rp 150jt</span>
-              <span>Rp 100jt</span>
-              <span>Rp 50jt</span>
-              <span>Rp 0jt</span>
+              <span>{{ maxMonthlyEvents }}</span>
+              <span>0</span>
             </div>
             <div class="bars">
-              <div class="bar-group" v-for="(item, index) in barData" :key="index">
-                <div class="bar" :style="{ height: item.height, background: item.active ? '#EE0034' : '#FECDD3' }"></div>
+              <div class="bar-group" v-for="(item, index) in barData" :key="item.month">
+                <div class="bar" :style="{ height: barHeight(item.count), background: index === barData.length - 1 ? '#EE0034' : '#FECDD3' }"></div>
                 <span class="bar-label">{{ item.label }}</span>
               </div>
             </div>
@@ -152,36 +146,16 @@
         <div class="chart-card">
           <div class="card-header">
             <span class="card-title">Kategori event</span>
-            <a href="#" class="card-link">Lihat semua</a>
+            <span class="card-link">{{ analytics.categories.length }} kategori</span>
           </div>
           <div class="donut-wrapper">
-            <svg viewBox="0 0 120 120" class="donut-svg">
-              <circle cx="60" cy="60" r="45" fill="none" stroke="#EE0034" stroke-width="20" stroke-dasharray="99 183" stroke-dashoffset="0" />
-              <circle cx="60" cy="60" r="45" fill="none" stroke="#3B82F6" stroke-width="20" stroke-dasharray="80 202" stroke-dashoffset="-99" />
-              <circle cx="60" cy="60" r="45" fill="none" stroke="#22C55E" stroke-width="20" stroke-dasharray="63 219" stroke-dashoffset="-179" />
-              <circle cx="60" cy="60" r="45" fill="none" stroke="#F97316" stroke-width="20" stroke-dasharray="43 239" stroke-dashoffset="-242" />
-            </svg>
+            <div class="donut-ring" :style="{ background: categoryGradient }"></div>
           </div>
           <div class="donut-legend">
-            <div class="legend-item">
-              <span class="legend-dot" style="background:#EE0034"></span>
-              <span class="legend-label">Konser</span>
-              <span class="legend-value">35%</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot" style="background:#3B82F6"></span>
-              <span class="legend-label">Seminar</span>
-              <span class="legend-value">28%</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot" style="background:#22C55E"></span>
-              <span class="legend-label">Festival</span>
-              <span class="legend-value">22%</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot" style="background:#F97316"></span>
-              <span class="legend-label">Workshop</span>
-              <span class="legend-value">15%</span>
+            <div class="legend-item" v-for="(category, index) in analytics.categories" :key="category.id">
+              <span class="legend-dot" :style="{ background: categoryColors[index % categoryColors.length] }"></span>
+              <span class="legend-label">{{ category.name }}</span>
+              <span class="legend-value">{{ category.percentage }}%</span>
             </div>
           </div>
         </div>
@@ -262,7 +236,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { eventApi, ticketApi } from '@/lib/http'
 
@@ -276,6 +250,22 @@ const totalEvents = ref(0)
 const totalParticipants = ref(0)
 const totalTicketsSold = ref(0)
 const totalRevenue = ref(0)
+const analytics = ref({ monthly_events: [], categories: [] })
+const categoryColors = ['#EE0034', '#3B82F6', '#22C55E', '#F97316', '#8B5CF6']
+const todayLabel = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date())
+const maxMonthlyEvents = computed(() => Math.max(1, ...analytics.value.monthly_events.map((item) => item.count)))
+const barData = computed(() => analytics.value.monthly_events.slice(-6))
+const categoryGradient = computed(() => {
+  if (!analytics.value.categories.length) return '#E5E7EB'
+  let offset = 0
+  const parts = analytics.value.categories.map((category, index) => {
+    const end = offset + category.percentage
+    const part = `${categoryColors[index % categoryColors.length]} ${offset}% ${end}%`
+    offset = end
+    return part
+  })
+  return `conic-gradient(${parts.join(', ')})`
+})
 
 const upcomingEvents = ref([])
 const ticketSales = ref([])
@@ -288,9 +278,10 @@ async function loadDashboard() {
   loading.value = true
   loadError.value = ''
 
-  const [eventsResult, ticketsResult] = await Promise.allSettled([
+  const [eventsResult, ticketsResult, analyticsResult] = await Promise.allSettled([
     eventApi.get('/events'),
     ticketApi.get('/tickets'),
+    eventApi.get('/dashboard/analytics'),
   ])
 
   const events = eventsResult.status === 'fulfilled' ? (eventsResult.value.data.data ?? []) : []
@@ -299,6 +290,7 @@ async function loadDashboard() {
   const failedParts = []
   if (eventsResult.status === 'rejected') failedParts.push('Event Service')
   if (ticketsResult.status === 'rejected') failedParts.push('Ticket Service')
+  if (analyticsResult.status === 'rejected') failedParts.push('Event analytics')
   if (failedParts.length > 0) {
     loadError.value = `Gagal memuat data dari: ${failedParts.join(', ')}. Data lainnya tetap ditampilkan.`
     if (ticketsResult.status === 'rejected') {
@@ -314,6 +306,9 @@ async function loadDashboard() {
     totalTicketsSold.value = tickets.length
     totalParticipants.value = tickets.reduce((sum, t) => sum + (t.quantity || 0), 0)
     totalRevenue.value = tickets.reduce((sum, t) => sum + Number(t.amount || 0), 0)
+    if (analyticsResult.status === 'fulfilled') {
+      analytics.value = analyticsResult.value.data.data
+    }
 
     upcomingEvents.value = [...events]
       .filter((e) => e.event_date)
@@ -374,14 +369,9 @@ onMounted(loadDashboard)
 // Belum ada backing service untuk trend pendapatan bulanan, breakdown
 // kategori event, dan activity log — masih data statis sampai ada
 // endpoint/tabel yang mendukung.
-const barData = ref([
-  { label: 'Jan', height: '45%', active: false },
-  { label: 'Feb', height: '55%', active: false },
-  { label: 'Mar', height: '65%', active: false },
-  { label: 'Apr', height: '50%', active: false },
-  { label: 'Mei', height: '70%', active: false },
-  { label: 'Jun', height: '90%', active: true },
-])
+function barHeight(count) {
+  return `${Math.max(6, (count / maxMonthlyEvents.value) * 100)}%`
+}
 
 const recentActivities = ref([
   { id: 1, icon: 'fa-ticket', color: '#EE0034', text: '32 tiket baru terjual untuk <strong>Music Festival VIP</strong>', time: '2 menit lalu' },
@@ -783,6 +773,21 @@ function handleLogout() {
   width: 130px;
   height: 130px;
   transform: rotate(-90deg);
+}
+
+.donut-ring {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.donut-ring::after {
+  content: '';
+  position: absolute;
+  inset: 28px;
+  background: white;
+  border-radius: 50%;
 }
 
 .donut-legend {

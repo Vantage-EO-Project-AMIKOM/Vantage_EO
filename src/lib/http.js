@@ -6,7 +6,11 @@ import axios from 'axios'
  * so individual views don't need to repeat that logic.
  */
 function createApiClient(baseURL) {
-  const instance = axios.create({ baseURL })
+  const instance = axios.create({
+    baseURL,
+    // A stopped microservice must not leave screens in a permanent loading state.
+    timeout: 8000,
+  })
 
   instance.interceptors.request.use((config) => {
     const token = localStorage.getItem('token')
