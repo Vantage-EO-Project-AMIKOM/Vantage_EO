@@ -146,13 +146,13 @@
         <div class="chart-card">
           <div class="card-header">
             <span class="card-title">Kategori event</span>
-            <span class="card-link">{{ analytics.categories.length }} kategori</span>
+            <span class="card-link">{{ categories.length }} kategori</span>
           </div>
           <div class="donut-wrapper">
             <div class="donut-ring" :style="{ background: categoryGradient }"></div>
           </div>
           <div class="donut-legend">
-            <div class="legend-item" v-for="(category, index) in analytics.categories" :key="category.id">
+            <div class="legend-item" v-for="(category, index) in categories" :key="category.id">
               <span class="legend-dot" :style="{ background: categoryColors[index % categoryColors.length] }"></span>
               <span class="legend-label">{{ category.name }}</span>
               <span class="legend-value">{{ category.percentage }}%</span>
@@ -253,12 +253,14 @@ const totalRevenue = ref(0)
 const analytics = ref({ monthly_events: [], categories: [] })
 const categoryColors = ['#EE0034', '#3B82F6', '#22C55E', '#F97316', '#8B5CF6']
 const todayLabel = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date())
-const maxMonthlyEvents = computed(() => Math.max(1, ...analytics.value.monthly_events.map((item) => item.count)))
-const barData = computed(() => analytics.value.monthly_events.slice(-6))
+const monthlyEvents = computed(() => Array.isArray(analytics.value?.monthly_events) ? analytics.value.monthly_events : [])
+const categories = computed(() => Array.isArray(analytics.value?.categories) ? analytics.value.categories : [])
+const maxMonthlyEvents = computed(() => Math.max(1, ...monthlyEvents.value.map((item) => item.count)))
+const barData = computed(() => monthlyEvents.value.slice(-6))
 const categoryGradient = computed(() => {
-  if (!analytics.value.categories.length) return '#E5E7EB'
+  if (!categories.value.length) return '#E5E7EB'
   let offset = 0
-  const parts = analytics.value.categories.map((category, index) => {
+  const parts = categories.value.map((category, index) => {
     const end = offset + category.percentage
     const part = `${categoryColors[index % categoryColors.length]} ${offset}% ${end}%`
     offset = end
@@ -307,7 +309,12 @@ async function loadDashboard() {
     totalParticipants.value = tickets.reduce((sum, t) => sum + (t.quantity || 0), 0)
     totalRevenue.value = tickets.reduce((sum, t) => sum + Number(t.amount || 0), 0)
     if (analyticsResult.status === 'fulfilled') {
-      analytics.value = analyticsResult.value.data.data
+      const analyticsData = analyticsResult.value.data?.data
+      if (analyticsData && typeof analyticsData === 'object') {
+        analytics.value = analyticsData
+      } else {
+        loadError.value = 'Respons analytics Event Service tidak valid. Periksa URL API di Netlify.'
+      }
     }
 
     upcomingEvents.value = [...events]
