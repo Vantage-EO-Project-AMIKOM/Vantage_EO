@@ -1,6 +1,8 @@
 <script setup>
 import { ref, watch, defineOptions } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
+import { authApi } from '@/lib/http'
 
 defineOptions({
   name: 'AppNavbar',
@@ -9,7 +11,19 @@ defineOptions({
 const isOpen = ref(false)
 const route = useRoute()
 const router = useRouter()
+const authStore = useAuthStore()
 const searchQuery = ref('')
+
+async function handleLogout() {
+  try {
+    await authApi.post('/logout')
+  } catch {
+    // Clear local authentication even if the token has already expired.
+  } finally {
+    authStore.logout()
+    router.push('/')
+  }
+}
 
 function handleSearch() {
   const query = searchQuery.value.trim()
@@ -107,12 +121,21 @@ watch(
         </div>
 
         <RouterLink
+          v-if="!authStore.isLoggedIn"
           to="/register"
           class="hidden h-10 w-32 rounded-full bg-[#17202A] px-4 py-2 text-center text-white transition-all hover:bg-[#425c79] xl:block"
         >
           Register
           <i class="fa fa-long-arrow-right -rotate-45 font-extralight" aria-hidden="true"></i>
         </RouterLink>
+        <button
+          v-else
+          type="button"
+          class="hidden h-10 rounded-full bg-[#17202A] px-5 py-2 text-center text-white transition-all hover:bg-[#425c79] xl:block"
+          @click="handleLogout"
+        >
+          Logout
+        </button>
       </div>
 
       <button
@@ -165,10 +188,19 @@ watch(
       >Contact Us</RouterLink
     >
     <RouterLink
+      v-if="!authStore.isLoggedIn"
       to="/register"
       class="mt-2 w-full rounded-full bg-[#EE0034] px-5 py-3 text-center font-bold transition-all hover:bg-[#ac2c2c]"
     >
       Register
     </RouterLink>
+    <button
+      v-else
+      type="button"
+      class="mt-2 w-full rounded-full bg-[#EE0034] px-5 py-3 text-center font-bold transition-all hover:bg-[#ac2c2c]"
+      @click="handleLogout"
+    >
+      Logout {{ authStore.user?.name ? `(${authStore.user.name})` : '' }}
+    </button>
   </div>
 </template>
