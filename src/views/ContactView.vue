@@ -1,8 +1,10 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { useRouter } from 'vue-router'; // 1. Import useRouter dari vue-router
+import { useAuthStore } from '@/stores/auth';
 
 const router = useRouter(); // 2. Definisikan instance router
+const authStore = useAuthStore();
 const parallaxOffset = ref(0);
 const imageOffsets = ref({
     c1: 0,
@@ -16,22 +18,28 @@ const isAnimate = ref(false);
 const lastScrollY = ref(0);
 const scrollDirection = ref('down');
 
-// 3. State untuk menangkap data form formulir (Opsional, siap dipakai ke backend nanti)
-const form = ref({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
+const feedbackForm = ref({
+    category: 'suggestion',
+    rating: 5,
     message: ''
 });
+const feedbackSent = ref(false);
+const isSubmitting = ref(false);
 
-// 4. Fungsi handle submit form untuk mengarahkan ke halaman tiket
-const handleRegister = () => {
-    // Di sini Anda bisa menambahkan proses pengiriman data ke API/Database jika sudah ada backend.
-    
-    // Alihkan pengguna ke halaman tiket (Sesuaikan '/event' atau '/tickets' dengan route aplikasi Anda)
-    router.push('/event'); 
+const handleFeedback = async () => {
+    isSubmitting.value = true;
+    feedbackSent.value = false;
+
+    // The panel is ready to be connected to a feedback API later.
+    await new Promise(resolve => setTimeout(resolve, 450));
+    feedbackSent.value = true;
+    feedbackForm.value.message = '';
+    isSubmitting.value = false;
 };
+
+watch(() => feedbackForm.value.message, () => {
+    feedbackSent.value = false;
+});
 
 const handleScroll = () => {
     parallaxOffset.value = window.scrollY * 0.4;
@@ -63,13 +71,13 @@ onMounted(() => {
             if (entry.isIntersecting) {
                 if (scrollDirection.value === 'down') {
                     entry.target.classList.add('show-down');
-                    entry.target.classList.remove('show-up');
                 } else {
                     entry.target.classList.add('show-up');
-                    entry.target.classList.remove('show-down');
                 }
-            } else {
-                entry.target.classList.remove('show-down', 'show-up');
+
+                // Reveal each section once and keep it visible. Re-hiding sections
+                // after layout changes caused large blank areas on the page.
+                observer.value.unobserve(entry.target);
             }
         });
     }, {
@@ -133,36 +141,96 @@ onUnmounted(() => {
             </div>
         </section>
 
-        <!-- Section 2: Form Pertanyaan & Registrasi -->
+        <!-- Section 2: Authenticated feedback panel -->
         <section class="w-full h-auto scroll-animate">
-            <div class=" w-full max-w-4/5 mx-auto py-20 flex flex-col items-center">
-                <div class=" w-full text-center">
-                    <h2 class=" text-5xl font-bold mb-30 text-white">Have Be Any Question? <br> Feel free to contact with us.</h2>
+            <div class="w-full max-w-4/5 mx-auto py-20">
+                <div class="mb-12 text-center text-white">
+                    <p class="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-[#EE0034]">Your voice matters</p>
+                    <h2 class="text-4xl font-bold md:text-5xl">Help us make Vantage better.</h2>
+                    <p class="mx-auto mt-4 max-w-2xl text-base text-slate-300 md:text-lg">Share an idea, report an issue, or tell us what you enjoyed. Every message helps shape the next Vantage experience.</p>
+                </div>
 
-                    <div class=" w-full h-auto flex flex-col xl:flex-row">
-                        <div class=" w-full xl:w-4/10 h-120 rounded-4xl overflow-hidden mb-10 xl:mb-0">
-                            <img src="./../components/img/contactPage/cs.jpeg" alt="" class=" w-full h-full object-cover object-top">
+                <div class="overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#223447] shadow-[0_30px_70px_rgba(10,20,32,0.35)]">
+                    <div class="grid min-h-115 lg:grid-cols-[0.8fr_1.2fr]">
+                        <div class="relative overflow-hidden bg-[#17283A] p-8 text-white md:p-12">
+                            <div class="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-[#EE0034]/20 blur-3xl"></div>
+                            <div class="absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-[#EE0034]/10 blur-3xl"></div>
+                            <div class="relative flex h-full flex-col justify-between">
+                                <div>
+                                    <div class="mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EE0034] text-2xl shadow-lg shadow-red-950/30">
+                                        <i class="fa fa-comment-dots" aria-hidden="true"></i>
+                                    </div>
+                                    <h3 class="text-3xl font-bold">A better platform starts with you.</h3>
+                                    <p class="mt-4 leading-7 text-slate-300">Your feedback goes directly to the Vantage team and helps us prioritize improvements for event creators and guests.</p>
+                                </div>
+
+                                <div class="mt-10 space-y-4 text-sm text-slate-300">
+                                    <p class="flex items-center gap-3"><i class="fa fa-check-circle text-[#EE0034]"></i> Suggestions and new ideas</p>
+                                    <p class="flex items-center gap-3"><i class="fa fa-check-circle text-[#EE0034]"></i> Website experience feedback</p>
+                                    <p class="flex items-center gap-3"><i class="fa fa-check-circle text-[#EE0034]"></i> Problems that need attention</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class=" w-full ml-0 xl:ml-10 p-10 md:p-15 bg-[#EE0034] rounded-4xl flex flex-col">
-                            <p class=" text-2xl font-bold text-white text-left mb-4">To find out the price and go to the selection tickets, fill out the forms fields</p>
-
-                            <!-- 5. Mengubah wrapper grid menjadi tag <form> dengan trigger submit -->
-                            <form @submit.prevent="handleRegister" class=" w-full h-full grid grid-cols-1 xl:grid-cols-2 gap-8">
-                                <input v-model="form.name" type="text" placeholder="Name" required class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5 text-black">
-                                <input v-model="form.email" type="email" placeholder="Email" required class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5 text-black">
-                                <input v-model="form.phone" type="number" placeholder="Phone" required class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5 text-black">
-                                <input v-model="form.subject" type="text" placeholder="Subject" required class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-full px-5 text-black">
-                                <textarea v-model="form.message" required class=" w-full h-full border border-black bg-[#FFFFFF] outline-none min-h-15 rounded-4xl p-5 text-black" placeholder="Message"></textarea>
-
-                                <div class=" relative">
-                                    <!-- 6. Mengubah type button menjadi "submit" -->
-                                    <button type="submit" class="w-full xl:w-auto px-7 py-4 m-auto bg-[#2B3B4C] rounded-full transition-all hover:translate-x-2 cursor-pointer xl:absolute top-0 left-0 capitalize text-white font-bold">
-                                        register now
-                                        <i class="fa fa-long-arrow-right font-extralight -rotate-45" aria-hidden="true"></i>
-                                    </button>
+                        <div v-if="authStore.isLoggedIn" class="p-8 text-white md:p-12">
+                            <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+                                <div>
+                                    <p class="text-sm text-slate-400">Sending feedback as</p>
+                                    <p class="mt-1 text-lg font-semibold">{{ authStore.user?.name }}</p>
+                                    <p class="text-sm text-slate-400">{{ authStore.user?.email }}</p>
                                 </div>
+                                <span class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-sm text-emerald-300">
+                                    <i class="fa fa-lock mr-2"></i>Signed in
+                                </span>
+                            </div>
+
+                            <form class="space-y-7" @submit.prevent="handleFeedback">
+                                <div>
+                                    <label class="mb-3 block text-sm font-semibold">What would you like to share?</label>
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <label v-for="option in [{ value: 'suggestion', label: 'Suggestion', icon: 'fa-lightbulb' }, { value: 'experience', label: 'Experience', icon: 'fa-star' }, { value: 'issue', label: 'Issue', icon: 'fa-circle-exclamation' }]" :key="option.value" class="cursor-pointer">
+                                            <input v-model="feedbackForm.category" class="peer sr-only" type="radio" :value="option.value">
+                                            <span class="flex min-h-24 flex-col items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-2 text-center text-xs text-slate-300 transition hover:bg-white/10 peer-checked:border-[#EE0034] peer-checked:bg-[#EE0034]/15 peer-checked:text-white md:text-sm">
+                                                <i :class="`fa ${option.icon} text-lg`"></i>{{ option.label }}
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="mb-3 block text-sm font-semibold">How is your experience?</label>
+                                    <div class="flex gap-2">
+                                        <button v-for="star in 5" :key="star" type="button" class="text-2xl transition hover:scale-110" :class="star <= feedbackForm.rating ? 'text-amber-400' : 'text-slate-600'" :aria-label="`Rate ${star} out of 5`" @click="feedbackForm.rating = star">
+                                            <i class="fa fa-star"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="feedback-message" class="mb-3 block text-sm font-semibold">Your message</label>
+                                    <textarea id="feedback-message" v-model="feedbackForm.message" required minlength="10" maxlength="1000" rows="5" placeholder="Tell us what is working well or what we can improve..." class="w-full resize-none rounded-2xl border border-white/10 bg-[#17283A] p-5 text-white outline-none transition placeholder:text-slate-500 focus:border-[#EE0034] focus:ring-4 focus:ring-[#EE0034]/10"></textarea>
+                                    <p class="mt-2 text-right text-xs text-slate-500">{{ feedbackForm.message.length }} / 1000</p>
+                                </div>
+
+                                <div v-if="feedbackSent" class="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4 text-sm text-emerald-300">
+                                    <i class="fa fa-check-circle mr-2"></i>Thank you! Your feedback has been received.
+                                </div>
+
+                                <button type="submit" :disabled="isSubmitting" class="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#EE0034] px-7 py-4 font-bold transition hover:-translate-y-0.5 hover:bg-[#d50030] disabled:cursor-not-allowed disabled:opacity-60 md:w-auto">
+                                    {{ isSubmitting ? 'Sending...' : 'Send feedback' }}
+                                    <i class="fa fa-paper-plane"></i>
+                                </button>
                             </form>
+                        </div>
+
+                        <div v-else class="flex flex-col items-center justify-center p-10 text-center text-white md:p-16">
+                            <div class="flex h-20 w-20 items-center justify-center rounded-full bg-white/5 text-3xl text-[#EE0034] ring-1 ring-white/10"><i class="fa fa-user-lock"></i></div>
+                            <h3 class="mt-7 text-3xl font-bold">Sign in to share feedback</h3>
+                            <p class="mt-3 max-w-md text-slate-300">Feedback is available to registered Vantage members so we can follow up and keep submissions meaningful.</p>
+                            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                                <button type="button" class="rounded-full bg-[#EE0034] px-7 py-3 font-bold transition hover:bg-[#d50030]" @click="router.push('/login')">Sign in</button>
+                                <button type="button" class="rounded-full border border-white/20 px-7 py-3 font-bold transition hover:bg-white/10" @click="router.push('/register')">Create account</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,11 +240,20 @@ onUnmounted(() => {
         <!-- Section 3: Google Maps -->
         <section class="w-full h-auto scroll-animate">
             <div class=" w-full max-w-4/5 mx-auto py-20 px-0 xl:px-20">
-                <div class=" w-full h-100 rounded-4xl overflow-hidden shadow-lg/25 shadow-black">
-                    <iframe class=" w-full h-full object-cover"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.280430130844!2d110.4065606759763!3d-7.76005487696027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a599bd3bdc4ef%3A0x6f1714b0c4544586!2sUniversity%20of%20Amikom%20Yogyakarta!5e0!3m2!1sen!2sid!4v1777812436113!5m2!1sen!2sid"
-                        width="600" height="450" style="border:0;" allowfullscreen="true" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="relative w-full h-100 rounded-4xl overflow-hidden bg-[#17283A] shadow-lg/25 shadow-black ring-1 ring-white/10">
+                    <div class="absolute inset-0 flex items-center justify-center text-slate-400">
+                        <i class="fa fa-location-dot mr-3 text-2xl text-[#EE0034]"></i>
+                        Loading map...
+                    </div>
+                    <iframe
+                        title="Vantage office at Universitas Amikom Yogyakarta"
+                        class="relative z-10 w-full h-full"
+                        src="https://maps.google.com/maps?q=Universitas%20Amikom%20Yogyakarta&z=15&output=embed"
+                        style="border: 0"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
                 </div>
             </div>
         </section>
@@ -244,7 +321,7 @@ onUnmounted(() => {
 }
 
 .scroll-animate:not(.show-down):not(.show-up) {
-  opacity: 0;
-  transform: translateY(50px) scale(0.98);
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 </style>
