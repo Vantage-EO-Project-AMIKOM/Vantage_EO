@@ -23,7 +23,13 @@ function createApiClient(baseURL) {
   return instance
 }
 
-export const authApi = createApiClient(import.meta.env.VITE_AUTH_API_URL)
+const productionAuthApiUrl = 'https://vantage-auth-service-production.up.railway.app/api'
+const configuredAuthApiUrl = import.meta.env.VITE_AUTH_API_URL
+const authApiUrl = !configuredAuthApiUrl || configuredAuthApiUrl.includes('vantage-amikom.netlify.app')
+  ? productionAuthApiUrl
+  : configuredAuthApiUrl
+
+export const authApi = createApiClient(authApiUrl)
 const productionEventApiUrl = 'https://vantage-eo-event-service-production.up.railway.app/api'
 const configuredEventApiUrl = import.meta.env.VITE_EVENT_API_URL
 const eventApiUrl = !configuredEventApiUrl || configuredEventApiUrl.includes('vantage-amikom.netlify.app')
