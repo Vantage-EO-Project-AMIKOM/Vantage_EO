@@ -1,9 +1,11 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { eventApi } from '@/lib/http'
 
 const router = useRouter()
 const isSubmitting = ref(false)
+const errorMessage = ref('')
 
 const categories = [
   { id: 1, name: 'Concert' },
@@ -35,12 +37,12 @@ const submitEvent = async () => {
   isSubmitting.value = true
 
   try {
-    // Sementara hanya cek data form.
-    // Nanti ganti dengan request POST ke Event Service.
-    console.log('Data event:', form)
-
-    alert('Event berhasil disiapkan.')
+    errorMessage.value = ''
+    await eventApi.post('/events', form)
+    alert('Event created successfully.')
     router.push('/event')
+  } catch (error) {
+    errorMessage.value = error.response?.data?.message || 'Could not create the event.'
   } finally {
     isSubmitting.value = false
   }
@@ -69,6 +71,9 @@ const submitEvent = async () => {
         class="rounded-3xl border border-white/15 bg-[#34495E] p-6 shadow-xl md:p-10"
         @submit.prevent="submitEvent"
       >
+        <div v-if="errorMessage" class="mb-6 rounded-xl bg-red-500/20 p-4 text-red-200">
+          {{ errorMessage }}
+        </div>
         <div class="grid gap-6 md:grid-cols-2">
           <label class="flex flex-col gap-2 md:col-span-2">
             <span class="font-medium">Event Title</span>

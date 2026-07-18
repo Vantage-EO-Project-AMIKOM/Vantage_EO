@@ -38,11 +38,13 @@ const router = createRouter({
       path: '/event/create',
       name: 'event-create',
       component: CreateEventView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/event/:slug/join',
       name: 'event-join',
       component: JoinEventView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/contact',
@@ -89,7 +91,7 @@ router.beforeEach((to, from, next) => {
     }
   }
 
-  if (to.name === 'admin' && !token) {
+  if ((to.meta.requiresAuth || to.name === 'admin') && !token) {
     // Not logged in, trying to access admin → redirect to login
     next('/login')
   } else if (to.name === 'admin' && user?.role !== 'admin') {

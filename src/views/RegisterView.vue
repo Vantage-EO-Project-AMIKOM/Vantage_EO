@@ -48,9 +48,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { authApi } from '@/lib/http'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
+const authStore = useAuthStore()
 const name = ref('')
 const email = ref('')
 const password = ref('')
@@ -71,15 +73,16 @@ async function handleRegister() {
   loading.value = true
 
   try {
-    await axios.post('http://localhost:8000/api/register', {
+    const response = await authApi.post('/register', {
       name: name.value,
       email: email.value,
       password: password.value,
       password_confirmation: passwordConfirm.value,
     })
 
-    successMessage.value = 'Account created! Redirecting to login...'
-    setTimeout(() => router.push('/login'), 2000)
+    authStore.setAuth(response.data.token, response.data.user)
+    successMessage.value = 'Account created! Redirecting...'
+    setTimeout(() => router.push('/event'), 800)
   } catch (error) {
     errorMessage.value = error.response?.data?.message || 'Registration failed.'
   } finally {

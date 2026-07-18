@@ -1,10 +1,12 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { eventApi } from '@/lib/http'
 
 const route = useRoute()
 const router = useRouter()
 const isSubmitting = ref(false)
+const errorMessage = ref('')
 
 const eventTitleMap = {
   'chatbots-and-virtual-assistants': 'Vantage Concert Night',
@@ -24,11 +26,27 @@ const submitJoinRequest = async () => {
   isSubmitting.value = true
 
   try {
-    console.log('Join request:', { eventSlug: route.params.slug, ...form })
+    errorMessage.value = ''
+    const eventsResponse = await eventApi.get('/events')
+    const slugify = (value) => value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+    const event = eventsResponse.data.data.find(
+      (item) => String(item.id) === route.params.slug || slugify(item.title) === route.params.slug,
+    )
+
+    if (!event) throw new Error('Event not found')
+
+    await eventApi.post(`/events/${event.id}/ticket-requests`, {
+      full_name: form.fullName,
+      email: form.email,
+      phone: form.phone,
+      quantity: form.tickets,
+    })
     alert(
       `Thank you, ${form.fullName || 'guest'}! Your join request for ${eventTitle} has been received.`,
     )
     router.push({ name: 'event-detail', params: { slug: route.params.slug } })
+  } catch (error) {
+    errorMessage.value = error.response?.data?.message || error.message || 'Could not submit the ticket request.'
   } finally {
     isSubmitting.value = false
   }
@@ -78,6 +96,9 @@ const submitJoinRequest = async () => {
           class="rounded-3xl border border-white/15 bg-[#34495E] p-6 shadow-xl md:p-8"
           @submit.prevent="submitJoinRequest"
         >
+          <div v-if="errorMessage" class="mb-5 rounded-xl bg-red-500/20 p-4 text-red-200">
+            {{ errorMessage }}
+          </div>
           <div class="grid gap-5 md:grid-cols-2">
             <label class="flex flex-col gap-2 md:col-span-2">
               <span class="font-medium">Full Name</span>

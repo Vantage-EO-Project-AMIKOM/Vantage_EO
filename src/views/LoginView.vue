@@ -37,9 +37,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { authApi } from '@/lib/http'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
+const authStore = useAuthStore()
 const email = ref('')
 const password = ref('')
 const errorMessage = ref('')
@@ -51,34 +53,13 @@ async function handleLogin() {
 
   const normalizedEmail = email.value.trim().toLowerCase()
 
-  if (normalizedEmail === 'admin@vantage.com' && password.value === 'admin123') {
-    localStorage.setItem('token', 'admin-token')
-    localStorage.setItem(
-      'user',
-      JSON.stringify({
-        id: 1,
-        name: 'Admin',
-        email: 'admin@vantage.com',
-        role: 'admin',
-      }),
-    )
-
-    router.push('/admin')
-    loading.value = false
-    return
-  }
-
   try {
-    const response = await axios.post(
-      'https://vantage-auth-service-production.up.railway.app/api/login',
-      {
-        email: email.value,
-        password: password.value,
-      },
-    )
+    const response = await authApi.post('/login', {
+      email: normalizedEmail,
+      password: password.value,
+    })
 
-    localStorage.setItem('token', response.data.token)
-    localStorage.setItem('user', JSON.stringify(response.data.user))
+    authStore.setAuth(response.data.token, response.data.user)
 
     if (response.data.user.role === 'admin') {
       router.push('/admin')
