@@ -59,7 +59,7 @@ async function handleLogin() {
       password: password.value,
     })
 
-    authStore.setAuth(response.data.token, response.data.user)
+    authStore.setAuth(response.data.token, response.data.user, response.data.expires_at)
 
     if (response.data.user.role === 'admin') {
       router.push('/admin')

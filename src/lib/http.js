@@ -20,6 +20,23 @@ function createApiClient(baseURL) {
     return config
   })
 
+  instance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      const isAuthForm = ['/login', '/register'].some((path) => error.config?.url?.endsWith(path))
+
+      if (error.response?.status === 401 && localStorage.getItem('token') && !isAuthForm) {
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        localStorage.removeItem('token_expires_at')
+
+        if (window.location.pathname !== '/login') window.location.assign('/login')
+      }
+
+      return Promise.reject(error)
+    },
+  )
+
   return instance
 }
 

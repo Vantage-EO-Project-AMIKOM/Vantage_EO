@@ -80,7 +80,7 @@ async function handleRegister() {
       password_confirmation: passwordConfirm.value,
     })
 
-    authStore.setAuth(response.data.token, response.data.user)
+    authStore.setAuth(response.data.token, response.data.user, response.data.expires_at)
     successMessage.value = 'Account created! Redirecting...'
     setTimeout(() => router.push('/event'), 800)
   } catch (error) {
