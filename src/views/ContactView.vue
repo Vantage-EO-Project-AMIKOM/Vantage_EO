@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from 'vue';
-import { useRouter } from 'vue-router'; // 1. Import useRouter dari vue-router
+import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
 
-const router = useRouter(); // 2. Definisikan instance router
+const router = useRouter();
 const authStore = useAuthStore();
 const parallaxOffset = ref(0);
 const imageOffsets = ref({
@@ -23,23 +23,30 @@ const feedbackForm = ref({
     rating: 5,
     message: ''
 });
-const feedbackSent = ref(false);
+
 const isSubmitting = ref(false);
+const showModal = ref(false); // State untuk mengontrol pop-up modal
 
 const handleFeedback = async () => {
-    isSubmitting.value = true;
-    feedbackSent.value = false;
+    if (!feedbackForm.value.message.trim()) return;
 
-    // The panel is ready to be connected to a feedback API later.
-    await new Promise(resolve => setTimeout(resolve, 450));
-    feedbackSent.value = true;
-    feedbackForm.value.message = '';
+    isSubmitting.value = true;
+
+    // Simulasi pengiriman data
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
     isSubmitting.value = false;
+    showModal.value = true; // Tampilkan pop-up modal
+    
+    // Reset form
+    feedbackForm.value.message = '';
+    feedbackForm.value.rating = 5;
+    feedbackForm.value.category = 'suggestion';
 };
 
-watch(() => feedbackForm.value.message, () => {
-    feedbackSent.value = false;
-});
+const closeModal = () => {
+    showModal.value = false;
+};
 
 const handleScroll = () => {
     parallaxOffset.value = window.scrollY * 0.4;
@@ -75,8 +82,6 @@ onMounted(() => {
                     entry.target.classList.add('show-up');
                 }
 
-                // Reveal each section once and keep it visible. Re-hiding sections
-                // after layout changes caused large blank areas on the page.
                 observer.value.unobserve(entry.target);
             }
         });
@@ -197,7 +202,7 @@ onUnmounted(() => {
                                     </div>
                                 </div>
 
-                                <div>
+                                <div v-if="feedbackForm.category === 'experience'">
                                     <label class="mb-3 block text-sm font-semibold">How is your experience?</label>
                                     <div class="flex gap-2">
                                         <button v-for="star in 5" :key="star" type="button" class="text-2xl transition hover:scale-110" :class="star <= feedbackForm.rating ? 'text-amber-400' : 'text-slate-600'" :aria-label="`Rate ${star} out of 5`" @click="feedbackForm.rating = star">
@@ -212,11 +217,7 @@ onUnmounted(() => {
                                     <p class="mt-2 text-right text-xs text-slate-500">{{ feedbackForm.message.length }} / 1000</p>
                                 </div>
 
-                                <div v-if="feedbackSent" class="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4 text-sm text-emerald-300">
-                                    <i class="fa fa-check-circle mr-2"></i>Thank you! Your feedback has been received.
-                                </div>
-
-                                <button type="submit" :disabled="isSubmitting" class="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#EE0034] px-7 py-4 font-bold transition hover:-translate-y-0.5 hover:bg-[#d50030] disabled:cursor-not-allowed disabled:opacity-60 md:w-auto">
+                                <button type="submit" :disabled="isSubmitting" class="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#EE0034] px-7 py-4 font-bold transition hover:-translate-y-0.5 hover:bg-[#d50030] disabled:cursor-not-allowed disabled:opacity-60 md:w-auto cursor-pointer">
                                     {{ isSubmitting ? 'Sending...' : 'Send feedback' }}
                                     <i class="fa fa-paper-plane"></i>
                                 </button>
@@ -228,8 +229,8 @@ onUnmounted(() => {
                             <h3 class="mt-7 text-3xl font-bold">Sign in to share feedback</h3>
                             <p class="mt-3 max-w-md text-slate-300">Feedback is available to registered Vantage members so we can follow up and keep submissions meaningful.</p>
                             <div class="mt-8 flex flex-wrap justify-center gap-3">
-                                <button type="button" class="rounded-full bg-[#EE0034] px-7 py-3 font-bold transition hover:bg-[#d50030]" @click="router.push('/login')">Sign in</button>
-                                <button type="button" class="rounded-full border border-white/20 px-7 py-3 font-bold transition hover:bg-white/10" @click="router.push('/register')">Create account</button>
+                                <button type="button" class="rounded-full bg-[#EE0034] px-7 py-3 font-bold transition hover:bg-[#d50030] cursor-pointer" @click="router.push('/login')">Sign in</button>
+                                <button type="button" class="rounded-full border border-white/20 px-7 py-3 font-bold transition hover:bg-white/10 cursor-pointer" @click="router.push('/register')">Create account</button>
                             </div>
                         </div>
                     </div>
@@ -281,16 +282,41 @@ onUnmounted(() => {
             </div>
         </section>
     </div>
+
+    <!-- POP-UP NOTIFICATION MODAL -->
+    <Teleport to="body">
+        <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-4 transition-all">
+            <div class="relative w-full max-w-md rounded-3xl border border-white/10 bg-[#17283A] p-8 text-center text-white shadow-2xl animate-modal-pop">
+                <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/20 text-3xl text-emerald-400 ring-1 ring-emerald-500/30">
+                    <i class="fa fa-check"></i>
+                </div>
+                <h3 class="text-2xl font-bold">Thank you for your feedback!</h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                    We appreciate your time. Your valuable input helps us continuously improve Vantage for everyone.
+                </p>
+                <button type="button" @click="closeModal" class="mt-7 w-full rounded-full bg-[#EE0034] py-3.5 font-bold transition hover:bg-[#d50030] cursor-pointer">
+                    Close
+                </button>
+            </div>
+        </div>
+    </Teleport>
 </template>
 
 <style scoped>
-/* CSS Animasi tetap sama */
 @keyframes heroPop {
   0% { transform: scale(1.1); filter: brightness(0.1); }
   100% { transform: scale(1); filter: brightness(0.4) saturate-50; }
 }
 .animate-hero-pop {
   animation: heroPop 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-modal-pop {
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .page-animation {
