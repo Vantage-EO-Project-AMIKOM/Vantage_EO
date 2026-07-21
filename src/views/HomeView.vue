@@ -14,6 +14,19 @@ const isAnimate = ref(false);
 const lastScrollY = ref(0);
 const scrollDirection = ref('down');
 
+// Referensi elemen ke seksi schedule / latest post
+const scheduleSection = ref(null);
+
+// Fungsi Smooth Scroll ke Seksi Schedule
+const scrollToSchedule = () => {
+  if (scheduleSection.value) {
+    scheduleSection.value.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+};
+
 const handleScroll = () => {
   parallaxOffset.value = window.scrollY * 0.3;
   imageOffsets.value.c1 = window.scrollY * 0.3;
@@ -95,7 +108,7 @@ onUnmounted(() => {
 
   <div class="relative z-10 bg-[#2B3B4C] py-5 rounded-[3rem] -mt-10 mb-20 shadow-[0_0_80px_rgba(0,0,0,0.15)] overflow-hidden">
 
-    <!-- SECTION 1: Welcome Digital Conference (Murni Pop Up Awal, tidak pakai .scroll-animate agar tak bentrok) -->
+    <!-- SECTION 1: Welcome Digital Conference -->
     <section class="w-full h-auto page-animation" :class="{ 'show': isAnimate }">
       <div class="w-full max-w-4/5 mx-auto my-20 grid grid-cols-1 xl:grid-cols-2 gap-4">
 
@@ -143,11 +156,15 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <RouterLink to="/">
+          <!-- Tombol View Our Schedule dengan Smooth Scroll -->
+          <div>
             <button
-              class="px-7 py-4 border-2 border-white bg-[#17202A] rounded-full transition-all hover:translate-x-2 cursor-pointer">View
-              Our Schedule</button>
-          </RouterLink>
+              @click="scrollToSchedule"
+              type="button"
+              class="px-7 py-4 border-2 border-white bg-[#17202A] rounded-full transition-all hover:bg-[#EE0034] hover:border-[#EE0034] hover:translate-x-2 cursor-pointer">
+              View Our Schedule
+            </button>
+          </div>
         </div>
 
       </div>
@@ -170,8 +187,8 @@ onUnmounted(() => {
       <CountPerson />
     </section>
 
-    <!-- SECTION 4: Latest Post (Scroll Animate) -->
-    <section class="w-full h-auto scroll-animate">
+    <!-- SECTION 4: Latest Post / Schedule (Target Smooth Scroll) -->
+    <section ref="scheduleSection" id="schedule-section" class="w-full h-auto scroll-animate pt-10">
       <HomLeatestPost />
     </section>
   </div>
