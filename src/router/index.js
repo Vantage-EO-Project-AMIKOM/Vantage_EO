@@ -10,6 +10,8 @@ import OurHistoryView from '@/views/OurHistoryView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import MyEventView from '@/views/MyEventView.vue'
+import MyTicketView from '@/views/MyTicketView.vue'
 import AdminDashboard from '@/views/AdminDashboard.vue'
 
 const router = createRouter({
@@ -23,6 +25,11 @@ const router = createRouter({
     }
   },
   routes: [
+    {
+      path: '/admin',
+      name: 'admin-dashboard',
+      component: AdminDashboard,
+    },
     {
       path: '/',
       name: 'home',
@@ -56,6 +63,18 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
+      path: '/my-events',
+      name: 'my-events',
+      component: MyEventView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/my-tickets',
+      name: 'my-tickets',
+      component: MyTicketView,
+      meta: { requiresAuth: true },
+    },
+    {
       path: '/contact',
       name: 'contact',
       component: ContactView,
@@ -69,6 +88,7 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: ProfileView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/login',

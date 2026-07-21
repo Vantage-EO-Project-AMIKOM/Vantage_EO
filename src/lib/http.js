@@ -47,6 +47,7 @@ const authApiUrl = !configuredAuthApiUrl || configuredAuthApiUrl.includes('vanta
   : configuredAuthApiUrl
 
 export const authApi = createApiClient(authApiUrl)
+
 const productionEventApiUrl = 'https://vantage-eo-event-service-production.up.railway.app/api'
 const configuredEventApiUrl = import.meta.env.VITE_EVENT_API_URL
 const eventApiUrl = !configuredEventApiUrl || configuredEventApiUrl.includes('vantage-amikom.netlify.app')
@@ -56,3 +57,11 @@ const eventApiUrl = !configuredEventApiUrl || configuredEventApiUrl.includes('va
 export const eventApi = createApiClient(eventApiUrl)
 export const ticketApi = createApiClient(import.meta.env.VITE_TICKET_API_URL)
 export const analyticsApi = createApiClient(import.meta.env.VITE_ANALYTICS_API_URL)
+
+// PERBAIKAN: Menambahkan export default agar tidak terjadi SyntaxError "Importing binding name 'default'"
+export default {
+  authApi,
+  eventApi,
+  ticketApi,
+  analyticsApi,
+}
