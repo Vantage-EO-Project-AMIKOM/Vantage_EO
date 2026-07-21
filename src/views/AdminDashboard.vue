@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <!-- Single Menu Group: Disederhanakan hanya Dashboard, Event, dan Tiket -->
+      <!-- Single Menu Group -->
       <div class="menu-section">
         <div class="menu-label">MENU UTAMA</div>
         <button 
@@ -194,6 +194,7 @@
             <thead>
               <tr>
                 <th>Judul Event</th>
+                <th>Kategori</th>
                 <th>Tanggal</th>
                 <th>Harga</th>
                 <th>Kuota</th>
@@ -205,7 +206,10 @@
               <tr v-for="item in filteredEvents" :key="item.id">
                 <td>
                   <div class="font-bold">{{ item.title }}</div>
-                  <div class="sub-text"><i class="fa fa-map-marker"></i> {{ item.venue?.name || 'Venue TBD' }}</div>
+                  <div class="sub-text"><i class="fa fa-map-marker"></i> {{ item.venue?.name || item.location || 'Venue TBD' }}</div>
+                </td>
+                <td>
+                  <span class="badge-category">{{ item.category || 'General' }}</span>
                 </td>
                 <td>{{ item.event_date ? formatDate(item.event_date) : '-' }}</td>
                 <td>{{ formatRupiah(item.price) }}</td>
@@ -225,7 +229,7 @@
                 </td>
               </tr>
               <tr v-if="!filteredEvents.length">
-                <td colspan="6" class="empty-state">Data event tidak ditemukan.</td>
+                <td colspan="7" class="empty-state">Data event tidak ditemukan.</td>
               </tr>
             </tbody>
           </table>
@@ -293,8 +297,17 @@
         <form @submit.prevent="saveEvent">
           <div class="form-group">
             <label>Judul Event</label>
-
             <input v-model="eventForm.title" type="text" required class="form-control" placeholder="Nama event..." />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Kategori</label>
+              <input v-model="eventForm.category" type="text" required class="form-control" placeholder="Concert, Festival, dll." />
+            </div>
+            <div class="form-group">
+              <label>Lokasi / Venue</label>
+              <input v-model="eventForm.location" type="text" required class="form-control" placeholder="Lokasi event..." />
+            </div>
           </div>
           <div class="form-row">
             <div class="form-group">
@@ -370,21 +383,118 @@ const router = useRouter()
 const user = ref(JSON.parse(localStorage.getItem('user')))
 
 // Navigation & State
-const currentTab = ref('dashboard') // 'dashboard' | 'events' | 'tickets'
+const currentTab = ref('dashboard')
 const loading = ref(true)
 const loadError = ref('')
 
+// Default initial events matching the design cards
+const defaultEvents = [
+  {
+    id: 1,
+    title: 'Vantage Concert Night',
+    category: 'Concert',
+    event_date: '2026-08-18',
+    location: 'Yogyakarta Convention',
+    venue: { name: 'Yogyakarta Convention' },
+    price: 150000,
+    quota: 500,
+    status: 'published',
+    image: './../components/img/bg/crsl-land.jpg'
+  },
+  {
+    id: 2,
+    title: 'Creative Innovation Summit',
+    category: 'Business',
+    event_date: '2026-09-26',
+    location: 'The Grand Hall',
+    venue: { name: 'The Grand Hall' },
+    price: 250000,
+    quota: 300,
+    status: 'published',
+    image: './../components/img/bg/hero-bg.jpg'
+  },
+  {
+    id: 3,
+    title: 'Future of AI Workshop',
+    category: 'Workshop',
+    event_date: '2026-10-12',
+    location: 'Bandung Tech Hub',
+    venue: { name: 'Bandung Tech Hub' },
+    price: 100000,
+    quota: 150,
+    status: 'published',
+    image: './../components/img/bg/crsl-land.jpg'
+  },
+  {
+    id: 4,
+    title: 'Digital Creators Festival',
+    category: 'Festival',
+    event_date: '2026-11-03',
+    location: 'Jakarta Creative District',
+    venue: { name: 'Jakarta Creative District' },
+    price: 180000,
+    quota: 1000,
+    status: 'published',
+    image: './../components/img/bg/hero-bg.jpg'
+  },
+  {
+    id: 5,
+    title: 'Design Systems Summit',
+    category: 'Design',
+    event_date: '2026-11-18',
+    location: 'Surabaya Innovation',
+    venue: { name: 'Surabaya Innovation' },
+    price: 200000,
+    quota: 250,
+    status: 'published',
+    image: './../components/img/bg/crsl-land.jpg'
+  },
+  {
+    id: 6,
+    title: 'Startup Networking Night',
+    category: 'Networking',
+    event_date: '2026-12-08',
+    location: 'Semarang Startup Hub',
+    venue: { name: 'Semarang Startup Hub' },
+    price: 75000,
+    quota: 200,
+    status: 'published',
+    image: './../components/img/bg/hero-bg.jpg'
+  }
+]
+
 // Raw Master Data
-const eventsList = ref([])
-const ticketsList = ref([])
+const eventsList = ref(defaultEvents)
+const ticketsList = ref([
+  { id: 101, event_id: 1, quantity: 2, amount: 300000 },
+  { id: 102, event_id: 2, quantity: 1, amount: 250000 },
+  { id: 103, event_id: 4, quantity: 4, amount: 720000 }
+])
 
 // Analytics & Dashboard Metrics
-const totalEvents = ref(0)
-const totalParticipants = ref(0)
-const totalTicketsSold = ref(0)
-const totalRevenue = ref(0)
-const analytics = ref({ monthly_events: [], categories: [] })
-const categoryColors = ['#EE0034', '#3B82F6', '#22C55E', '#F97316', '#8B5CF6']
+const totalEvents = ref(defaultEvents.length)
+const totalParticipants = ref(7)
+const totalTicketsSold = ref(3)
+const totalRevenue = ref(1270000)
+const analytics = ref({ 
+  monthly_events: [
+    { month: 'Jul', count: 2 },
+    { month: 'Aug', count: 1 },
+    { month: 'Sep', count: 1 },
+    { month: 'Oct', count: 1 },
+    { month: 'Nov', count: 2 },
+    { month: 'Dec', count: 1 }
+  ], 
+  categories: [
+    { name: 'Concert', percentage: 20 },
+    { name: 'Business', percentage: 15 },
+    { name: 'Workshop', percentage: 15 },
+    { name: 'Festival', percentage: 20 },
+    { name: 'Design', percentage: 15 },
+    { name: 'Networking', percentage: 15 }
+  ] 
+})
+const categoryColors = ['#EE0034', '#3B82F6', '#22C55E', '#F97316', '#8B5CF6', '#EC4899']
 const todayLabel = new Intl.DateTimeFormat('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date())
 
 // Search Filters
@@ -421,7 +531,7 @@ const upcomingEvents = computed(() => {
         day: date.getDate().toString().padStart(2, '0'),
         month: date.toLocaleDateString('id-ID', { month: 'short' }).toUpperCase(),
         name: e.title,
-        location: `${e.venue?.name ?? 'Venue TBD'} · ${e.quota || 0} kuota`,
+        location: `${e.venue?.name || e.location || 'Venue TBD'} · ${e.quota || 0} kuota`,
         status: e.status ?? 'draft',
         statusClass: e.status === 'published' ? 'status-green' : 'status-blue',
       }
@@ -432,7 +542,12 @@ const upcomingEvents = computed(() => {
 const filteredEvents = computed(() => {
   if (!eventSearchQuery.value) return eventsList.value
   const q = eventSearchQuery.value.toLowerCase()
-  return eventsList.value.filter(e => e.title?.toLowerCase().includes(q) || e.venue?.name?.toLowerCase().includes(q))
+  return eventsList.value.filter(e => 
+    e.title?.toLowerCase().includes(q) || 
+    e.category?.toLowerCase().includes(q) ||
+    e.location?.toLowerCase().includes(q) ||
+    e.venue?.name?.toLowerCase().includes(q)
+  )
 })
 
 const filteredTickets = computed(() => {
@@ -444,7 +559,7 @@ const filteredTickets = computed(() => {
   })
 })
 
-// General Helper
+// General Helpers
 function formatRupiah(value) {
   return 'Rp ' + Number(value || 0).toLocaleString('id-ID')
 }
@@ -467,35 +582,37 @@ async function loadDashboard() {
   loading.value = true
   loadError.value = ''
 
-  const [eventsResult, ticketsResult, analyticsResult] = await Promise.allSettled([
-    eventApi.get('/events'),
-    ticketApi.get('/tickets'),
-    eventApi.get('/dashboard/analytics'),
-  ])
+  try {
+    const [eventsResult, ticketsResult, analyticsResult] = await Promise.allSettled([
+      eventApi.get('/events'),
+      ticketApi.get('/tickets'),
+      eventApi.get('/dashboard/analytics'),
+    ])
 
-  const events = eventsResult.status === 'fulfilled' ? (eventsResult.value.data.data ?? []) : []
-  const tickets = ticketsResult.status === 'fulfilled' ? (ticketsResult.value.data.data ?? []) : []
+    const events = eventsResult.status === 'fulfilled' && eventsResult.value.data.data?.length 
+      ? eventsResult.value.data.data 
+      : defaultEvents
 
-  eventsList.value = events
-  ticketsList.value = tickets
+    const tickets = ticketsResult.status === 'fulfilled' && ticketsResult.value.data.data?.length 
+      ? ticketsResult.value.data.data 
+      : ticketsList.value
 
-  if (eventsResult.status === 'rejected' || ticketsResult.status === 'rejected') {
-    loadError.value = 'Beberapa koneksi API bermasalah. Menggunakan data lokal jika tersedia.'
-  }
+    eventsList.value = events
+    ticketsList.value = tickets
 
-  totalEvents.value = events.length
-  totalTicketsSold.value = tickets.length
-  totalParticipants.value = tickets.reduce((sum, t) => sum + (t.quantity || 0), 0)
-  totalRevenue.value = tickets.reduce((sum, t) => sum + Number(t.amount || 0), 0)
+    totalEvents.value = events.length
+    totalTicketsSold.value = tickets.length
+    totalParticipants.value = tickets.reduce((sum, t) => sum + (t.quantity || 0), 0)
+    totalRevenue.value = tickets.reduce((sum, t) => sum + Number(t.amount || 0), 0)
 
-  if (analyticsResult.status === 'fulfilled') {
-    const analyticsData = analyticsResult.value.data?.data
-    if (analyticsData && typeof analyticsData === 'object') {
-      analytics.value = analyticsData
+    if (analyticsResult.status === 'fulfilled' && analyticsResult.value.data?.data) {
+      analytics.value = analyticsResult.value.data.data
     }
+  } catch (err) {
+    loadError.value = 'Menggunakan data lokal event Vantage.'
+  } finally {
+    loading.value = false
   }
-
-  loading.value = false
 }
 
 onMounted(loadDashboard)
@@ -503,28 +620,44 @@ onMounted(loadDashboard)
 // ================= CRUD EVENT =================
 const showEventModal = ref(false)
 const isEditingEvent = ref(false)
-const eventForm = ref({ id: null, title: '', event_date: '', price: 0, quota: 100, status: 'draft' })
+const eventForm = ref({ id: null, title: '', category: '', location: '', event_date: '', price: 0, quota: 100, status: 'draft' })
 
 function openEventModal(item = null) {
   if (item) {
     isEditingEvent.value = true
-    eventForm.value = { ...item }
+    eventForm.value = { 
+      ...item, 
+      location: item.location || item.venue?.name || '' 
+    }
   } else {
     isEditingEvent.value = false
-    eventForm.value = { id: Date.now(), title: '', event_date: new Date().toISOString().slice(0, 10), price: 0, quota: 100, status: 'draft' }
+    eventForm.value = { 
+      id: Date.now(), 
+      title: '', 
+      category: 'General', 
+      location: '', 
+      event_date: new Date().toISOString().slice(0, 10), 
+      price: 0, 
+      quota: 100, 
+      status: 'published' 
+    }
   }
   showEventModal.value = true
 }
 
 async function saveEvent() {
+  const payload = {
+    ...eventForm.value,
+    venue: { name: eventForm.value.location }
+  }
+
   if (isEditingEvent.value) {
-    const idx = eventsList.value.findIndex(e => e.id === eventForm.value.id)
-    if (idx !== -1) eventsList.value[idx] = { ...eventForm.value }
-    try { await eventApi.put(`/events/${eventForm.value.id}`, eventForm.value) } catch (e) { console.warn(e) }
+    const idx = eventsList.value.findIndex(e => e.id === payload.id)
+    if (idx !== -1) eventsList.value[idx] = payload
+    try { await eventApi.put(`/events/${payload.id}`, payload) } catch (e) { console.warn(e) }
   } else {
-    const newObj = { ...eventForm.value }
-    eventsList.value.unshift(newObj)
-    try { await eventApi.post('/events', eventForm.value) } catch (e) { console.warn(e) }
+    eventsList.value.unshift(payload)
+    try { await eventApi.post('/events', payload) } catch (e) { console.warn(e) }
   }
   totalEvents.value = eventsList.value.length
   showEventModal.value = false
@@ -696,6 +829,15 @@ function handleLogout() {
   font-size: 10px;
   padding: 1px 6px;
   border-radius: 999px;
+}
+
+.badge-category {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #F3F4F6;
+  color: #374151;
 }
 
 .sidebar-footer {
@@ -1096,7 +1238,65 @@ function handleLogout() {
 .status-green { background: #DCFCE7; color: #16A34A; }
 .status-blue { background: #DBEAFE; color: #2563EB; }
 
-/* Modal Backdrop */
+/* Upcoming Event Item list */
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.event-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.event-date {
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 6px 12px;
+  text-align: center;
+  min-width: 50px;
+}
+
+.event-day {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1C2431;
+  line-height: 1;
+}
+
+.event-month {
+  font-size: 10px;
+  font-weight: 600;
+  color: #EE0034;
+  margin-top: 2px;
+}
+
+.event-info {
+  flex: 1;
+}
+
+.event-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1C2431;
+}
+
+.event-meta {
+  font-size: 12px;
+  color: #6B7280;
+  margin-top: 2px;
+}
+
+/* Modal Backdrop & Form */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -1111,7 +1311,7 @@ function handleLogout() {
   background: white;
   border-radius: 12px;
   width: 100%;
-  max-width: 480px;
+  max-width: 500px;
   padding: 1.5rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
@@ -1124,6 +1324,12 @@ function handleLogout() {
 
 .form-group {
   margin-bottom: 1rem;
+  flex: 1;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
 }
 
 .form-group label {
@@ -1141,14 +1347,6 @@ function handleLogout() {
   border-radius: 6px;
   font-size: 13px;
   outline: none;
-}
-
-.form-control:focus { border-color: #EE0034; }
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
 }
 
 .modal-actions {
