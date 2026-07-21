@@ -387,7 +387,7 @@ const currentTab = ref('dashboard')
 const loading = ref(true)
 const loadError = ref('')
 
-// Default initial events matching the design cards
+// Default initial events
 const defaultEvents = [
   {
     id: 1,
@@ -460,6 +460,30 @@ const defaultEvents = [
     quota: 200,
     status: 'published',
     image: './../components/img/bg/hero-bg.jpg'
+  },
+  {
+    id: 7,
+    title: 'Perantara Fest',
+    category: 'Concert',
+    event_date: '2026-09-15',
+    location: 'Yogyakarta Expo Center',
+    venue: { name: 'Yogyakarta Expo Center' },
+    price: 125000,
+    quota: 400,
+    status: 'draft',
+    image: './../components/img/bg/crsl-land.jpg'
+  },
+  {
+    id: 8,
+    title: 'Veteran Cup',
+    category: 'Concert',
+    event_date: '2026-10-20',
+    location: 'Stadion Veteran',
+    venue: { name: 'Stadion Veteran' },
+    price: 100000,
+    quota: 350,
+    status: 'draft',
+    image: './../components/img/bg/hero-bg.jpg'
   }
 ]
 
@@ -480,18 +504,18 @@ const analytics = ref({
   monthly_events: [
     { month: 'Jul', count: 2 },
     { month: 'Aug', count: 1 },
-    { month: 'Sep', count: 1 },
-    { month: 'Oct', count: 1 },
+    { month: 'Sep', count: 2 },
+    { month: 'Oct', count: 2 },
     { month: 'Nov', count: 2 },
     { month: 'Dec', count: 1 }
   ], 
   categories: [
-    { name: 'Concert', percentage: 20 },
-    { name: 'Business', percentage: 15 },
-    { name: 'Workshop', percentage: 15 },
-    { name: 'Festival', percentage: 20 },
-    { name: 'Design', percentage: 15 },
-    { name: 'Networking', percentage: 15 }
+    { name: 'Concert', percentage: 38 },
+    { name: 'Business', percentage: 12 },
+    { name: 'Workshop', percentage: 12 },
+    { name: 'Festival', percentage: 13 },
+    { name: 'Design', percentage: 12 },
+    { name: 'Networking', percentage: 13 }
   ] 
 })
 const categoryColors = ['#EE0034', '#3B82F6', '#22C55E', '#F97316', '#8B5CF6', '#EC4899']
@@ -634,12 +658,12 @@ function openEventModal(item = null) {
     eventForm.value = { 
       id: Date.now(), 
       title: '', 
-      category: 'General', 
+      category: 'Concert', 
       location: '', 
       event_date: new Date().toISOString().slice(0, 10), 
       price: 0, 
       quota: 100, 
-      status: 'published' 
+      status: 'draft' 
     }
   }
   showEventModal.value = true
