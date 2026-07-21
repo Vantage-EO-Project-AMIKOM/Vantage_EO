@@ -4,10 +4,89 @@ import { useRoute } from 'vue-router'
 
 import heroBg from '@/components/img/bg/hero-bg.jpg'
 import eventImage from '@/components/img/bg/ulp.jpeg'
+import pfImg from '@/components/img/post/pf.jpeg'
+import vfImg from '@/components/img/post/vf.jpeg'
 
 const route = useRoute()
 
 const posts = [
+  // --- Event 1: Perantara Fest (Ditambahkan untuk Footer Link) ---
+  {
+    slug: 'perantara-fest',
+    title: 'Perantara Fest',
+    category: 'Concert',
+    date: '06 April 2027',
+    time: '18:00 - 23:00',
+    location: 'Stadion Mandalasana',
+    image: pfImg,
+    description:
+      'Perantara Fest adalah festival musik tahunan yang menghadirkan kolaborasi lintas genre, instalasi seni interaktif, dan penampilan eksklusif dari deretan musisi papan atas tanah air.',
+    organizer: 'Perantara Live',
+    organizerDescription:
+      'Penyelenggara festival independen yang berfokus pada ruang apresiasi musik kreatif dan pengalaman konser yang berkesan.',
+    highlights: [
+      'Penampilan spesial dari musisi papan atas Indonesia',
+      'Art Market & Booth Kreatif Komunitas Lokal',
+      'Pengalaman panggung outdoor dengan tata cahaya futuristik',
+    ],
+    agenda: [
+      {
+        time: '18.00',
+        title: 'Open Gate & Exhibition Area',
+        detail: 'Pengunjung mulai memasuki venue dan menikmati area instalasi seni.',
+      },
+      {
+        time: '19.30',
+        title: 'Indie Wave Stage',
+        detail: 'Sesi pembuka dari band-band pilihan komunitas lokal.',
+      },
+      {
+        time: '21.00',
+        title: 'Headline Show',
+        detail: 'Penampilan puncak dari guest star utama Perantara Fest.',
+      },
+    ],
+  },
+
+  // --- Event 2: Veteran Cup (Ditambahkan untuk Footer Link) ---
+  {
+    slug: 'veteran-cup',
+    title: 'Veteran Cup',
+    category: 'Festival & Music',
+    date: '26 April 2027',
+    time: '15:00 - 22:00',
+    location: 'Gelora Veteran Center',
+    image: vfImg,
+    description:
+      'Ajang kompetisi kreativitas dan penutupan rangkaian festival Veteran Cup yang memadukan pentas seni, kompetisi band, dan bazaar kuliner khas.',
+    organizer: 'Veteran Committee',
+    organizerDescription:
+      'Wadah pemuda dan pelajar dalam mengekspresikan minat serta bakat di bidang seni dan olahraga.',
+    highlights: [
+      'Final Kompetisi Band & Modern Dance',
+      'Food Festival dengan puluhan tenant kuliner',
+      'Pesta kembang api dan penutupan acara',
+    ],
+    agenda: [
+      {
+        time: '15.00',
+        title: 'Final Competition Band',
+        detail: 'Aksi panggung dari para finalis kompetisi musik.',
+      },
+      {
+        time: '18.30',
+        title: 'Awarding & Cultural Performance',
+        detail: 'Penyerahan piala dan penampilan seni tradisional modern.',
+      },
+      {
+        time: '20.30',
+        title: 'Guest Star Concert',
+        detail: 'Konser selebrasi bersama bintang tamu spesial.',
+      },
+    ],
+  },
+
+  // --- Event Existed ---
   {
     slug: 'chatbots-and-virtual-assistants',
     title: 'Vantage Concert Night',
@@ -93,6 +172,7 @@ const posts = [
   },
 ]
 
+// Mencocokkan slug pada URL dengan slug di array posts
 const post = computed(() => posts.find((item) => item.slug === route.params.slug) ?? posts[0])
 </script>
 
@@ -132,9 +212,10 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
     >
       <div class="grid gap-8 lg:grid-cols-[1.7fr_0.9fr]">
         <div>
+          <!-- Poster Gambar Event Sesuai Post Dynamic -->
           <img
-            src="./../components/img/bg/c6.jpeg"
-            alt="Event preview"
+            :src="post.image"
+            :alt="post.title"
             class="h-80 w-full rounded-3xl object-cover md:h-105"
           />
 

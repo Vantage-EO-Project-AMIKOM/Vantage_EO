@@ -11,8 +11,17 @@ import ProfileView from '@/views/ProfileView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import AdminDashboard from '@/views/AdminDashboard.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  // Menambahkan scrollBehavior agar halaman otomatis scroll ke paling atas saat navigasi
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
   routes: [
     {
       path: '/',
@@ -78,6 +87,7 @@ const router = createRouter({
     },
   ],
 })
+
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token')
   const storedUser = localStorage.getItem('user')
@@ -92,7 +102,7 @@ router.beforeEach((to, from, next) => {
   }
 
   if ((to.meta.requiresAuth || to.name === 'admin') && !token) {
-    // Not logged in, trying to access admin → redirect to login
+    // Not logged in, trying to access protected page/admin → redirect to login
     next('/login')
   } else if (to.name === 'admin' && user?.role !== 'admin') {
     // Logged in but not admin → redirect to home
@@ -102,4 +112,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
 export default router
