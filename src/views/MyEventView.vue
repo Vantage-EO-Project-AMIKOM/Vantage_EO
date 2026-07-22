@@ -15,7 +15,7 @@
 
         <!-- Tombol Buat Event Baru -->
         <RouterLink 
-          to="/create-event" 
+          to="/event/create"
           class="inline-flex items-center justify-center gap-2 bg-[#EE0034] hover:bg-[#c9002c] text-white font-medium px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:scale-105 self-start md:self-auto"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,7 +44,7 @@
         </p>
         <RouterLink 
           v-if="!isAdmin" 
-          to="/create-event" 
+          to="/event/create"
           class="inline-block bg-[#EE0034] hover:bg-[#c9002c] text-white px-6 py-2.5 rounded-full text-sm font-medium transition"
         >
           Buat Event Sekarang

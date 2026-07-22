@@ -613,13 +613,14 @@ async function loadDashboard() {
       eventApi.get('/dashboard/analytics'),
     ])
 
-    const events = eventsResult.status === 'fulfilled' && eventsResult.value.data.data?.length 
-      ? eventsResult.value.data.data 
-      : defaultEvents
-
-    const tickets = ticketsResult.status === 'fulfilled' && ticketsResult.value.data.data?.length 
-      ? ticketsResult.value.data.data 
-      : ticketsList.value
+    const eventsPayload = eventsResult.status === 'fulfilled'
+      ? (eventsResult.value.data?.data || eventsResult.value.data)
+      : null
+    const ticketsPayload = ticketsResult.status === 'fulfilled'
+      ? (ticketsResult.value.data?.data || ticketsResult.value.data)
+      : null
+    const events = Array.isArray(eventsPayload) ? eventsPayload : []
+    const tickets = Array.isArray(ticketsPayload) ? ticketsPayload : []
 
     eventsList.value = events
     ticketsList.value = tickets
@@ -632,8 +633,15 @@ async function loadDashboard() {
     if (analyticsResult.status === 'fulfilled' && analyticsResult.value.data?.data) {
       analytics.value = analyticsResult.value.data.data
     }
+
+    if (eventsResult.status === 'rejected' || ticketsResult.status === 'rejected') {
+      loadError.value = 'Sebagian data dashboard gagal dimuat. Silakan coba lagi.'
+    }
   } catch (err) {
-    loadError.value = 'Menggunakan data lokal event Vantage.'
+    console.error('Gagal memuat dashboard:', err)
+    eventsList.value = []
+    ticketsList.value = []
+    loadError.value = 'Dashboard gagal dimuat. Silakan coba lagi.'
   } finally {
     loading.value = false
   }
@@ -675,23 +683,36 @@ async function saveEvent() {
     venue: { name: eventForm.value.location }
   }
 
-  if (isEditingEvent.value) {
-    const idx = eventsList.value.findIndex(e => e.id === payload.id)
-    if (idx !== -1) eventsList.value[idx] = payload
-    try { await eventApi.put(`/events/${payload.id}`, payload) } catch (e) { console.warn(e) }
-  } else {
-    eventsList.value.unshift(payload)
-    try { await eventApi.post('/events', payload) } catch (e) { console.warn(e) }
+  try {
+    if (isEditingEvent.value) {
+      const response = await eventApi.put(`/events/${payload.id}`, payload)
+      const savedEvent = response.data?.data || response.data || payload
+      const idx = eventsList.value.findIndex(e => e.id === payload.id)
+      if (idx !== -1) eventsList.value[idx] = savedEvent
+    } else {
+      const response = await eventApi.post('/events', payload)
+      eventsList.value.unshift(response.data?.data || response.data || payload)
+    }
+    totalEvents.value = eventsList.value.length
+    showEventModal.value = false
+    loadError.value = ''
+  } catch (error) {
+    console.error('Gagal menyimpan event:', error)
+    loadError.value = 'Event gagal disimpan. Perubahan tidak diterapkan.'
   }
-  totalEvents.value = eventsList.value.length
-  showEventModal.value = false
 }
 
 async function deleteEvent(id) {
   if (confirm('Yakin ingin menghapus event ini?')) {
-    eventsList.value = eventsList.value.filter(e => e.id !== id)
-    totalEvents.value = eventsList.value.length
-    try { await eventApi.delete(`/events/${id}`) } catch (e) { console.warn(e) }
+    try {
+      await eventApi.delete(`/events/${id}`)
+      eventsList.value = eventsList.value.filter(e => e.id !== id)
+      totalEvents.value = eventsList.value.length
+      loadError.value = ''
+    } catch (error) {
+      console.error('Gagal menghapus event:', error)
+      loadError.value = 'Event gagal dihapus. Data tidak berubah.'
+    }
   }
 }
 
@@ -712,28 +733,40 @@ function openTicketModal(item = null) {
 }
 
 async function saveTicket() {
-  if (isEditingTicket.value) {
-    const idx = ticketsList.value.findIndex(t => t.id === ticketForm.value.id)
-    if (idx !== -1) ticketsList.value[idx] = { ...ticketForm.value }
-    try { await ticketApi.put(`/tickets/${ticketForm.value.id}`, ticketForm.value) } catch (e) { console.warn(e) }
-  } else {
-    const newObj = { ...ticketForm.value }
-    ticketsList.value.unshift(newObj)
-    try { await ticketApi.post('/tickets', ticketForm.value) } catch (e) { console.warn(e) }
+  try {
+    if (isEditingTicket.value) {
+      const response = await ticketApi.put(`/tickets/${ticketForm.value.id}`, ticketForm.value)
+      const savedTicket = response.data?.data || response.data || { ...ticketForm.value }
+      const idx = ticketsList.value.findIndex(t => t.id === ticketForm.value.id)
+      if (idx !== -1) ticketsList.value[idx] = savedTicket
+    } else {
+      const response = await ticketApi.post('/tickets', ticketForm.value)
+      ticketsList.value.unshift(response.data?.data || response.data || { ...ticketForm.value })
+    }
+    totalTicketsSold.value = ticketsList.value.length
+    totalParticipants.value = ticketsList.value.reduce((sum, t) => sum + (t.quantity || 0), 0)
+    totalRevenue.value = ticketsList.value.reduce((sum, t) => sum + Number(t.amount || 0), 0)
+    showTicketModal.value = false
+    loadError.value = ''
+  } catch (error) {
+    console.error('Gagal menyimpan tiket:', error)
+    loadError.value = 'Tiket gagal disimpan. Perubahan tidak diterapkan.'
   }
-  totalTicketsSold.value = ticketsList.value.length
-  totalParticipants.value = ticketsList.value.reduce((sum, t) => sum + (t.quantity || 0), 0)
-  totalRevenue.value = ticketsList.value.reduce((sum, t) => sum + Number(t.amount || 0), 0)
-  showTicketModal.value = false
 }
 
 async function deleteTicket(id) {
   if (confirm('Yakin ingin menghapus data tiket ini?')) {
-    ticketsList.value = ticketsList.value.filter(t => t.id !== id)
-    totalTicketsSold.value = ticketsList.value.length
-    totalParticipants.value = ticketsList.value.reduce((sum, t) => sum + (t.quantity || 0), 0)
-    totalRevenue.value = ticketsList.value.reduce((sum, t) => sum + Number(t.amount || 0), 0)
-    try { await ticketApi.delete(`/tickets/${id}`) } catch (e) { console.warn(e) }
+    try {
+      await ticketApi.delete(`/tickets/${id}`)
+      ticketsList.value = ticketsList.value.filter(t => t.id !== id)
+      totalTicketsSold.value = ticketsList.value.length
+      totalParticipants.value = ticketsList.value.reduce((sum, t) => sum + (t.quantity || 0), 0)
+      totalRevenue.value = ticketsList.value.reduce((sum, t) => sum + Number(t.amount || 0), 0)
+      loadError.value = ''
+    } catch (error) {
+      console.error('Gagal menghapus tiket:', error)
+      loadError.value = 'Tiket gagal dihapus. Data tidak berubah.'
+    }
   }
 }
 

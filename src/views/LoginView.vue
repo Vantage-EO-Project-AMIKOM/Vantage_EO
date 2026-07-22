@@ -22,7 +22,24 @@
 
       <div class="form-group">
         <label>Password</label>
-        <input v-model="password" type="password" placeholder="••••••••" />
+        <div class="password-field">
+          <input
+            v-model="password"
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            @keyup.enter="handleLogin"
+          />
+          <button
+            type="button"
+            class="password-toggle"
+            :aria-label="showPassword ? 'Hide password' : 'Show password'"
+            :aria-pressed="showPassword"
+            @click="showPassword = !showPassword"
+          >
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
       </div>
 
       <button @click="handleLogin" :disabled="loading">
@@ -44,14 +61,45 @@ const router = useRouter()
 const authStore = useAuthStore()
 const email = ref('')
 const password = ref('')
+const showPassword = ref(false)
 const errorMessage = ref('')
 const loading = ref(false)
+
+function getLoginErrorMessage(error) {
+  if (error.code === 'ECONNABORTED') {
+    return 'The authentication service timed out. Make sure the local auth backend is running on port 8000.'
+  }
+
+  if (error.code === 'ERR_NETWORK' || !error.response) {
+    return 'Cannot connect to the authentication service. Check that the backend and database are running.'
+  }
+
+  if (error.response.status === 401) return 'Invalid email or password.'
+
+  if (error.response.status === 422) {
+    const validationErrors = error.response.data?.errors
+    const firstError = validationErrors && Object.values(validationErrors).flat()[0]
+    return firstError || error.response.data?.message || 'Please check your email and password.'
+  }
+
+  if (error.response.status >= 500) {
+    return 'The authentication service encountered an error. Please try again later.'
+  }
+
+  return error.response.data?.message || 'Login failed. Please try again.'
+}
 
 async function handleLogin() {
   loading.value = true
   errorMessage.value = ''
 
   const normalizedEmail = email.value.trim().toLowerCase()
+
+  if (!normalizedEmail || !password.value) {
+    errorMessage.value = 'Enter both your email and password.'
+    loading.value = false
+    return
+  }
 
   try {
     const response = await authApi.post('/login', {
@@ -68,7 +116,7 @@ async function handleLogin() {
     }
   } catch (error) {
     console.error('Login failed:', error)
-    errorMessage.value = 'Invalid email or password. Please try again.'
+    errorMessage.value = getLoginErrorMessage(error)
   } finally {
     loading.value = false
   }
@@ -145,6 +193,41 @@ h2 {
 .form-group input:focus {
   border-color: #ee0034; /* Focus border menggunakan warna merah */
   box-shadow: 0 0 0 3px rgba(238, 0, 52, 0.2);
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 5rem;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.55rem;
+  width: auto;
+  margin: 0;
+  padding: 0.45rem 0.75rem;
+  transform: translateY(-50%);
+  background: transparent;
+  color: #6b7280;
+  box-shadow: none;
+  font-size: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.password-toggle:hover:not(:disabled) {
+  background: rgba(238, 0, 52, 0.1);
+  color: #ee0034;
+  transform: translateY(-50%);
+}
+
+.password-toggle:focus-visible {
+  outline: 2px solid #ee0034;
+  outline-offset: 2px;
 }
 
 /* Tombol Sign In utama dengan warna merah khas Vantage #EE0034 */

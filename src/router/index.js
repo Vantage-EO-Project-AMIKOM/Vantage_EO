@@ -26,11 +26,6 @@ const router = createRouter({
   },
   routes: [
     {
-      path: '/admin',
-      name: 'admin-dashboard',
-      component: AdminDashboard,
-    },
-    {
       path: '/',
       name: 'home',
       component: HomeView,
@@ -104,6 +99,7 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: AdminDashboard,
+      meta: { requiresAuth: true, requiresAdmin: true },
     },
   ],
 })
@@ -121,10 +117,10 @@ router.beforeEach((to, from, next) => {
     }
   }
 
-  if ((to.meta.requiresAuth || to.name === 'admin') && !token) {
+  if (to.meta.requiresAuth && !token) {
     // Not logged in, trying to access protected page/admin → redirect to login
     next('/login')
-  } else if (to.name === 'admin' && user?.role !== 'admin') {
+  } else if (to.meta.requiresAdmin && user?.role !== 'admin') {
     // Logged in but not admin → redirect to home
     next('/')
   } else {

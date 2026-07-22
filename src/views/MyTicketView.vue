@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
-import Navbar from '@/components/Navbar.vue'
 import { ticketApi } from '@/lib/http'
 import { useAuthStore } from '@/stores/auth'
 
@@ -12,6 +11,7 @@ const tickets = ref([])
 const isLoading = ref(true)
 const searchQuery = ref('')
 const selectedTicket = ref(null)
+const loadError = ref('')
 
 const heroBg = heroBgImport
 
@@ -46,38 +46,14 @@ const isAdmin = computed(() => {
 // Function mengambil data tiket dari backend
 const fetchMyTickets = async () => {
   isLoading.value = true
+  loadError.value = ''
   try {
     const response = await ticketApi.get('/my-tickets')
     tickets.value = response.data?.data || response.data || []
   } catch (error) {
     console.error('Gagal mengambil data tiket:', error)
-    // Fallback dummy jika API belum siap
-    tickets.value = [
-      {
-        id: 101,
-        ticket_code: 'VTG-8829-X1',
-        event_title: 'Welcome The Greatest Digital Conference',
-        event_date: '15 Ags 2026',
-        event_time: '09:00 WIB',
-        event_location: 'Vantage Grand Ballroom, Jakarta',
-        ticket_type: 'VIP Pass',
-        quantity: 1,
-        status: 'Active',
-        user_name: 'Ahmad Fauzi'
-      },
-      {
-        id: 102,
-        ticket_code: 'VTG-9021-X2',
-        event_title: 'Perantara Fest 2026',
-        event_date: '06 Apr 2026',
-        event_time: '18:30 WIB',
-        event_location: 'Stadion Utama Yogyakarta',
-        ticket_type: 'Festival General',
-        quantity: 2,
-        status: 'Used',
-        user_name: 'Ahmad Fauzi'
-      }
-    ]
+    tickets.value = []
+    loadError.value = 'Tiket gagal dimuat. Silakan coba lagi.'
   } finally {
     isLoading.value = false
   }
@@ -146,8 +122,6 @@ onUnmounted(() => {
 
 <template>
   <div class="overflow-x-hidden">
-    <Navbar />
-
     <!-- HERO SECTION (Disamakan persis dengan Event View) -->
     <section class="w-full h-130 z-10 flex justify-center items-center relative overflow-hidden pt-16">
       <div class="absolute inset-0 bg-black/60">
@@ -194,6 +168,13 @@ onUnmounted(() => {
       <div v-if="isLoading" class="flex flex-col items-center justify-center py-20">
         <div class="w-12 h-12 border-4 border-[#EE0034] border-t-transparent rounded-full animate-spin"></div>
         <p class="text-gray-400 mt-4 text-sm animate-pulse">Memuat data tiket Anda...</p>
+      </div>
+
+      <div v-else-if="loadError" class="bg-red-950/40 border border-red-500/40 rounded-2xl p-8 text-center my-6">
+        <p class="text-red-200 mb-4">{{ loadError }}</p>
+        <button type="button" class="bg-[#EE0034] hover:bg-[#c9002c] text-white px-6 py-2.5 rounded-full" @click="fetchMyTickets">
+          Coba Lagi
+        </button>
       </div>
 
       <!-- State: Empty -->
