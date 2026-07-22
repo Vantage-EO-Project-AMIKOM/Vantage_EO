@@ -61,7 +61,7 @@
           <p class="page-date">{{ todayLabel }}</p>
         </div>
         <div class="topbar-actions">
-          <button v-if="currentTab === 'events'" class="btn-primary" @click="openEventModal()">
+          <button v-if="currentTab === 'events'" class="btn-primary" @click="router.push('/event/create')">
             <i class="fa fa-plus"></i> Tambah Event
           </button>
           <button v-if="currentTab === 'tickets'" class="btn-primary" @click="openTicketModal()">
@@ -220,7 +220,7 @@
                   </span>
                 </td>
                 <td class="text-right actions-cell">
-                  <button class="btn-icon edit" @click="openEventModal(item)" title="Edit">
+                  <button class="btn-icon edit" @click="router.push(`/event/${item.id}/edit`)" title="Edit">
                     <i class="fa fa-pencil"></i>
                   </button>
                   <button class="btn-icon delete" @click="deleteEvent(item.id)" title="Hapus">
@@ -608,7 +608,7 @@ async function loadDashboard() {
 
   try {
     const [eventsResult, ticketsResult, analyticsResult] = await Promise.allSettled([
-      eventApi.get('/events'),
+      eventApi.get('/my-events'),
       ticketApi.get('/tickets'),
       eventApi.get('/dashboard/analytics'),
     ])

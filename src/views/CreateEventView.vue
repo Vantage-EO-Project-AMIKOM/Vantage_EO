@@ -1,24 +1,16 @@
 <script setup>
-import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, reactive, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { eventApi } from '@/lib/http'
 
+const route = useRoute()
 const router = useRouter()
 const isSubmitting = ref(false)
+const isLoading = ref(true)
 const errorMessage = ref('')
-
-const categories = [
-  { id: 1, name: 'Concert' },
-  { id: 2, name: 'Seminar' },
-  { id: 3, name: 'Workshop' },
-  { id: 4, name: 'Festival' },
-]
-
-const venues = [
-  { id: 1, name: 'Jogja Expo Center' },
-  { id: 2, name: 'Auditorium Universitas' },
-  { id: 3, name: 'Convention Hall' },
-]
+const categories = ref([])
+const venues = ref([])
+const isEditing = computed(() => Boolean(route.params.id))
 
 const form = reactive({
   title: '',
@@ -28,25 +20,71 @@ const form = reactive({
   event_date: '',
   start_time: '',
   end_time: '',
+  banner: '',
   price: '',
   quota: '',
   status: 'draft',
 })
+
+const apiErrorMessage = (error, fallback) => {
+  const errors = error.response?.data?.errors
+  return (errors && Object.values(errors).flat()[0]) || error.response?.data?.message || fallback
+}
+
+const loadForm = async () => {
+  isLoading.value = true
+  errorMessage.value = ''
+
+  try {
+    const requests = [eventApi.get('/categories'), eventApi.get('/venues')]
+    if (isEditing.value) requests.push(eventApi.get(`/events/${route.params.id}`))
+
+    const [categoryResponse, venueResponse, eventResponse] = await Promise.all(requests)
+    categories.value = categoryResponse.data?.data || categoryResponse.data || []
+    venues.value = venueResponse.data?.data || venueResponse.data || []
+
+    if (eventResponse) {
+      const event = eventResponse.data?.data || eventResponse.data
+      Object.assign(form, {
+        title: event.title || '',
+        category_id: event.category_id || '',
+        venue_id: event.venue_id || '',
+        description: event.description || '',
+        event_date: event.event_date?.slice(0, 10) || '',
+        start_time: event.start_time?.slice(0, 5) || '',
+        end_time: event.end_time?.slice(0, 5) || '',
+        banner: event.banner || '',
+        price: event.price ?? '',
+        quota: event.quota ?? '',
+        status: event.status || 'draft',
+      })
+    }
+  } catch (error) {
+    errorMessage.value = apiErrorMessage(error, 'Could not load the event form.')
+  } finally {
+    isLoading.value = false
+  }
+}
 
 const submitEvent = async () => {
   isSubmitting.value = true
 
   try {
     errorMessage.value = ''
-    await eventApi.post('/events', form)
-    alert('Event created successfully.')
-    router.push('/event')
+    if (isEditing.value) {
+      await eventApi.put(`/events/${route.params.id}`, form)
+    } else {
+      await eventApi.post('/events', form)
+    }
+    router.push('/my-events')
   } catch (error) {
-    errorMessage.value = error.response?.data?.message || 'Could not create the event.'
+    errorMessage.value = apiErrorMessage(error, `Could not ${isEditing.value ? 'update' : 'create'} the event.`)
   } finally {
     isSubmitting.value = false
   }
 }
+
+onMounted(loadForm)
 </script>
 
 <template>
@@ -56,7 +94,7 @@ const submitEvent = async () => {
     <section class="mx-auto max-w-5xl">
       <div class="mb-8 flex items-center justify-between">
         <div>
-          <h1 class="mt-2 text-3xl font-bold md:text-4xl">Create New Event</h1>
+          <h1 class="mt-2 text-3xl font-bold md:text-4xl">{{ isEditing ? 'Edit Event' : 'Create New Event' }}</h1>
         </div>
 
         <RouterLink
@@ -68,6 +106,7 @@ const submitEvent = async () => {
       </div>
 
       <form
+        v-if="!isLoading"
         class="rounded-3xl border border-white/15 bg-[#34495E] p-6 shadow-xl md:p-10"
         @submit.prevent="submitEvent"
       >
@@ -82,6 +121,16 @@ const submitEvent = async () => {
               required
               type="text"
               placeholder="Contoh: Vantage Tech Conference 2026"
+              class="rounded-xl bg-white px-4 py-3 text-slate-800 outline-none ring-[#EE0034] focus:ring-2"
+            />
+          </label>
+
+          <label class="flex flex-col gap-2 md:col-span-2">
+            <span class="font-medium">Banner URL <span class="text-white/60">(optional)</span></span>
+            <input
+              v-model="form.banner"
+              type="url"
+              placeholder="https://example.com/event-banner.jpg"
               class="rounded-xl bg-white px-4 py-3 text-slate-800 outline-none ring-[#EE0034] focus:ring-2"
             />
           </label>
@@ -207,10 +256,13 @@ const submitEvent = async () => {
             type="submit"
             class="rounded-full bg-[#EE0034] px-7 py-3 font-semibold transition hover:bg-[#c9002c] disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {{ isSubmitting ? 'Saving...' : 'Save Event' }}
+            {{ isSubmitting ? 'Saving...' : (isEditing ? 'Update Event' : 'Create Event') }}
           </button>
         </div>
       </form>
+      <div v-else class="rounded-3xl border border-white/15 bg-[#34495E] p-10 text-center text-white/70">
+        Loading event form...
+      </div>
     </section>
   </main>
 </template>

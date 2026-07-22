@@ -139,7 +139,7 @@ onUnmounted(() => {
     </section>
 
     <!-- MAIN CONTENT (Container Melayang Berbentuk Card Besar) -->
-    <main class="relative z-20 bg-[#2B3B4C] py-12 px-4 sm:px-8 md:px-12 rounded-[3rem] -mt-10 mb-20 shadow-[0_0_80px_rgba(0,0,0,0.15)] max-w-6xl mx">
+    <main class="relative z-20 mx-auto mt-6 mb-20 w-[calc(100%-2rem)] max-w-6xl rounded-[3rem] bg-[#2B3B4C] px-4 py-12 shadow-[0_0_80px_rgba(0,0,0,0.15)] sm:px-8 md:px-12">
       
       <!-- Sub-Header & Search Input -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 pb-6 border-b border-gray-700/60">

@@ -31,6 +31,13 @@
         <p class="text-gray-400 mt-4">Memuat data event...</p>
       </div>
 
+      <div v-else-if="errorMessage" class="bg-red-950/40 border border-red-500/40 rounded-2xl p-8 text-center my-6">
+        <p class="text-red-200 mb-4">{{ errorMessage }}</p>
+        <button type="button" class="bg-[#EE0034] px-6 py-2.5 rounded-full text-white" @click="fetchMyEvents">
+          Coba Lagi
+        </button>
+      </div>
+
       <!-- State: Empty (Belum Ada Event) -->
       <div v-else-if="events.length === 0" class="bg-[#2B3B4C] rounded-3xl p-10 text-center border border-gray-700/50 my-10">
         <div class="w-20 h-20 bg-gray-800/80 rounded-full flex items-center justify-center mx-auto mb-4 text-[#EE0034]">
@@ -60,16 +67,24 @@
         >
           <!-- Poster Event -->
           <div class="h-48 w-full overflow-hidden relative bg-gray-800">
-            <img 
-              :src="event.image || event.banner || '/placeholder-event.jpg'" 
+            <img
+              v-if="event.banner || event.image"
+              :src="event.banner || event.image"
               :alt="event.title" 
               class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-              @error="(e) => e.target.src = 'https://via.placeholder.com/400x200?text=Vantage+Event'"
+              @error="event.banner = null; event.image = null"
             />
+            <div
+              v-else
+              class="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-[#34495E] to-[#17202A] px-6 text-center text-white/70"
+            >
+              <i class="fa fa-calendar mb-3 text-4xl text-[#EE0034]" aria-hidden="true"></i>
+              <span class="line-clamp-2 font-semibold">{{ event.title || 'Vantage Event' }}</span>
+            </div>
             <!-- Badge Status / Role Badge jika Admin -->
             <div v-if="isAdmin" class="absolute top-3 right-3 flex gap-2">
               <span class="bg-[#17202A]/90 text-amber-400 text-xs px-3 py-1 rounded-full border border-amber-400/30 backdrop-blur-sm">
-                Owner: {{ event.creator_name || event.user_id || 'User' }}
+                Owner: {{ event.creator_name || (event.creator_id ? `User #${event.creator_id}` : 'Unknown') }}
               </span>
             </div>
           </div>
@@ -83,12 +98,12 @@
               
               <div class="flex items-center text-gray-300 text-sm mb-2">
                 <i class="fa fa-calendar text-[#EE0034] mr-2"></i>
-                <span>{{ event.date || event.start_date || 'Tanggal belum diatur' }}</span>
+                <span>{{ formatDate(event.event_date || event.date || event.start_date) }}</span>
               </div>
 
               <div class="flex items-center text-gray-300 text-sm mb-4">
                 <i class="fa fa-map-marker text-[#EE0034] mr-2"></i>
-                <span class="line-clamp-1">{{ event.location || event.venue || 'Lokasi belum diatur' }}</span>
+                <span class="line-clamp-1">{{ event.venue?.name || event.location || 'Lokasi belum diatur' }}</span>
               </div>
 
               <p class="text-gray-400 text-sm line-clamp-2 mb-4">
@@ -107,6 +122,13 @@
               </RouterLink>
 
               <div class="flex items-center gap-2">
+                <RouterLink
+                  :to="`/event/${event.id}/edit`"
+                  title="Edit Event"
+                  class="p-2 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition"
+                >
+                  <i class="fa fa-pencil"></i>
+                </RouterLink>
                 <button 
                   @click="deleteEvent(event.id)" 
                   title="Hapus Event" 
@@ -135,6 +157,7 @@ import { useAuthStore } from '@/stores/auth'
 const authStore = useAuthStore()
 const events = ref([])
 const isLoading = ref(true)
+const errorMessage = ref('')
 
 // Status Admin dari Auth Store
 const isAdmin = computed(() => authStore.isAdmin || authStore.user?.role === 'admin')
@@ -142,6 +165,7 @@ const isAdmin = computed(() => authStore.isAdmin || authStore.user?.role === 'ad
 // Ambil Data Event Khusus User / Semua Event jika Admin
 const fetchMyEvents = async () => {
   isLoading.value = true
+  errorMessage.value = ''
   try {
     // Memanggil API Event Service
     const response = await eventApi.get('/my-events')
@@ -149,9 +173,15 @@ const fetchMyEvents = async () => {
   } catch (error) {
     console.error('Gagal mengambil data event:', error)
     events.value = []
+    errorMessage.value = error.response?.data?.message || 'Gagal memuat event. Silakan coba lagi.'
   } finally {
     isLoading.value = false
   }
+}
+
+const formatDate = (value) => {
+  if (!value) return 'Tanggal belum diatur'
+  return new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium' }).format(new Date(value))
 }
 
 // Menghapus Event
