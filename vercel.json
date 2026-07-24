@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/api/auth/:path*",
+      "destination": "https://vantage-auth-service-production.up.railway.app/api/:path*"
+    },
+    {
+      "source": "/api/event/:path*",
+      "destination": "https://vantage-eo-event-service-production.up.railway.app/api/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
