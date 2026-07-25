@@ -1,7 +1,7 @@
 <template>
   <div class="w-full min-h-screen bg-[#1d2939] pt-28 pb-20 px-4">
     <div class="max-w-6xl mx-auto">
-      
+
       <!-- Header Section -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
@@ -14,7 +14,7 @@
         </div>
 
         <!-- Tombol Buat Event Baru -->
-        <RouterLink 
+        <RouterLink
           to="/event/create"
           class="inline-flex items-center justify-center gap-2 bg-[#EE0034] hover:bg-[#c9002c] text-white font-medium px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:scale-105 self-start md:self-auto"
         >
@@ -49,8 +49,8 @@
         <p class="text-gray-400 max-w-md mx-auto mb-6">
           {{ isAdmin ? 'Belum ada event yang dibuat di sistem ini.' : 'Anda belum membuat event apapun. Mulai buat event pertama Anda sekarang!' }}
         </p>
-        <RouterLink 
-          v-if="!isAdmin" 
+        <RouterLink
+          v-if="!isAdmin"
           to="/event/create"
           class="inline-block bg-[#EE0034] hover:bg-[#c9002c] text-white px-6 py-2.5 rounded-full text-sm font-medium transition"
         >
@@ -59,9 +59,9 @@
       </div>
 
       <!-- State: Display Grid Events -->
-      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div 
-          v-for="event in events" 
+      <div v-else id="event-grid-top" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          v-for="event in paginatedEvents"
           :key="event.id || event.slug"
           class="bg-[#2B3B4C] rounded-2xl overflow-hidden border border-gray-700/50 hover:border-[#EE0034]/50 transition-all duration-300 flex flex-col group shadow-lg"
         >
@@ -70,7 +70,7 @@
             <img
               v-if="event.banner || event.image"
               :src="event.banner || event.image"
-              :alt="event.title" 
+              :alt="event.title"
               class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
               @error="event.banner = null; event.image = null"
             />
@@ -95,7 +95,7 @@
               <h2 class="text-xl font-bold text-white capitalize group-hover:text-[#EE0034] transition line-clamp-1 mb-2">
                 {{ event.title || event.name }}
               </h2>
-              
+
               <div class="flex items-center text-gray-300 text-sm mb-2">
                 <i class="fa fa-calendar text-[#EE0034] mr-2"></i>
                 <span>{{ formatDate(event.event_date || event.date || event.start_date) }}</span>
@@ -113,7 +113,7 @@
 
             <!-- Action Buttons (Detail, Delete) -->
             <div class="pt-4 border-t border-gray-700/60 flex items-center justify-between gap-2">
-              <RouterLink 
+              <RouterLink
                 :to="`/event/${event.slug || event.id}`"
                 class="text-sm text-gray-300 hover:text-white flex items-center gap-1 transition"
               >
@@ -129,9 +129,9 @@
                 >
                   <i class="fa fa-pencil"></i>
                 </RouterLink>
-                <button 
-                  @click="deleteEvent(event.id)" 
-                  title="Hapus Event" 
+                <button
+                  @click="deleteEvent(event.id)"
+                  title="Hapus Event"
                   class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-500/10 rounded-lg transition cursor-pointer"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -145,12 +145,93 @@
         </div>
       </div>
 
+      <!-- Navigasi Paginasi -->
+      <div v-if="!isLoading && !errorMessage && events.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-10 pt-6 border-t border-gray-700/60">
+        <div class="flex items-center gap-3">
+          <p class="text-xs sm:text-sm text-gray-400 whitespace-nowrap">
+            Menampilkan {{ (currentPage - 1) * itemsPerPage + 1 }}–{{ Math.min(currentPage * itemsPerPage, events.length) }} dari {{ events.length }} event
+          </p>
+
+          <!-- Dropdown Jumlah Event per Halaman -->
+          <div class="flex items-center gap-1.5">
+            <label for="per-page-event" class="text-xs text-gray-400 hidden sm:inline">per halaman:</label>
+            <select
+              id="per-page-event"
+              v-model.number="itemsPerPage"
+              class="bg-[#17202A] border border-gray-700/80 rounded-full py-1 px-3 text-xs text-white focus:outline-none focus:border-[#EE0034] cursor-pointer"
+            >
+              <option v-for="opt in perPageOptions" :key="opt" :value="opt">{{ opt }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div v-if="totalPages > 1" class="flex items-center gap-2">
+          <!-- Tombol Sebelumnya -->
+          <button
+            type="button"
+            @click="goToPage(currentPage - 1)"
+            :disabled="currentPage === 1"
+            class="w-9 h-9 flex items-center justify-center rounded-full text-sm border border-gray-700/80 text-white transition-all hover:bg-[#EE0034] hover:border-[#EE0034] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-700/80"
+          >
+            <i class="fa fa-chevron-left text-xs"></i>
+          </button>
+
+          <!-- Jika halaman pertama tidak terlihat, tampilkan pintasan ke halaman 1 -->
+          <template v-if="paginationRange[0] > 1">
+            <button
+              type="button"
+              @click="goToPage(1)"
+              class="w-9 h-9 flex items-center justify-center rounded-full text-sm border border-gray-700/80 text-white transition-all hover:bg-[#EE0034] hover:border-[#EE0034]"
+            >
+              1
+            </button>
+            <span v-if="paginationRange[0] > 2" class="text-gray-500 px-1">...</span>
+          </template>
+
+          <!-- Nomor Halaman -->
+          <button
+            v-for="page in paginationRange"
+            :key="page"
+            type="button"
+            @click="goToPage(page)"
+            class="w-9 h-9 flex items-center justify-center rounded-full text-sm border transition-all"
+            :class="page === currentPage
+              ? 'bg-[#EE0034] border-[#EE0034] text-white font-semibold'
+              : 'border-gray-700/80 text-white hover:bg-[#EE0034] hover:border-[#EE0034]'"
+          >
+            {{ page }}
+          </button>
+
+          <!-- Jika halaman terakhir tidak terlihat, tampilkan pintasan ke halaman terakhir -->
+          <template v-if="paginationRange[paginationRange.length - 1] < totalPages">
+            <span v-if="paginationRange[paginationRange.length - 1] < totalPages - 1" class="text-gray-500 px-1">...</span>
+            <button
+              type="button"
+              @click="goToPage(totalPages)"
+              class="w-9 h-9 flex items-center justify-center rounded-full text-sm border border-gray-700/80 text-white transition-all hover:bg-[#EE0034] hover:border-[#EE0034]"
+            >
+              {{ totalPages }}
+            </button>
+          </template>
+
+          <!-- Tombol Berikutnya -->
+          <button
+            type="button"
+            @click="goToPage(currentPage + 1)"
+            :disabled="currentPage === totalPages"
+            class="w-9 h-9 flex items-center justify-center rounded-full text-sm border border-gray-700/80 text-white transition-all hover:bg-[#EE0034] hover:border-[#EE0034] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-700/80"
+          >
+            <i class="fa fa-chevron-right text-xs"></i>
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { eventApi } from '@/lib/http'
 import { useAuthStore } from '@/stores/auth'
 
@@ -162,6 +243,60 @@ const errorMessage = ref('')
 // Status Admin dari Auth Store
 const isAdmin = computed(() => authStore.isAdmin || authStore.user?.role === 'admin')
 
+// ==== PAGINASI ====
+const currentPage = ref(1)
+const itemsPerPage = ref(6) // Default jumlah event per halaman, bisa diubah lewat dropdown di UI
+const perPageOptions = [6, 9, 12, 15] // Pilihan jumlah event per halaman (kelipatan grid 3 kolom)
+
+// Total halaman berdasarkan jumlah event yang ada
+const totalPages = computed(() => {
+  return Math.max(1, Math.ceil(events.value.length / itemsPerPage.value))
+})
+
+// Event yang ditampilkan pada halaman aktif saja
+const paginatedEvents = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
+  return events.value.slice(start, end)
+})
+
+// Nomor halaman yang ditampilkan di navigasi (maks 5 nomor, digeser mengikuti halaman aktif)
+const paginationRange = computed(() => {
+  const total = totalPages.value
+  const current = currentPage.value
+  const maxVisible = 5
+
+  let start = Math.max(1, current - Math.floor(maxVisible / 2))
+  let end = Math.min(total, start + maxVisible - 1)
+
+  if (end - start + 1 < maxVisible) {
+    start = Math.max(1, end - maxVisible + 1)
+  }
+
+  const range = []
+  for (let i = start; i <= end; i++) range.push(i)
+  return range
+})
+
+const goToPage = (page) => {
+  if (page < 1 || page > totalPages.value) return
+  currentPage.value = page
+  // Scroll halus ke atas grid event setiap ganti halaman
+  document.getElementById('event-grid-top')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+// Reset ke halaman 1 setiap kali jumlah event per halaman diubah
+watch(itemsPerPage, () => {
+  currentPage.value = 1
+})
+
+// Jaga-jaga: jika event dihapus dan halaman aktif jadi kosong, mundur ke halaman terakhir yang valid
+watch(totalPages, (newTotal) => {
+  if (currentPage.value > newTotal) {
+    currentPage.value = newTotal
+  }
+})
+
 // Ambil Data Event Khusus User / Semua Event jika Admin
 const fetchMyEvents = async () => {
   isLoading.value = true
@@ -170,6 +305,7 @@ const fetchMyEvents = async () => {
     // Memanggil API Event Service
     const response = await eventApi.get('/my-events')
     events.value = response.data?.data || response.data || []
+    currentPage.value = 1
   } catch (error) {
     console.error('Gagal mengambil data event:', error)
     events.value = []

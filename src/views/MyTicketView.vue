@@ -1,10 +1,11 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { ticketApi } from '@/lib/http'
 import { useAuthStore } from '@/stores/auth'
 
 import heroBgImport from '@/components/img/bg/hero-bg.jpg'
+import ulpImg from '@/components/img/bg/ulp.jpeg'
 
 const authStore = useAuthStore()
 const tickets = ref([])
@@ -68,6 +69,58 @@ const filteredTickets = computed(() => {
     const code = (ticket.ticket_code || '').toLowerCase()
     return title.includes(query) || code.includes(query)
   })
+})
+
+// ==== PAGINASI ====
+const currentPage = ref(1)
+const itemsPerPage = ref(5) // Default jumlah tiket per halaman, bisa diubah lewat dropdown di UI
+const perPageOptions = [5, 10, 15, 20] // Pilihan jumlah tiket per halaman yang bisa dipilih user
+
+// Total halaman berdasarkan jumlah tiket hasil filter & jumlah item per halaman yang dipilih
+const totalPages = computed(() => {
+  return Math.max(1, Math.ceil(filteredTickets.value.length / itemsPerPage.value))
+})
+
+// Tiket yang ditampilkan pada halaman aktif saja
+const paginatedTickets = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value
+  const end = start + itemsPerPage.value
+  return filteredTickets.value.slice(start, end)
+})
+
+// Nomor halaman yang ditampilkan di navigasi (maks 5 nomor, digeser mengikuti halaman aktif)
+const paginationRange = computed(() => {
+  const total = totalPages.value
+  const current = currentPage.value
+  const maxVisible = 5
+
+  let start = Math.max(1, current - Math.floor(maxVisible / 2))
+  let end = Math.min(total, start + maxVisible - 1)
+
+  if (end - start + 1 < maxVisible) {
+    start = Math.max(1, end - maxVisible + 1)
+  }
+
+  const range = []
+  for (let i = start; i <= end; i++) range.push(i)
+  return range
+})
+
+const goToPage = (page) => {
+  if (page < 1 || page > totalPages.value) return
+  currentPage.value = page
+  // Scroll halus ke atas daftar tiket setiap ganti halaman
+  document.getElementById('ticket-list-top')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+// Reset ke halaman 1 setiap kali kata kunci pencarian berubah
+watch(searchQuery, () => {
+  currentPage.value = 1
+})
+
+// Reset ke halaman 1 setiap kali jumlah tiket per halaman diubah
+watch(itemsPerPage, () => {
+  currentPage.value = 1
 })
 
 // Badge Status
@@ -200,19 +253,18 @@ onUnmounted(() => {
       </div>
 
       <!-- State: Display List Tickets -->
-      <div v-else class="space-y-6">
+      <div v-else id="ticket-list-top" class="space-y-6">
         <div
-          v-for="ticket in filteredTickets"
+          v-for="ticket in paginatedTickets"
           :key="ticket.id"
           class="bg-[#17202A] rounded-2xl overflow-hidden border border-gray-700/60 hover:border-[#EE0034]/60 transition-all duration-300 flex flex-col md:flex-row shadow-lg group"
         >
           <!-- Gambar Event -->
           <div class="md:w-1/3 h-52 md:h-auto relative overflow-hidden bg-gray-900 shrink-0">
             <img
-              :src="ticket.event_image || ticket.event?.image || '/placeholder-event.jpg'"
+              :src="ulpImg"
               :alt="ticket.event_title || ticket.event?.title"
               class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-              @error="(e) => e.target.src = 'https://via.placeholder.com/400x300?text=Vantage+Ticket'"
             />
             <span
               class="absolute top-3 left-3 text-xs font-semibold px-3 py-1.5 rounded-full text-white shadow-md backdrop-blur-md uppercase tracking-wide"
@@ -275,6 +327,87 @@ onUnmounted(() => {
             </div>
 
           </div>
+        </div>
+      </div>
+
+      <!-- Navigasi Paginasi -->
+      <div v-if="!isLoading && !loadError && filteredTickets.length > 0" class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-10 pt-6 border-t border-gray-700/60">
+        <div class="flex items-center gap-3">
+          <p class="text-xs sm:text-sm text-gray-400 whitespace-nowrap">
+            Menampilkan {{ (currentPage - 1) * itemsPerPage + 1 }}–{{ Math.min(currentPage * itemsPerPage, filteredTickets.length) }} dari {{ filteredTickets.length }} tiket
+          </p>
+
+          <!-- Dropdown Jumlah Tiket per Halaman -->
+          <div class="flex items-center gap-1.5">
+            <label for="per-page" class="text-xs text-gray-400 hidden sm:inline">per halaman:</label>
+            <select
+              id="per-page"
+              v-model.number="itemsPerPage"
+              class="bg-[#17202A] border border-gray-700/80 rounded-full py-1 px-3 text-xs text-white focus:outline-none focus:border-[#EE0034] cursor-pointer"
+            >
+              <option v-for="opt in perPageOptions" :key="opt" :value="opt">{{ opt }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div v-if="totalPages > 1" class="flex items-center gap-2">
+          <!-- Tombol Sebelumnya -->
+          <button
+            type="button"
+            @click="goToPage(currentPage - 1)"
+            :disabled="currentPage === 1"
+            class="w-9 h-9 flex items-center justify-center rounded-full text-sm border border-gray-700/80 text-white transition-all hover:bg-[#EE0034] hover:border-[#EE0034] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-700/80"
+          >
+            <i class="fa fa-chevron-left text-xs"></i>
+          </button>
+
+          <!-- Jika halaman pertama tidak terlihat, tampilkan pintasan ke halaman 1 -->
+          <template v-if="paginationRange[0] > 1">
+            <button
+              type="button"
+              @click="goToPage(1)"
+              class="w-9 h-9 flex items-center justify-center rounded-full text-sm border border-gray-700/80 text-white transition-all hover:bg-[#EE0034] hover:border-[#EE0034]"
+            >
+              1
+            </button>
+            <span v-if="paginationRange[0] > 2" class="text-gray-500 px-1">...</span>
+          </template>
+
+          <!-- Nomor Halaman -->
+          <button
+            v-for="page in paginationRange"
+            :key="page"
+            type="button"
+            @click="goToPage(page)"
+            class="w-9 h-9 flex items-center justify-center rounded-full text-sm border transition-all"
+            :class="page === currentPage
+              ? 'bg-[#EE0034] border-[#EE0034] text-white font-semibold'
+              : 'border-gray-700/80 text-white hover:bg-[#EE0034] hover:border-[#EE0034]'"
+          >
+            {{ page }}
+          </button>
+
+          <!-- Jika halaman terakhir tidak terlihat, tampilkan pintasan ke halaman terakhir -->
+          <template v-if="paginationRange[paginationRange.length - 1] < totalPages">
+            <span v-if="paginationRange[paginationRange.length - 1] < totalPages - 1" class="text-gray-500 px-1">...</span>
+            <button
+              type="button"
+              @click="goToPage(totalPages)"
+              class="w-9 h-9 flex items-center justify-center rounded-full text-sm border border-gray-700/80 text-white transition-all hover:bg-[#EE0034] hover:border-[#EE0034]"
+            >
+              {{ totalPages }}
+            </button>
+          </template>
+
+          <!-- Tombol Berikutnya -->
+          <button
+            type="button"
+            @click="goToPage(currentPage + 1)"
+            :disabled="currentPage === totalPages"
+            class="w-9 h-9 flex items-center justify-center rounded-full text-sm border border-gray-700/80 text-white transition-all hover:bg-[#EE0034] hover:border-[#EE0034] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:border-gray-700/80"
+          >
+            <i class="fa fa-chevron-right text-xs"></i>
+          </button>
         </div>
       </div>
     </main>
