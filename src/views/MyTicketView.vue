@@ -140,7 +140,7 @@ onUnmounted(() => {
 
     <!-- MAIN CONTENT (Container Melayang Berbentuk Card Besar) -->
     <main class="relative z-20 mx-auto mt-6 mb-20 w-[calc(100%-2rem)] max-w-6xl rounded-[3rem] bg-[#2B3B4C] px-4 py-12 shadow-[0_0_80px_rgba(0,0,0,0.15)] sm:px-8 md:px-12">
-      
+
       <!-- Sub-Header & Search Input -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 pb-6 border-b border-gray-700/60">
         <div>
@@ -154,10 +154,10 @@ onUnmounted(() => {
 
         <!-- Search Bar -->
         <div class="relative w-full md:w-80">
-          <input 
+          <input
             v-model="searchQuery"
-            type="text" 
-            placeholder="Cari event atau kode tiket..." 
+            type="text"
+            placeholder="Cari event atau kode tiket..."
             class="w-full bg-[#17202A] border border-gray-700/80 rounded-full py-3 pl-11 pr-4 text-white text-sm placeholder-gray-400 focus:outline-none focus:border-[#EE0034] transition-all shadow-inner"
           />
           <i class="fa fa-search absolute left-4 top-3.5 text-gray-400 text-sm"></i>
@@ -190,9 +190,9 @@ onUnmounted(() => {
         <p class="text-gray-400 max-w-md mx-auto mb-8 text-sm sm:text-base leading-relaxed">
           {{ searchQuery ? 'Tidak ada tiket yang cocok dengan kata kunci pencarian Anda.' : (isAdmin ? 'Belum ada transaksi tiket tercatat di dalam sistem.' : 'Anda belum membeli tiket event apapun. Jelajahi event menarik dan pesan tiketmu sekarang!') }}
         </p>
-        <RouterLink 
-          v-if="!searchQuery" 
-          to="/event" 
+        <RouterLink
+          v-if="!searchQuery"
+          to="/event"
           class="inline-flex items-center justify-center bg-[#EE0034] hover:bg-[#c9002c] text-white px-8 py-3 rounded-full text-sm font-semibold transition-all shadow-lg hover:scale-105"
         >
           Cari Event Sekarang
@@ -201,20 +201,20 @@ onUnmounted(() => {
 
       <!-- State: Display List Tickets -->
       <div v-else class="space-y-6">
-        <div 
-          v-for="ticket in filteredTickets" 
+        <div
+          v-for="ticket in filteredTickets"
           :key="ticket.id"
           class="bg-[#17202A] rounded-2xl overflow-hidden border border-gray-700/60 hover:border-[#EE0034]/60 transition-all duration-300 flex flex-col md:flex-row shadow-lg group"
         >
           <!-- Gambar Event -->
           <div class="md:w-1/3 h-52 md:h-auto relative overflow-hidden bg-gray-900 shrink-0">
-            <img 
-              :src="ticket.event_image || ticket.event?.image || '/placeholder-event.jpg'" 
-              :alt="ticket.event_title || ticket.event?.title" 
+            <img
+              :src="ticket.event_image || ticket.event?.image || '/placeholder-event.jpg'"
+              :alt="ticket.event_title || ticket.event?.title"
               class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               @error="(e) => e.target.src = 'https://via.placeholder.com/400x300?text=Vantage+Ticket'"
             />
-            <span 
+            <span
               class="absolute top-3 left-3 text-xs font-semibold px-3 py-1.5 rounded-full text-white shadow-md backdrop-blur-md uppercase tracking-wide"
               :class="getStatusBadge(ticket.status)"
             >
@@ -264,7 +264,7 @@ onUnmounted(() => {
               </div>
 
               <div>
-                <button 
+                <button
                   @click="openTicketModal(ticket)"
                   class="px-6 py-2.5 bg-[#2B3B4C] hover:bg-[#EE0034] border border-gray-600/80 hover:border-[#EE0034] text-white rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer flex items-center gap-2 shadow-md hover:scale-105"
                 >
@@ -280,15 +280,15 @@ onUnmounted(() => {
     </main>
 
     <!-- MODAL POPUP E-TICKET -->
-    <div 
-      v-if="selectedTicket" 
+    <div
+      v-if="selectedTicket"
       class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all"
       @click.self="selectedTicket = null"
     >
       <div class="bg-[#2B3B4C] border border-gray-700/80 w-full max-w-md rounded-3xl p-6 sm:p-8 text-white text-center relative shadow-2xl animate-in fade-in zoom-in-95 duration-200">
-        
-        <button 
-          @click="selectedTicket = null" 
+
+        <button
+          @click="selectedTicket = null"
           class="absolute top-5 right-5 text-gray-400 hover:text-white w-8 h-8 rounded-full bg-gray-800/80 flex items-center justify-center transition cursor-pointer"
         >
           <i class="fa fa-times text-sm"></i>
@@ -299,8 +299,8 @@ onUnmounted(() => {
 
         <!-- QR Code Container -->
         <div class="bg-white p-5 rounded-2xl inline-block mb-6 shadow-inner border border-gray-200">
-          <img 
-            :src="`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${selectedTicket.ticket_code || selectedTicket.id}`" 
+          <img
+            :src="`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${selectedTicket.ticket_code || selectedTicket.id}`"
             alt="QR Ticket Code"
             class="w-44 h-44 mx-auto object-contain"
           />
@@ -321,7 +321,7 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <button 
+        <button
           @click="selectedTicket = null"
           class="w-full bg-[#EE0034] hover:bg-[#c9002c] text-white py-3.5 rounded-full font-semibold transition-all shadow-lg hover:shadow-red-900/30 cursor-pointer"
         >
