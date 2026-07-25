@@ -1,188 +1,121 @@
 <script setup>
-import { computed } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { eventApi } from '@/lib/http'
 
 import heroBg from '@/components/img/bg/hero-bg.jpg'
 import eventImage from '@/components/img/bg/ulp.jpeg'
-import pfImg from '@/components/img/post/pf.jpeg'
-import vfImg from '@/components/img/post/vf.jpeg'
 
 const route = useRoute()
+const post = ref(null)
+const isLoading = ref(true)
+const loadError = ref('')
 
-const posts = [
-  // --- Event 1: Perantara Fest (Ditambahkan untuk Footer Link) ---
-  {
-    slug: 'perantara-fest',
-    title: 'Perantara Fest',
-    category: 'Concert',
-    date: '06 April 2027',
-    time: '18:00 - 23:00',
-    location: 'Stadion Mandalasana',
-    image: pfImg,
-    description:
-      'Perantara Fest adalah festival musik tahunan yang menghadirkan kolaborasi lintas genre, instalasi seni interaktif, dan penampilan eksklusif dari deretan musisi papan atas tanah air.',
-    organizer: 'Perantara Live',
-    organizerDescription:
-      'Penyelenggara festival independen yang berfokus pada ruang apresiasi musik kreatif dan pengalaman konser yang berkesan.',
-    highlights: [
-      'Penampilan spesial dari musisi papan atas Indonesia',
-      'Art Market & Booth Kreatif Komunitas Lokal',
-      'Pengalaman panggung outdoor dengan tata cahaya futuristik',
-    ],
-    agenda: [
-      {
-        time: '18.00',
-        title: 'Open Gate & Exhibition Area',
-        detail: 'Pengunjung mulai memasuki venue dan menikmati area instalasi seni.',
-      },
-      {
-        time: '19.30',
-        title: 'Indie Wave Stage',
-        detail: 'Sesi pembuka dari band-band pilihan komunitas lokal.',
-      },
-      {
-        time: '21.00',
-        title: 'Headline Show',
-        detail: 'Penampilan puncak dari guest star utama Perantara Fest.',
-      },
-    ],
-  },
+const slugify = (value) =>
+  String(value || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
 
-  // --- Event 2: Veteran Cup (Ditambahkan untuk Footer Link) ---
-  {
-    slug: 'veteran-cup',
-    title: 'Veteran Cup',
-    category: 'Festival & Music',
-    date: '26 April 2027',
-    time: '15:00 - 22:00',
-    location: 'Gelora Veteran Center',
-    image: vfImg,
-    description:
-      'Ajang kompetisi kreativitas dan penutupan rangkaian festival Veteran Cup yang memadukan pentas seni, kompetisi band, dan bazaar kuliner khas.',
-    organizer: 'Veteran Committee',
-    organizerDescription:
-      'Wadah pemuda dan pelajar dalam mengekspresikan minat serta bakat di bidang seni dan olahraga.',
-    highlights: [
-      'Final Kompetisi Band & Modern Dance',
-      'Food Festival dengan puluhan tenant kuliner',
-      'Pesta kembang api dan penutupan acara',
-    ],
-    agenda: [
-      {
-        time: '15.00',
-        title: 'Final Competition Band',
-        detail: 'Aksi panggung dari para finalis kompetisi musik.',
-      },
-      {
-        time: '18.30',
-        title: 'Awarding & Cultural Performance',
-        detail: 'Penyerahan piala dan penampilan seni tradisional modern.',
-      },
-      {
-        time: '20.30',
-        title: 'Guest Star Concert',
-        detail: 'Konser selebrasi bersama bintang tamu spesial.',
-      },
-    ],
-  },
+const formatDate = (value) => {
+  if (!value) return 'Date TBA'
+  const date = new Date(`${String(value).slice(0, 10)}T00:00:00`)
+  return Number.isNaN(date.getTime())
+    ? value
+    : new Intl.DateTimeFormat('en-GB', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+      }).format(date)
+}
 
-  // --- Event Existed ---
-  {
-    slug: 'chatbots-and-virtual-assistants',
-    title: 'Vantage Concert Night',
-    category: 'Concert',
-    date: '18 August 2026',
-    time: '19:00 - 23:00',
-    location: 'Yogyakarta Convention Center',
-    image: eventImage,
-    description:
-      'An unforgettable live music experience featuring top local and international performers, immersive stage visuals, and a vibrant crowd atmosphere for a night of celebration.',
-    organizer: 'Vantage Event Organizer',
-    organizerDescription:
-      'We craft premium event experiences with stunning production, seamless logistics, and memorable entertainment for every guest.',
-    highlights: [
-      'Live performances from favorite artists',
-      'Premium sound and lighting production',
-      'Exclusive fan zone and photo booth experience',
-    ],
-    agenda: [
-      {
-        time: '19.00',
-        title: 'Doors open & welcome drinks',
-        detail:
-          'Guests enter the venue, enjoy the atmosphere, and settle into the concert experience.',
-      },
-      {
-        time: '20.00',
-        title: 'Opening performance',
-        detail: 'A warm-up set to kick off the evening with energy and excitement.',
-      },
-      {
-        time: '21.00',
-        title: 'Main stage show',
-        detail: 'The headline act takes the stage with a full concert set and special effects.',
-      },
-      {
-        time: '22.15',
-        title: 'Encore & closing',
-        detail: 'A final performance moment and a memorable closing for the night.',
-      },
-    ],
-  },
-  {
-    slug: 'creative-innovation-summit',
-    title: 'Creative Innovation Summit',
-    category: 'Business',
-    date: '26 September 2026',
-    time: '08:30 - 15:30',
-    location: 'The Grand Hall',
-    image: heroBg,
-    description:
-      'An inspiring event for teams that want to build stronger brands, better customer journeys, and smarter digital experiences.',
-    organizer: 'Vantage Creative Lab',
-    organizerDescription:
-      'A collaborative team that turns bold ideas into memorable event experiences with measurable impact.',
-    highlights: [
-      'Strategy talks for modern brand growth',
-      'Workshops on content storytelling and campaigns',
-      'High-energy networking session',
-    ],
-    agenda: [
-      {
-        time: '08.30',
-        title: 'Networking breakfast',
-        detail: 'Early conversations and coffee with peers.',
-      },
-      {
-        time: '10.00',
-        title: 'Brand storytelling',
-        detail: 'How to turn audience attention into lasting trust.',
-      },
-      {
-        time: '12.00',
-        title: 'Lunch and panel',
-        detail: 'An open discussion with guest speakers.',
-      },
-      {
-        time: '14.00',
-        title: 'Workshop session',
-        detail: 'Hands-on planning ideas for upcoming campaigns.',
-      },
-    ],
-  },
-]
+const formatTime = (value) => String(value || '').slice(0, 5)
 
-// Mencocokkan slug pada URL dengan slug di array posts
-const post = computed(() => posts.find((item) => item.slug === route.params.slug) ?? posts[0])
+const mapEvent = (event) => ({
+  id: event.id,
+  title: event.title,
+  category: event.category?.name || 'Event',
+  date: formatDate(event.event_date),
+  time:
+    event.start_time || event.end_time
+      ? `${formatTime(event.start_time) || 'TBA'} - ${formatTime(event.end_time) || 'TBA'}`
+      : 'Time TBA',
+  location: event.venue?.name || event.venue?.address || 'Venue TBA',
+  venueAddress: event.venue?.address || '',
+  image: event.banner || eventImage,
+  description: event.description || 'More information about this event will be available soon.',
+  organizer: event.creator_name || 'Vantage Event Organizer',
+  price: Number(event.price || 0),
+  quota: event.quota,
+})
+
+const loadEvent = async () => {
+  isLoading.value = true
+  loadError.value = ''
+  post.value = null
+
+  try {
+    const identifier = String(route.params.slug)
+    let event
+
+    if (/^\d+$/.test(identifier)) {
+      const response = await eventApi.get(`/events/${identifier}`)
+      event = response.data?.data
+    } else {
+      const response = await eventApi.get('/events')
+      event = (response.data?.data || []).find((item) => slugify(item.title) === identifier)
+    }
+
+    if (!event) throw new Error('Event not found')
+    post.value = mapEvent(event)
+  } catch (error) {
+    loadError.value =
+      error.response?.status === 404 || error.message === 'Event not found'
+        ? 'This event could not be found.'
+        : error.response?.data?.message || 'We could not load this event. Please try again.'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(loadEvent)
+watch(() => route.params.slug, loadEvent)
 </script>
 
 <template>
   <div>
+    <main
+      v-if="isLoading"
+      class="flex min-h-screen items-center justify-center bg-[#2B3B4C] px-6 pt-24 text-white"
+    >
+      <p class="rounded-2xl border border-white/10 bg-white/10 px-6 py-5">
+        Loading event details...
+      </p>
+    </main>
+
+    <main
+      v-else-if="loadError"
+      class="flex min-h-screen flex-col items-center justify-center gap-5 bg-[#2B3B4C] px-6 pt-24 text-white"
+    >
+      <p class="rounded-2xl border border-red-300/20 bg-red-500/10 px-6 py-5 text-red-100">
+        {{ loadError }}
+      </p>
+      <RouterLink
+        to="/event"
+        class="rounded-full bg-[#EE0034] px-6 py-3 text-sm font-semibold text-white"
+      >
+        Back to events
+      </RouterLink>
+    </main>
+
+    <template v-else-if="post">
     <section class="relative min-h-80 overflow-hidden pt-24 md:min-h-97.5">
       <img
-        :src="heroBg"
+        :src="post.image || heroBg"
         alt="Event detail banner"
         class="absolute inset-0 h-full w-full object-cover"
+        @error="$event.target.src = heroBg"
       />
       <div class="absolute inset-0 bg-black/60"></div>
 
@@ -217,6 +150,7 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
             :src="post.image"
             :alt="post.title"
             class="h-80 w-full rounded-3xl object-cover md:h-105"
+            @error="$event.target.src = eventImage"
           />
 
           <h2 class="mt-8 text-3xl font-semibold text-white">About this event</h2>
@@ -238,31 +172,15 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
           </div>
 
           <div class="mt-8 grid gap-4 md:grid-cols-2">
-            <div
-              v-for="item in post.highlights"
-              :key="item"
-              class="rounded-2xl border border-white/10 bg-white/10 p-4 text-slate-100"
-            >
-              <i class="fa fa-check-circle mr-2 text-[#EE0034]"></i>{{ item }}
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 text-slate-100">
+              <i class="fa fa-ticket mr-2 text-[#EE0034]"></i>
+              {{ post.price > 0 ? `IDR ${post.price.toLocaleString('id-ID')}` : 'Free admission' }}
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-4 text-slate-100">
+              <i class="fa fa-users mr-2 text-[#EE0034]"></i>
+              {{ post.quota ? `${post.quota} available spots` : 'Quota TBA' }}
             </div>
           </div>
-
-          <section class="mt-10">
-            <h3 class="text-2xl font-semibold text-white">Event agenda</h3>
-            <div class="mt-6 space-y-4">
-              <div
-                v-for="item in post.agenda"
-                :key="item.time"
-                class="flex gap-4 rounded-2xl border border-white/10 bg-white/5 p-4"
-              >
-                <div class="min-w-18 text-sm font-semibold text-[#EE0034]">{{ item.time }}</div>
-                <div>
-                  <h4 class="font-semibold text-white">{{ item.title }}</h4>
-                  <p class="mt-1 text-sm leading-6 text-slate-300">{{ item.detail }}</p>
-                </div>
-              </div>
-            </div>
-          </section>
         </div>
 
         <aside class="space-y-6">
@@ -272,6 +190,9 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
               <li><i class="fa fa-calendar mr-2 text-[#EE0034]"></i>{{ post.date }}</li>
               <li><i class="fa fa-clock-o mr-2 text-[#EE0034]"></i>{{ post.time }}</li>
               <li><i class="fa fa-map-marker mr-2 text-[#EE0034]"></i>{{ post.location }}</li>
+              <li v-if="post.venueAddress">
+                <i class="fa fa-map-o mr-2 text-[#EE0034]"></i>{{ post.venueAddress }}
+              </li>
               <li><i class="fa fa-tag mr-2 text-[#EE0034]"></i>{{ post.category }}</li>
             </ul>
           </div>
@@ -279,7 +200,9 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
           <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
             <h3 class="text-xl font-semibold text-white">Organizer</h3>
             <p class="mt-3 font-semibold text-white">{{ post.organizer }}</p>
-            <p class="mt-2 text-sm leading-7 text-slate-300">{{ post.organizerDescription }}</p>
+            <p class="mt-2 text-sm leading-7 text-slate-300">
+              Contact the organizer through Vantage for more event information.
+            </p>
           </div>
 
           <RouterLink
@@ -291,5 +214,6 @@ const post = computed(() => posts.find((item) => item.slug === route.params.slug
         </aside>
       </div>
     </main>
+    </template>
   </div>
 </template>

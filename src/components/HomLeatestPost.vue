@@ -1,63 +1,51 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+import { eventApi } from '@/lib/http'
 
 import coverOne from '@/components/img/bg/ulp.jpeg'
-import coverTwo from '@/components/img/bg/hero-bg.jpg'
 
 const route = useRoute()
 const showAll = ref(false)
+const posts = ref([])
+const isLoading = ref(true)
+const loadError = ref('')
 
-const posts = [
-  {
-    slug: 'chatbots-and-virtual-assistants',
-    title: 'Vantage Concert Night',
-    category: 'Concert',
-    date: '2026-08-18',
-    location: 'Yogyakarta Convention Center',
-    image: coverOne,
-  },
-  {
-    slug: 'creative-innovation-summit',
-    title: 'Creative Innovation Summit',
-    category: 'Business',
-    date: '2026-09-26',
-    location: 'The Grand Hall',
-    image: coverTwo,
-  },
-  {
-    slug: 'future-of-ai-workshop',
-    title: 'Future of AI Workshop',
-    category: 'Workshop',
-    date: '2026-10-12',
-    location: 'Bandung Tech Hub',
-    image: coverOne,
-  },
-  {
-    slug: 'digital-creators-festival',
-    title: 'Digital Creators Festival',
-    category: 'Festival',
-    date: '2026-11-03',
-    location: 'Jakarta Creative District',
-    image: coverTwo,
-  },
-  {
-    slug: 'design-systems-summit',
-    title: 'Design Systems Summit',
-    category: 'Design',
-    date: '2026-11-18',
-    location: 'Surabaya Innovation Center',
-    image: coverOne,
-  },
-  {
-    slug: 'startup-networking-night',
-    title: 'Startup Networking Night',
-    category: 'Networking',
-    date: '2026-12-08',
-    location: 'Semarang Startup Hub',
-    image: coverTwo,
-  },
-]
+const formatDate = (value) => {
+  if (!value) return 'Date TBA'
+  const date = new Date(`${String(value).slice(0, 10)}T00:00:00`)
+  return Number.isNaN(date.getTime())
+    ? value
+    : new Intl.DateTimeFormat('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      }).format(date)
+}
+
+const mapEvent = (event) => ({
+  id: event.id,
+  title: event.title,
+  category: event.category?.name || 'Event',
+  date: formatDate(event.event_date),
+  searchableDate: event.event_date || '',
+  location: event.venue?.name || event.venue?.address || 'Venue TBA',
+  image: event.banner || coverOne,
+})
+
+const loadEvents = async () => {
+  try {
+    const response = await eventApi.get('/events')
+    posts.value = (response.data?.data || []).map(mapEvent)
+  } catch (error) {
+    loadError.value =
+      error.response?.data?.message || 'We could not load the latest events. Please try again.'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(loadEvents)
 
 const searchTerm = computed(() => {
   const value = route.query.search
@@ -66,11 +54,11 @@ const searchTerm = computed(() => {
 
 const filteredPosts = computed(() => {
   if (!searchTerm.value) {
-    return posts.slice(0, showAll.value ? posts.length : 4)
+    return posts.value.slice(0, showAll.value ? posts.value.length : 4)
   }
 
-  const matches = posts.filter((post) => {
-    return [post.title, post.category, post.location, post.date].some((field) =>
+  const matches = posts.value.filter((post) => {
+    return [post.title, post.category, post.location, post.date, post.searchableDate].some((field) =>
       String(field).toLowerCase().includes(searchTerm.value),
     )
   })
@@ -96,7 +84,21 @@ const filteredPosts = computed(() => {
     </div>
 
     <div
-      v-if="filteredPosts.length === 0"
+      v-if="isLoading"
+      class="rounded-2xl border border-white/10 bg-white/10 px-6 py-5 text-sm text-white/80"
+    >
+      Loading the latest events...
+    </div>
+
+    <div
+      v-else-if="loadError"
+      class="rounded-2xl border border-red-300/20 bg-red-500/10 px-6 py-5 text-sm text-red-100"
+    >
+      {{ loadError }}
+    </div>
+
+    <div
+      v-else-if="filteredPosts.length === 0"
       class="rounded-2xl border border-white/10 bg-white/10 px-6 py-5 text-sm text-white/80"
     >
       No events match your search.
@@ -105,8 +107,8 @@ const filteredPosts = computed(() => {
     <div v-else class="grid w-full grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
       <RouterLink
         v-for="post in filteredPosts"
-        :key="post.slug"
-        :to="`/event/${post.slug}`"
+        :key="post.id"
+        :to="{ name: 'event-detail', params: { slug: post.id } }"
         class="flex h-80 flex-col items-start overflow-hidden rounded-2xl border border-white/5 bg-[#1d2d42]/50 shadow-md transition-all hover:-translate-y-1 hover:scale-[1.01]"
       >
         <img
@@ -114,6 +116,7 @@ const filteredPosts = computed(() => {
           :src="post.image"
           :alt="post.title"
           draggable="false"
+          @error="$event.target.src = coverOne"
         />
         <div class="h-auto w-full p-5">
           <div class="mb-2 flex w-full">
