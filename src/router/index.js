@@ -13,6 +13,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import MyEventView from '@/views/MyEventView.vue'
 import MyTicketView from '@/views/MyTicketView.vue'
 import AdminDashboard from '@/views/AdminDashboard.vue'
+import EventTicketRequestsView from '@/views/EventTicketRequestsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,6 +68,12 @@ const router = createRouter({
       path: '/my-events',
       name: 'my-events',
       component: MyEventView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/event/:id/requests',
+      name: 'event-ticket-requests',
+      component: EventTicketRequestsView,
       meta: { requiresAuth: true },
     },
     {

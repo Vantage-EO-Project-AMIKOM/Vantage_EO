@@ -195,10 +195,24 @@
         <div class="hidden xl:flex flex-col items-start">
           <h3 class="text-3xl font-bold text-white text-left capitalize mb-5">upcoming events</h3>
           <div class="w-full h-full grid grid-rows-2 gap-4">
+            <div
+              v-if="isLoadingEvents"
+              v-for="index in 2"
+              :key="`event-loading-${index}`"
+              class="grid h-full w-full animate-pulse grid-cols-3 gap-4"
+            >
+              <div class="rounded-2xl bg-white/10"></div>
+              <div class="col-span-2 flex flex-col justify-center gap-3">
+                <div class="h-5 w-4/5 rounded bg-white/10"></div>
+                <div class="h-3 w-2/5 rounded bg-white/10"></div>
+              </div>
+            </div>
+
             <RouterLink
+              v-else
               v-for="event in upcomingEvents"
-              :key="event.slug"
-              :to="{ name: 'event-detail', params: { slug: event.slug } }"
+              :key="event.id"
+              :to="{ name: 'event-detail', params: { slug: event.id } }"
               class="w-full h-full grid grid-cols-3 transition-all hover:scale-102 rounded-2xl cursor-pointer group"
             >
               <div class="overflow-hidden rounded-2xl">
@@ -220,6 +234,16 @@
                 </div>
               </div>
             </RouterLink>
+
+            <div
+              v-if="!isLoadingEvents && upcomingEvents.length === 0"
+              class="row-span-2 flex flex-col items-start justify-center rounded-2xl border border-white/10 bg-white/5 p-5"
+            >
+              <p class="text-sm text-slate-300">Belum ada event mendatang yang dipublikasikan.</p>
+              <RouterLink to="/event" class="mt-3 text-sm font-semibold text-[#EE0034] hover:text-white">
+                Lihat semua event
+              </RouterLink>
+            </div>
           </div>
         </div>
 
@@ -261,7 +285,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { eventApi } from '@/lib/http'
 
 // Import gambar poster event
 import pfImg from './img/post/pf.jpeg'
@@ -317,21 +342,49 @@ const handleSocialClick = () => {
   )
 }
 
-// Data Upcoming Events
-const upcomingEvents = [
-  {
-    slug: 'perantara-fest',
-    title: 'perantara fest',
-    date: '06 Apr 2027',
-    image: pfImg,
-  },
-  {
-    slug: 'veteran-cup',
-    title: 'veteran cup',
-    date: '26 Apr 2027',
-    image: vfImg,
-  },
-]
+const upcomingEvents = ref([])
+const isLoadingEvents = ref(true)
+
+const formatEventDate = (value) => {
+  const date = new Date(`${String(value).slice(0, 10)}T00:00:00`)
+  return new Intl.DateTimeFormat('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  }).format(date)
+}
+
+const loadUpcomingEvents = async () => {
+  isLoadingEvents.value = true
+
+  try {
+    const response = await eventApi.get('/events')
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    upcomingEvents.value = (response.data?.data || [])
+      .filter((event) => {
+        if (!event.event_date) return false
+        const eventDate = new Date(`${String(event.event_date).slice(0, 10)}T00:00:00`)
+        return !Number.isNaN(eventDate.getTime()) && eventDate >= today
+      })
+      .sort((first, second) => new Date(first.event_date) - new Date(second.event_date))
+      .slice(0, 2)
+      .map((event, index) => ({
+        id: event.id,
+        title: event.title,
+        date: formatEventDate(event.event_date),
+        image: event.banner || (index % 2 === 0 ? pfImg : vfImg),
+      }))
+  } catch (error) {
+    console.error('Gagal memuat upcoming events:', error)
+    upcomingEvents.value = []
+  } finally {
+    isLoadingEvents.value = false
+  }
+}
+
+onMounted(loadUpcomingEvents)
 </script>
 
 <style scoped>

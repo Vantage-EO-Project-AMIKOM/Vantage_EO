@@ -123,6 +123,14 @@
 
               <div class="flex items-center gap-2">
                 <RouterLink
+                  :to="`/event/${event.id}/requests`"
+                  title="Kelola Permintaan Tiket"
+                  class="inline-flex items-center gap-2 rounded-lg bg-emerald-500/10 px-3 py-2 text-sm font-medium text-emerald-300 transition hover:bg-emerald-500/20"
+                >
+                  <i class="fa fa-ticket"></i>
+                  <span>Permintaan</span>
+                </RouterLink>
+                <RouterLink
                   :to="`/event/${event.id}/edit`"
                   title="Edit Event"
                   class="p-2 text-gray-400 hover:text-blue-400 hover:bg-blue-500/10 rounded-lg transition"

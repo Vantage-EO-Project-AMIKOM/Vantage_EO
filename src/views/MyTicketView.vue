@@ -48,12 +48,16 @@ const fetchMyTickets = async () => {
   isLoading.value = true
   loadError.value = ''
   try {
-    const response = await ticketApi.get('/my-tickets')
+    const response = await ticketApi.get('/tickets')
     tickets.value = response.data?.data || response.data || []
   } catch (error) {
     console.error('Gagal mengambil data tiket:', error)
     tickets.value = []
-    loadError.value = 'Tiket gagal dimuat. Silakan coba lagi.'
+    loadError.value =
+      error.response?.data?.message ||
+      (error.code === 'ECONNABORTED'
+        ? 'Layanan tiket tidak merespons. Pastikan Event Service sedang berjalan.'
+        : 'Tiket gagal dimuat. Silakan coba lagi.')
   } finally {
     isLoading.value = false
   }
@@ -65,7 +69,7 @@ const filteredTickets = computed(() => {
   const query = searchQuery.value.toLowerCase()
   return tickets.value.filter(ticket => {
     const title = (ticket.event_title || ticket.event?.title || '').toLowerCase()
-    const code = (ticket.ticket_code || '').toLowerCase()
+    const code = (ticket.code || ticket.ticket_code || '').toLowerCase()
     return title.includes(query) || code.includes(query)
   })
 })
@@ -227,7 +231,7 @@ onUnmounted(() => {
             <div>
               <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <span class="text-xs font-mono text-gray-400 tracking-wider">
-                  KODE: <strong class="text-[#EE0034] font-semibold">{{ ticket.ticket_code || `#TCK-${ticket.id}` }}</strong>
+                  KODE: <strong class="text-[#EE0034] font-semibold">{{ ticket.code || ticket.ticket_code || `#TCK-${ticket.id}` }}</strong>
                 </span>
                 <span v-if="isAdmin" class="text-xs bg-[#2B3B4C] text-amber-400 px-3 py-1 rounded-full border border-amber-400/20 shadow-sm">
                   <i class="fa fa-user mr-1.5"></i> Pembeli: {{ ticket.user_name || ticket.user?.name || 'User' }}
@@ -300,7 +304,7 @@ onUnmounted(() => {
         <!-- QR Code Container -->
         <div class="bg-white p-5 rounded-2xl inline-block mb-6 shadow-inner border border-gray-200">
           <img 
-            :src="`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${selectedTicket.ticket_code || selectedTicket.id}`" 
+            :src="`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${selectedTicket.code || selectedTicket.ticket_code || selectedTicket.id}`" 
             alt="QR Ticket Code"
             class="w-44 h-44 mx-auto object-contain"
           />
@@ -309,7 +313,7 @@ onUnmounted(() => {
         <div class="space-y-2.5 text-left bg-[#17202A] p-4 sm:p-5 rounded-2xl text-sm mb-6 border border-gray-800 shadow-inner">
           <div class="flex justify-between items-center">
             <span class="text-gray-400 text-xs">Kode Tiket:</span>
-            <span class="font-mono text-[#EE0034] font-bold text-xs tracking-wider">{{ selectedTicket.ticket_code || `#TCK-${selectedTicket.id}` }}</span>
+            <span class="font-mono text-[#EE0034] font-bold text-xs tracking-wider">{{ selectedTicket.code || selectedTicket.ticket_code || `#TCK-${selectedTicket.id}` }}</span>
           </div>
           <div class="flex justify-between items-center">
             <span class="text-gray-400 text-xs">Event:</span>

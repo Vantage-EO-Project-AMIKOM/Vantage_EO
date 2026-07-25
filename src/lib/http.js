@@ -55,7 +55,9 @@ const eventApiUrl = !configuredEventApiUrl || configuredEventApiUrl.includes('va
   : configuredEventApiUrl
 
 export const eventApi = createApiClient(eventApiUrl)
-export const ticketApi = createApiClient(import.meta.env.VITE_TICKET_API_URL)
+// Ticketing lives inside the event service. A separate URL remains optional
+// for deployment flexibility, but local development safely uses eventApiUrl.
+export const ticketApi = createApiClient(import.meta.env.VITE_TICKET_API_URL || eventApiUrl)
 export const analyticsApi = createApiClient(import.meta.env.VITE_ANALYTICS_API_URL)
 
 // PERBAIKAN: Menambahkan export default agar tidak terjadi SyntaxError "Importing binding name 'default'"
