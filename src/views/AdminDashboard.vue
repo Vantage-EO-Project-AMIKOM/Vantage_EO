@@ -64,9 +64,6 @@
           <button v-if="currentTab === 'events'" class="btn-primary" @click="router.push('/event/create')">
             <i class="fa fa-plus"></i> Tambah Event
           </button>
-          <button v-if="currentTab === 'tickets'" class="btn-primary" @click="openTicketModal()">
-            <i class="fa fa-plus"></i> Tambah Tiket
-          </button>
         </div>
       </div>
 
@@ -254,7 +251,7 @@
               <tr>
                 <th>ID Tiket</th>
                 <th>Event</th>
-                <th>Jumlah (Qty)</th>
+                <th>Pemilik</th>
                 <th>Total Bayar</th>
                 <th>Status</th>
                 <th class="text-right">Aksi</th>
@@ -262,22 +259,29 @@
             </thead>
             <tbody>
               <tr v-for="t in filteredTickets" :key="t.id">
-                <td class="font-mono">#{{ t.id }}</td>
+                <td class="font-mono">{{ shortTicketCode(t.code) }}</td>
                 <td>
-                  <div class="font-bold">{{ getEventTitle(t.event_id) }}</div>
+                  <div class="font-bold">{{ t.event?.title || getEventTitle(t.event_id) }}</div>
                   <div class="sub-text">Event ID: {{ t.event_id }}</div>
                 </td>
-                <td>{{ t.quantity || 1 }} Tiket</td>
-                <td>{{ formatRupiah(t.amount) }}</td>
                 <td>
-                  <span class="event-status status-green">Terbayar</span>
+                  <div class="font-bold">{{ t.request?.full_name || `User #${t.user_id}` }}</div>
+                  <div class="sub-text">{{ t.request?.email || '-' }}</div>
+                </td>
+                <td>{{ formatRupiah(t.event?.price || 0) }}</td>
+                <td>
+                  <span class="event-status" :class="ticketStatusClass(t.status)">
+                    {{ ticketStatusLabel(t.status) }}
+                  </span>
                 </td>
                 <td class="text-right actions-cell">
-                  <button class="btn-icon edit" @click="openTicketModal(t)" title="Edit">
-                    <i class="fa fa-pencil"></i>
-                  </button>
-                  <button class="btn-icon delete" @click="deleteTicket(t.id)" title="Hapus">
-                    <i class="fa fa-trash"></i>
+                  <button
+                    v-if="t.status === 'valid'"
+                    class="btn-icon delete"
+                    title="Batalkan tiket"
+                    @click="cancelTicket(t)"
+                  >
+                    <i class="fa fa-ban"></i>
                   </button>
                 </td>
               </tr>
@@ -578,8 +582,9 @@ const filteredTickets = computed(() => {
   if (!ticketSearchQuery.value) return ticketsList.value
   const q = ticketSearchQuery.value.toLowerCase()
   return ticketsList.value.filter(t => {
-    const eventName = getEventTitle(t.event_id).toLowerCase()
-    return String(t.id).includes(q) || eventName.includes(q)
+    const eventName = (t.event?.title || getEventTitle(t.event_id)).toLowerCase()
+    const attendee = (t.request?.full_name || '').toLowerCase()
+    return String(t.id).includes(q) || (t.code || '').toLowerCase().includes(q) || eventName.includes(q) || attendee.includes(q)
   })
 })
 
@@ -595,6 +600,26 @@ function formatDate(dateStr) {
 function getEventTitle(eventId) {
   const ev = eventsList.value.find(e => e.id === Number(eventId))
   return ev ? ev.title : `Event #${eventId}`
+}
+
+function shortTicketCode(code) {
+  return code ? `${code.slice(0, 8)}…` : '-'
+}
+
+function ticketStatusLabel(status) {
+  return {
+    valid: 'Valid',
+    used: 'Sudah Digunakan',
+    cancelled: 'Dibatalkan',
+  }[status] || status
+}
+
+function ticketStatusClass(status) {
+  return {
+    valid: 'status-green',
+    used: 'status-blue',
+    cancelled: 'status-red',
+  }[status] || 'status-blue'
 }
 
 function barHeight(count) {
@@ -627,8 +652,10 @@ async function loadDashboard() {
 
     totalEvents.value = events.length
     totalTicketsSold.value = tickets.length
-    totalParticipants.value = tickets.reduce((sum, t) => sum + (t.quantity || 0), 0)
-    totalRevenue.value = tickets.reduce((sum, t) => sum + Number(t.amount || 0), 0)
+    totalParticipants.value = tickets.filter((t) => t.status !== 'cancelled').length
+    totalRevenue.value = tickets
+      .filter((t) => t.status !== 'cancelled')
+      .reduce((sum, t) => sum + Number(t.event?.price || 0), 0)
 
     if (analyticsResult.status === 'fulfilled' && analyticsResult.value.data?.data) {
       analytics.value = analyticsResult.value.data.data
@@ -716,7 +743,7 @@ async function deleteEvent(id) {
   }
 }
 
-// ================= CRUD TIKET =================
+// ================= MANAJEMEN TIKET =================
 const showTicketModal = ref(false)
 const isEditingTicket = ref(false)
 const ticketForm = ref({ id: null, event_id: '', quantity: 1, amount: 0 })
@@ -767,6 +794,27 @@ async function deleteTicket(id) {
       console.error('Gagal menghapus tiket:', error)
       loadError.value = 'Tiket gagal dihapus. Data tidak berubah.'
     }
+  }
+}
+
+async function cancelTicket(ticket) {
+  if (!confirm(`Batalkan tiket ${shortTicketCode(ticket.code)}?`)) return
+
+  try {
+    const response = await ticketApi.patch(`/tickets/${ticket.id}`, { status: 'cancelled' })
+    const index = ticketsList.value.findIndex((item) => item.id === ticket.id)
+    if (index !== -1) ticketsList.value[index] = {
+      ...ticketsList.value[index],
+      ...(response.data?.data || {}),
+    }
+    totalParticipants.value = ticketsList.value.filter((item) => item.status !== 'cancelled').length
+    totalRevenue.value = ticketsList.value
+      .filter((item) => item.status !== 'cancelled')
+      .reduce((sum, item) => sum + Number(item.event?.price || 0), 0)
+    loadError.value = ''
+  } catch (error) {
+    console.error('Gagal membatalkan tiket:', error)
+    loadError.value = error.response?.data?.message || 'Tiket gagal dibatalkan.'
   }
 }
 
@@ -1294,6 +1342,7 @@ function handleLogout() {
 
 .status-green { background: #DCFCE7; color: #16A34A; }
 .status-blue { background: #DBEAFE; color: #2563EB; }
+.status-red { background: #FEE2E2; color: #DC2626; }
 
 /* Upcoming Event Item list */
 .event-list {
